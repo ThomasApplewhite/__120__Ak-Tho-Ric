@@ -9,7 +9,7 @@ class MagicMissileBlast extends Attack{
         this.scene.mmBlastSFX.play();
         this.anims.play('missle_blastAnim');
 
-        this.scene.time.addEvent({
+        this.destroyTimer = this.scene.time.addEvent({
             delay: 250,
             callback: this.removeSelf,
             callbackScope: this,
@@ -19,10 +19,8 @@ class MagicMissileBlast extends Attack{
     }
 
     strike(target){
-        if(target != null){
-            console.log("Blast has hit something");
-            //target.onDamage(this.damage);
-            target.health -= this.damage;
+        if(target !== null && target !== this.scene.player){
+            target.onDamage(this.damage, this.destroyTimer.elapsed);
         }
     }
 }

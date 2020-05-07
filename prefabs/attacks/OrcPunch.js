@@ -11,7 +11,7 @@ class OrcPunch extends Attack{
         this.scene.punchSFX.play();
         this.anims.play('punch_effectAnim');
 
-        this.scene.time.addEvent({
+        this.destroyTimer = this.scene.time.addEvent({
             delay: 1/3 * 1000,       //active for 20 frames (1/3 of a second)
             callback: this.removeSelf,
             callbackScope: this,
@@ -21,9 +21,7 @@ class OrcPunch extends Attack{
 
     strike(target){
         if(target !== null){
-            console.log("Punch has hit something");
-            //target.onDamage(this.damage);
-            target.health -= this.damage;
+            target.onDamage(this.damage, this.destroyTimer.elapsed);
             if(!this.mmGiven){
                 ++this.scene.player.canSpecial;
                 this.scene.meterUpdate(this.scene.player.canSpecial);

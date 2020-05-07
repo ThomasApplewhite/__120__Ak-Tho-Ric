@@ -7,6 +7,7 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
         this.health = health;
         this.points = points;
+        this.immune = false;
         this.attackPattern();
     }
 
@@ -39,8 +40,20 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
     }
 
-    onDamage(damage){
-        this.health -= damage;
+    onDamage(damage, immuneTime){
+        if(!this.immune){
+            this.health -= damage;
+            this.startImmunity(immuneTime);
+        }
+    }
+
+    startImmunity(immuneTime){
+        this.immune = true;
+        this.scene.time.addEvent({
+            delay: immuneTime,
+            callback: () => {this.immune = false},
+            callbackScope: this
+        });
     }
 
     //anything special that happens when the enemy dies
