@@ -4,8 +4,15 @@ class DominatingStrike extends Attack{
 
         this.setAlpha(0.2);
         this.active = false;
-        /*this.boss = boss;
-        console.log(this.boss);*/
+        this.bossAnim;
+        //console.log(this.boss);*/
+
+        if(this.type == 1){
+            this.bossAnim = 'boss_sweepingAnim';
+        }
+        else{
+            this.bossAnim = 'boss_dominatingAnim';
+        }
 
         //type determines the nature of the attack
         //type 0 = DominatingStrike, type 1 = SweepingStrike
@@ -13,7 +20,7 @@ class DominatingStrike extends Attack{
         if(this.type == 1){
             this.body.isCircle = true;
         }
-
+        this.scene.boss.anims.delayedPlay(250, this.bossAnim);
         this.scene.time.addEvent({
             delay: 750,
             callback: this.activateMove,
@@ -29,12 +36,6 @@ class DominatingStrike extends Attack{
     activateMove(){
         this.setAlpha(0);
         this.active = true;
-        if(this.type == 1){
-            this.scene.boss.anims.play('boss_sweepingAnim');
-        }
-        else{
-            this.scene.boss.anims.play('boss_dominatingAnim');
-        }
     }
 
     //what happens when the attack collides with a target
