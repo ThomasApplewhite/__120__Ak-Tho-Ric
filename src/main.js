@@ -18,7 +18,7 @@ From an artistic perspective, we decided to go for a pixel-art style because it'
 let config = {
     type: Phaser.CANVAS,
     width: 1024,
-    height: 768,
+    height: 640,
     scene: [ Load, Menu, Play, End, Credits ],
     physics:{
         default: "arcade",

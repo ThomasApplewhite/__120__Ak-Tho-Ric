@@ -57,23 +57,19 @@ class Zombie extends Enemy{
         if(this.lunging == 0 && dist <= this.attackRange){
             this.lunging = 1;
             this.anims.play('zombie_attackAnim');
-            this.scene.time.addEvent({
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
                 delay: this.attackDuration,
                 callback: () => {
                     this.lunging = 2;
-                    //this prevents an anim being played on a dead zombie
-                    //a better fix would be to destroy all timers on zombie death, but I'm lazy.
-                    if(this.health !== null){
-                        this.anims.play('zombie_walkAnim');
-                    }
+                    this.anims.play('zombie_walkAnim');
                 },
                 callbackScope: this
-            });
-            this.scene.time.addEvent({
+            }));
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
                 delay: this.attackDuration * 2,
                 callback: () => {this.lunging = 0;},
                 callbackScope: this
-            });
+            }));
         }
     }
 }

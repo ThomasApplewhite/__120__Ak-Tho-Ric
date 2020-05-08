@@ -8,6 +8,7 @@ class Enemy extends Phaser.GameObjects.Sprite{
         this.health = health;
         this.points = points;
         this.immune = false;
+        this.timers = new Array();
         this.attackPattern();
     }
 
@@ -16,11 +17,11 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
         if(this.health <= 0){
             this.onDeath();
-            this.destroy();
+            this.destroyCleanup();
         }
 
         if(this.y > game.config.height){
-            this.destroy();
+            this.destroyCleanup();
         }
     }
 
@@ -60,5 +61,10 @@ class Enemy extends Phaser.GameObjects.Sprite{
     onDeath(){
         ++this.scene.player.bodyCount;
         this.scene.player.score += this.points;
+    }
+
+    destroyCleanup(){
+        this.timers.forEach((item) => {item.remove()})
+        this.destroy();
     }
 }
