@@ -259,24 +259,24 @@ class Play extends Phaser.Scene{
             strokeThickness: 10,
             fixedWidth: 0
         }
-        this.meterText = this.add.text(20, 20, "Meters: 0", this.uiConfig)
+        this.meterText = this.add.text(20, 20, "Meters: 0", this.uiConfig).setScrollFactor(0);
         this.meterText.depth = 1;
         this.uiConfig.color = '#D62109';
         //this.uiConfig.align = 'right';
-        this.scoreText = this.add.text(20, 60, "Score: 0", this.uiConfig,)
+        this.scoreText = this.add.text(20, 60, "Score: 0", this.uiConfig,).setScrollFactor(0);
         this.scoreText.depth = 1;
         this.magicMissileMeter = [
-            this.add.sprite(game.config.width - 40, 110, 'magic_missileUI'),
-            this.add.sprite(game.config.width - 110, 110, 'magic_missileUI'),
-            this.add.sprite(game.config.width - 180, 110, 'magic_missileUI'),
+            this.add.sprite(game.config.width - 40, 110, 'magic_missileUI').setScrollFactor(0),
+            this.add.sprite(game.config.width - 110, 110, 'magic_missileUI').setScrollFactor(0),
+            this.add.sprite(game.config.width - 180, 110, 'magic_missileUI').setScrollFactor(0)
         ];
         this.magicMissileMeter[0].depth = 1;
         this.magicMissileMeter[1].depth = 1;
         this.magicMissileMeter[2].depth = 1;
         this.heartMeter = [
-            this.add.sprite(game.config.width - 40, 40, 'heartUI'),
-            this.add.sprite(game.config.width - 110, 40, 'heartUI'),
-            this.add.sprite(game.config.width - 180, 40, 'heartUI')
+            this.add.sprite(game.config.width - 40, 40, 'heartUI').setScrollFactor(0),
+            this.add.sprite(game.config.width - 110, 40, 'heartUI').setScrollFactor(0),
+            this.add.sprite(game.config.width - 180, 40, 'heartUI').setScrollFactor(0)
         ]
         this.heartMeter[0].depth = 1;
         this.heartMeter[1].depth = 1;

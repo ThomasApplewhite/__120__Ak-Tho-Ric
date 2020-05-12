@@ -241,7 +241,8 @@ class Load extends Phaser.Scene{
                     loop: true,
                     delay: 0
                 });
-                this.scene.start("menuScene");},
+                //CHANGE THIS TO CHANGE WHAT SCENE THE GAME STARTS IN
+                this.scene.start("testMapScene");},
             loop: false,
         });
         this.nextSceneTime.paused = true;

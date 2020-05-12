@@ -47,11 +47,11 @@ class Player extends Phaser.GameObjects.Sprite{
 
         //up-down movement
         if(!this.stunned && this.moveUp.isDown){
-            this.body.setVelocityY(-this.speed * 1/2);
+            this.body.setVelocityY(-this.speed);
             this.walkAnim();
         }
         else if(!this.stunned && this.moveDown.isDown){
-            this.body.setVelocityY(this.speed * 3/2);
+            this.body.setVelocityY(this.speed);
             this.walkAnim();
         }
         else if(!this.stunned){
@@ -70,10 +70,6 @@ class Player extends Phaser.GameObjects.Sprite{
 
         if(!this.stunned && Phaser.Input.Keyboard.JustDown(this.specialAttack)){
             this.magicMissileAttack();
-        }
-
-        if(this.y > config.height){
-            this.defeat();
         }
 
     }
