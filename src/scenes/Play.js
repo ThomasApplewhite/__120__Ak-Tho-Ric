@@ -43,7 +43,10 @@ class Play extends Phaser.Scene{
             config.height*2/3, 
             'player',
             'back_walk8'
-        ).setOrigin(0, 0);
+        );
+
+        //starting camera follow
+        this.cameras.main.startFollow(this.player);
         
         //creating object groups
         this.defineGroups();

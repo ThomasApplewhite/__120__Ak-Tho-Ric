@@ -19,6 +19,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 1024,
     height: 640,
+    pixelArt: true,
     scene: [ Load, Menu, Play, End, Credits ],
     physics:{
         default: "arcade",

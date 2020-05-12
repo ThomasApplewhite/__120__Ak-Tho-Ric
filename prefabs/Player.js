@@ -58,6 +58,8 @@ class Player extends Phaser.GameObjects.Sprite{
             this.body.setVelocityY(0);
         }
 
+        this.updateRotation();
+
         /*if(this.body.speed == 0 && this.anims.getCurrentKey() == 'orc_walkAnim'){
             this.anims.stop();
         }*/
@@ -183,6 +185,16 @@ class Player extends Phaser.GameObjects.Sprite{
     walkAnim(){
         if(!this.anims.isPlaying && !this.stunned){
             this.anims.play('orc_walkAnim');
+        }
+    }
+
+    updateRotation(){
+        let vector = this.body.velocity;
+        //I'd compare to Phaser.Math.Vector2.ZERO, but the comparison is insonsistent
+        if(vector.x != 0 || vector.y != 0){
+            let newRot = Phaser.Math.RadToDeg(vector.angle()) + 90;
+            this.body.rotation = newRot;
+            this.body.rotation = newRot;
         }
     }
 }
