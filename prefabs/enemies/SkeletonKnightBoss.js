@@ -103,12 +103,12 @@ class SkeletonKnightBoss extends Enemy{
     }
 
     sweepingStrike(){
-        let attack = new DominatingStrike(this.scene, this.x, this.y+86, 'sweeping_strike', 0, 1, this);
+        let attack = new DominatingStrike(this.scene, this.x, this.y+86, 'sweeping_strike', 0, this, 1);
         this.scene.attackGroup.add(attack);
     }
 
     lashingStrike(){
-        let attack = new LashingStrike(this.scene, this.x, this.y+86, 'lashing_strike');
+        let attack = new LashingStrike(this.scene, this.x, this.y+86, 'lashing_strike', 0, this);
         this.scene.attackGroup.add(attack);
     }
 }

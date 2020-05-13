@@ -1,9 +1,12 @@
 class Attack extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y, texture, frame){
+    constructor(scene, x, y, texture, frame, user){
         super(scene, x, y, texture, frame);
         
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+
+        this.rotation = user.rotation;
+        this.body.rotation = user.rotation;
 
         //this.effected = new Array();
     }

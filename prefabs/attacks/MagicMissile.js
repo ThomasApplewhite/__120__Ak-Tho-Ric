@@ -1,11 +1,15 @@
 class MagicMissile extends Attack{
-    constructor(scene, x, y, texture, frame, range){
-        super(scene, x, y, texture, frame);
+    constructor(scene, x, y, texture, frame, user, range){
+        super(scene, x, y, texture, frame, user);
 
         //properties
+        let speed = 300;
         this.range = this.y - range;
         this.damage = 5;
-        this.body.setVelocityY(-300);
+        scene.physics.velocityFromAngle(this.angle + 90, -speed, this.body.velocity);
+        
+        this.xLaunch = x;
+        this.yLaunch = y;
 
         this.scene.mmShotSFX.play();
 
@@ -19,7 +23,7 @@ class MagicMissile extends Attack{
 
     strike(target){
         //stop
-        this.body.setVelocityY(0);
+        this.body.stop();
         //become invisible
         this.setVisible(false);
         //create the blast
@@ -28,7 +32,8 @@ class MagicMissile extends Attack{
             this.x, 
             this.y, 
             'attacks', 
-            'missle_explode1', 
+            'missle_explode1',
+            this, 
             this.damage
             )
         );
@@ -37,12 +42,12 @@ class MagicMissile extends Attack{
     }
 
     movementPattern(){
-        if(this.y < this.range){
+        if(Phaser.Math.Distance.Between(this.x, this.y, this.xLaunch, this.yLaunch) > this.range){
             this.strike(null);
         }
 
-        if(this.y < 0){
+        /*if(this.y < 0){
             this.removeSelf();
-        }
+        }*/
     }
 }

@@ -6,6 +6,7 @@ class Player extends Phaser.GameObjects.Sprite{
         scene.add.existing(this);           //add the sprite
         scene.physics.add.existing(this);   //add the physics
         this.body.setSize(24, 36);
+        //this.body.syncBounds = true;
         //set controls
         this.moveUp         =   keyUP;
         this.moveDown       =   keyDOWN;
@@ -119,13 +120,15 @@ class Player extends Phaser.GameObjects.Sprite{
     punchAttack(){
         if(this.canNormal){
             //PUNCH HIM
+            let attackOffset = this.attackRotation(16, -32); //change the numbers here to determine where the attack goes relative to the player
             this.anims.play('orc_punchAnim');
             this.scene.attackGroup.add(new OrcPunch(
                 this.scene,
-                this.x + 32, //this.body.sourceWidth/2,
-                this.y - 8, //this.body.sourceHeight/2,
+                this.x + attackOffset.x, 
+                this.y + attackOffset.y, 
                 'attacks',
                 'power_punch1',
+                this,
                 1               //the damage of the punch
                 )
             );
@@ -149,27 +152,19 @@ class Player extends Phaser.GameObjects.Sprite{
             this.scene.meterUpdate(0);
             //create magic missile
             //new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
+            let attackOffset = this.attackRotation(32, -32); //change the numbers here to determine where the attack goes relative to the player
             this.scene.attackGroup.add(new MagicMissile(
                 this.scene, 
-                this.x+16, 
-                this.y-16, 
+                this.x + attackOffset.x, 
+                this.y + attackOffset.y, 
                 'magic_missile', 
-                0, 
+                0,
+                this, 
                 300             //the range of the missile
                 )
             );
             //start cooldown
             this.canSpecial = 0;
-            /*this.scene.time.addEvent({
-                delay: 4000,
-                callback: function(){
-                    this.canSpecial = true;
-                    console.log("Magic Missle ready!");
-                },
-                //args: [],
-                callbackScope: this,
-                loop: false
-            });*/
         }
     }
 
@@ -184,13 +179,43 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
+    //Sets the player's rotation based on the direction they're moving in, if they are moving
     updateRotation(){
         let vector = this.body.velocity;
-        //I'd compare to Phaser.Math.Vector2.ZERO, but the comparison is insonsistent
+        //I'd compare to Phaser.Math.Vector2.ZERO, but the comparison is inconsistent
         if(vector.x != 0 || vector.y != 0){
+            //I know there's a smoother way to get rotation through the vector,
+            //  but it's very difficult to get it precise, imo due to how phaser
+            //  keeps switching between radians and degrees under the hood,
+            //  unless I do it this way.
             let newRot = Phaser.Math.RadToDeg(vector.angle()) + 90;
             this.body.rotation = newRot;
             this.body.rotation = newRot;
         }
+    }
+
+    //calculates where an attack should be generated based on rotation
+    attackRotation(offsetX, offsetY){
+        let xOut = offsetX;
+        let yOut = offsetY;
+
+        if(this.angle == 0 || this.angle == -180){
+            xOut = 0;
+        }
+        else if(this.angle < 0){
+            xOut -= offsetX * 3;
+        }else if(this.angle > 0){
+            xOut += offsetX;
+        }
+
+        //I have a feeling there is a more formulaic way to do this, but I'll figure it out later.
+        if(this.angle == -90 || this.angle == 90){
+            yOut -= offsetY;
+        }
+        else if(this.angle == -135 || this.angle == 135 || this.angle == -180){
+            yOut -= offsetY * 2;
+        }
+
+        return {x: xOut, y: yOut}
     }
 }

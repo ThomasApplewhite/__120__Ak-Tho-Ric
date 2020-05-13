@@ -1,6 +1,6 @@
 class DominatingStrike extends Attack{
-    constructor(scene, x, y, texture, frame, type, boss){
-        super(scene, x, y, texture, frame);
+    constructor(scene, x, y, texture, frame, user, type){
+        super(scene, x, y, texture, frame, user);
 
         this.setAlpha(0.2);
         this.active = false;

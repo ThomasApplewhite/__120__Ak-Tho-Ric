@@ -1,6 +1,6 @@
 class LashingStrike extends Attack{
-    constructor(scene, x, y, texture, frame){
-        super(scene, x, y, texture, frame);
+    constructor(scene, x, y, texture, frame, user){
+        super(scene, x, y, texture, frame, user);
 
         this.hookedTarget;
         this.active = false;

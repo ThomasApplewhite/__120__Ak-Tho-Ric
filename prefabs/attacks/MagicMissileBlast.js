@@ -1,10 +1,11 @@
 class MagicMissileBlast extends Attack{
-    constructor(scene, x, y, texture, frame, damage){
-        super(scene, x, y, texture, frame);
+    constructor(scene, x, y, texture, frame, user, damage){
+        super(scene, x, y, texture, frame, user);
 
         this.damage = damage;
         this.body.setImmovable();
         this.body.setSize(160, 160);
+        this.body.isCircle = true;
 
         this.scene.mmBlastSFX.play();
         this.anims.play('missle_blastAnim');
