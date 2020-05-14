@@ -35,6 +35,7 @@ class OrcPunch extends Attack{
                 this.scene.meterUpdate(this.user.canSpecial);
                 this.mmGiven = true;
             }
+            //cuts 0.5 seconds off of dash cooldown
             if(this.user.actionTimers.dashCooldown != null){
                 this.user.actionTimers.dashCooldown += 500;
             }

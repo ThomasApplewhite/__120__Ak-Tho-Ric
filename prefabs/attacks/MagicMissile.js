@@ -13,6 +13,11 @@ class MagicMissile extends Attack{
 
         this.scene.mmShotSFX.play();
 
+        //cuts 1 second off of dash cooldown
+        if(this.user.actionTimers.dashCooldown != null){
+            this.user.actionTimers.dashCooldown += 1000;
+        }
+
         //add to collision group
         //console.log(this.body);
 
