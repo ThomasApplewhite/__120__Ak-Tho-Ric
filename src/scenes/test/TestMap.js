@@ -9,7 +9,13 @@ class TestMap extends Phaser.Scene{
     }
 
     create(){
-        SceneLoad.genericCreate(this, null);
+        SceneLoad.genericCreate(this, 'placeholder_map');
+
+        //temporarily removing obstacle and spawn timers
+        this.obstacleSpawnTimer.paused = true;
+        this.enemySpawnTimer.paused = true;
+
+        console.log(this.tilemap);
     }
 
     update(){

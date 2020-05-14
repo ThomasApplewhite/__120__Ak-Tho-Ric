@@ -31,9 +31,12 @@ class OrcPunch extends Attack{
         if(target !== null && target !== this.user){
             target.onDamage(this.damage, this.destroyTimer.elapsed);
             if(!this.mmGiven){
-                ++this.scene.player.canSpecial;
-                this.scene.meterUpdate(this.scene.player.canSpecial);
+                ++this.user.canSpecial;
+                this.scene.meterUpdate(this.user.canSpecial);
                 this.mmGiven = true;
+            }
+            if(this.user.actionTimers.dashCooldown != null){
+                this.user.actionTimers.dashCooldown += 500;
             }
         }
     }

@@ -48,7 +48,7 @@ game.registry.set("bodyCount", 0);
 //game.registry.set("backgroundScroll", mmParticleConfig);
 
 //reserving keyboard keys
-let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE;
+let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE, keyW;
 
 if (game.sound.context.state === 'suspended') {
     game.sound.context.resume();

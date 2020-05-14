@@ -14,6 +14,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.moveRight      =   keyRIGHT;
         this.normalAttack   =   keyQ;
         this.specialAttack  =   keyE;
+        this.dash           =   keyW;
         //player properties
         this.lives = 3;
         this.stunned = false;
@@ -22,9 +23,19 @@ class Player extends Phaser.GameObjects.Sprite{
         this.bodyCount = 0;
         this.score = 0;
         this.distance = 0;
-        //attack cooldowns
+        //action cooldowns
         this.canNormal = true;
+        this.canDash = true;
         this.canSpecial = 3;
+        this.controlLock = false;
+        //related timers
+        this.actionTimers = {
+            stunTime: null,
+            immuneTime: null,
+            punchCooldown: null,
+            dashTime: null,
+            dashCooldown: null,
+        }
         //animation logic
         this.walkAnim();
         this.on('animationcomplete', () => {this.anims.play('orc_walkAnim');}, this);
@@ -33,46 +44,53 @@ class Player extends Phaser.GameObjects.Sprite{
     update(){
         ++this.distance;
 
+        if(!this.stunned && !this.controlLock){
+            this.controlOperations();
+        }
+
+    }
+
+    controlOperations(){
         //left-right movement
-        if(!this.stunned && this.moveLeft.isDown){
+        if(this.moveLeft.isDown){
             this.body.setVelocityX(-this.speed);
             this.walkAnim();
         }
-        else if(!this.stunned && this.moveRight.isDown){
+        else if(this.moveRight.isDown){
             this.body.setVelocityX(this.speed);
             this.walkAnim();
         }
-        else if(!this.stunned){
+        else{
             this.body.setVelocityX(0);
         }
 
         //up-down movement
-        if(!this.stunned && this.moveUp.isDown){
+        if(this.moveUp.isDown){
             this.body.setVelocityY(-this.speed);
             this.walkAnim();
         }
-        else if(!this.stunned && this.moveDown.isDown){
+        else if(this.moveDown.isDown){
             this.body.setVelocityY(this.speed);
             this.walkAnim();
         }
-        else if(!this.stunned){
+        else{
             this.body.setVelocityY(0);
         }
 
         this.updateRotation();
 
-        /*if(this.body.speed == 0 && this.anims.getCurrentKey() == 'orc_walkAnim'){
-            this.anims.stop();
-        }*/
-
-        if(!this.stunned && Phaser.Input.Keyboard.JustDown(this.normalAttack)){
+        //actions
+        if(Phaser.Input.Keyboard.JustDown(this.normalAttack)){
             this.punchAttack();
         }
 
-        if(!this.stunned && Phaser.Input.Keyboard.JustDown(this.specialAttack)){
+        if(Phaser.Input.Keyboard.JustDown(this.specialAttack)){
             this.magicMissileAttack();
         }
 
+        if(Phaser.Input.Keyboard.JustDown(this.dash)){
+            this.dashAttack();
+        }
     }
 
     //stuns the player for 1 second
@@ -81,13 +99,13 @@ class Player extends Phaser.GameObjects.Sprite{
             console.log("You've been stunned!");
             this.anims.play('orc_stunAnim');
             this.stunned = true;
-            this.scene.time.delayedCall(stunTime, () => {
+            this.actionTimers.stunTime = this.scene.time.delayedCall(stunTime, () => {
                 this.stunned = false;
                 this.immune = true;
                 this.anims.stop();
                 console.log("Now you're immune!");
             }, null, this);
-            this.scene.time.delayedCall(stunTime * 2, () => {
+            this.actionTimers.immuneTime = this.scene.time.delayedCall(stunTime * 2, () => {
                 this.immune = false;
             });
         }
@@ -134,7 +152,7 @@ class Player extends Phaser.GameObjects.Sprite{
             );
             //start cooldown
             this.canNormal = false;
-            this.scene.time.addEvent({
+            this.actionTimers.punchCooldown = this.scene.time.addEvent({
                 delay: 500,     //total time before next punch is 30 frames i.e. half a second
                 callback: function(){
                     this.canNormal = true;
@@ -165,6 +183,36 @@ class Player extends Phaser.GameObjects.Sprite{
             );
             //start cooldown
             this.canSpecial = 0;
+        }
+    }
+
+    //not actually an attack
+    //yet
+    dashAttack(){
+        if(this.canDash){
+            console.log("Dashing!");
+            //if the player is facing forward, their destination is 128 pixels infront of them.
+            //attackRotation will automatically set the destination coods based off of this offset and player rotation
+            let destination = this.attackRotation(128, -128);  
+            this.scene.physics.moveTo(this, this.x + destination.x, this.y + destination.y, 60, 250);
+            this.controlLock = true;
+            this.canDash = true;
+            this.actionTimers.dashTime = this.scene.time.addEvent({
+                delay: 250, 
+                callback: () => {
+                    this.body.stop()
+                    this.controlLock = false;
+                },
+                callbackScope: this
+            });
+            this.actionTimers.dashCooldown = this.scene.time.addEvent({
+                delay: 4000,
+                callback: () => {
+                    this.canDash = true;
+                    console.log("Dash ready!")
+                },
+                callbackScope: this
+            });
         }
     }
 
@@ -199,6 +247,8 @@ class Player extends Phaser.GameObjects.Sprite{
         let xOut = offsetX;
         let yOut = offsetY;
 
+        //console.log("Percieved Angle: " + this.angle);
+
         if(this.angle == 0 || this.angle == -180){
             xOut = 0;
         }
@@ -215,6 +265,8 @@ class Player extends Phaser.GameObjects.Sprite{
         else if(this.angle == -135 || this.angle == 135 || this.angle == -180){
             yOut -= offsetY * 2;
         }
+
+        //console.log("Offset X: " + xOut + ". Offset Y: " + yOut);
 
         return {x: xOut, y: yOut}
     }

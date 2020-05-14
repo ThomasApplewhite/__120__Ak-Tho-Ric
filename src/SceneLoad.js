@@ -18,8 +18,9 @@ class SceneLoad extends Phaser.Scene{
         keyRIGHT =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP    =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN  =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        keyQ     =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        keyQ     =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);   //punch
         keyE     =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);   //magic missile
+        keyW     =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);   //dash
 
         //setting background
         if(tilemap == null){
@@ -32,7 +33,20 @@ class SceneLoad extends Phaser.Scene{
             ).setOrigin(0, 0).setScale(4);
         }
         else{
-            ///generate background off of tilemap
+            //generate background off of tilemap
+            let tilemapKey = new String(tilemap);
+            let tileset = tilemapKey.concat("_tiles");
+            let tilesetName = tilemap.substring(0, tilemap.length - 4);
+
+            scene.tilemap = scene.add.tilemap(tilemapKey);
+            scene.tilemap.addTilesetImage(tilesetName, tileset,);
+
+            let tileCenterX = (game.config.width + scene.tilemap.widthInPixels) / 2;
+            let tileCenterY = (game.config.height + scene.tilemap.heightInPixels) / 2;
+            //tileCenterX, tileCenterY
+
+            scene.tilemap.createStaticLayer("Floor", scene.tilemap.tilesets[0], -100, -100);
+            scene.tilemap.createStaticLayer("Walls", scene.tilemap.tilesets[0], -100, -100).setCollisionByProperty({collides: true});
         }
         
         
@@ -60,7 +74,7 @@ class SceneLoad extends Phaser.Scene{
             creating object groups
         */
         //creating invisible walls
-        scene.invisibleWallsGroup = scene.add.group({
+        /*scene.invisibleWallsGroup = scene.add.group({
             classType: Phaser.Physics.Arcade.Sprite,
             active: true,
             runChildUpdate: false
@@ -68,7 +82,7 @@ class SceneLoad extends Phaser.Scene{
             scene.physics.add.sprite(-50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
             scene.physics.add.sprite(config.width+50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
             scene.physics.add.sprite(config.width/2, 149, 'invisible_wall_rotated').setImmovable().setVisible(false)
-        ]);
+        ]);*/
         
         //creating the group to hold all the obstacles
         scene.obstacleGroup = scene.add.group({
@@ -143,7 +157,7 @@ class SceneLoad extends Phaser.Scene{
             attack.strike(player);
         })
         //creating colliders for things that just need to collide
-        scene.physics.add.collider(scene.player, scene.invisibleWallsGroup);
+        scene.physics.add.collider(scene.player, scene.tilemap.getLayer("Walls").tilemapLayer);
         scene.physics.add.collider(scene.enemyGroup, scene.obstacleGroup);
         scene.physics.add.collider(scene.enemyGroup, scene.enemyGroup);
         //scene.physics.add.collider(scene.enemyGroup, scene.invisibleWallsGroup);

@@ -22,10 +22,11 @@ class Load extends Phaser.Scene{
         //background images
         //this.load.image('backgroundTile', './assets/dirt.png');
 
-        //placeholder images
-        //Lines with a /*$*/ are still usimg placeholder assets
-        /*$*/this.load.image('invisible_wall', './assets/placeholders/invisible_wall.png');
-        /*$*/this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');      
+        //placeholder assets
+        this.load.image('invisible_wall', './assets/placeholders/invisible_wall.png');
+        this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');     
+        this.load.image('placeholder_map_tiles', './assets/placeholders/tiles_placeholder.png');
+        this.load.tilemapTiledJSON('placeholder_map', './assets/placeholders/tilemap_placeholder.json'); 
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
