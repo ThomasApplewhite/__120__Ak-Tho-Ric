@@ -9,7 +9,7 @@ class TestMap extends Phaser.Scene{
     }
 
     create(){
-        SceneLoad.genericCreate(this, 'placeholder_map');
+        SceneLoad.genericCreate(this, 'cave_texture_map');
 
         //temporarily removing obstacle and spawn timers
         this.obstacleSpawnTimer.paused = true;
@@ -43,6 +43,7 @@ class TestMap extends Phaser.Scene{
         }
     }
 
+    //DEPRECIATED
     createObstacle(){
         let obstacle = this.obstacleList[Phaser.Math.Between(0, this.obstacleList.length-1)];
         if(!this.gameOver && !this.obstacleGroup.isFull()){
@@ -57,6 +58,7 @@ class TestMap extends Phaser.Scene{
         }
     }
 
+    //DEPRECIATED
     createEnemy(){
         if(!this.gameOver && !this.enemyGroup.isFull()){
             this.enemyGroup.add(new Zombie(

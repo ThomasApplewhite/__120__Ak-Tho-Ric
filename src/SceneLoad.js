@@ -22,7 +22,43 @@ class SceneLoad extends Phaser.Scene{
         keyE     =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);   //magic missile
         keyW     =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);   //dash
 
-        //setting background
+        /*
+            creating object groups
+        */
+        //DEPRECIATED 
+        //creating the group to hold all the obstacles
+        scene.obstacleGroup = scene.add.group({
+            classType: Phaser.GameObjects.Sprite.Obstacle,
+            defaultKey: null,               //default texture to use
+            defaultFrame: null,             //default animation frame start to use
+            active: true,
+            maxSize: 15,
+            runChildUpdate: true,
+            createCallback: null,           //what to do when an object is added to the group
+            removeCallback: null,           //what to do when an object is removed from the group
+            createMultipleCallback: null    //what to do when multiple objects are added to the group
+        });
+
+        //creating the group to hold all the enemies
+        scene.enemyGroup = scene.add.group({
+            classType: Phaser.GameObjects.Sprite.Enemy,
+            active: true,
+            maxSize: -1,
+            runChildUpdate: true
+        });
+
+        //creating the group to hold all the attacks
+        scene.attackGroup = scene.add.group({
+            classType: Phaser.GameObjects.Sprite,
+            active: true,
+            maxSize: -1,
+            runChildUpdate: true
+        });        
+
+        /*
+            creating entities and their logic
+        */
+        //setting background and also spawning entities
         if(tilemap == null){
             scene.background = scene.add.tileSprite(
                 0, 
@@ -46,10 +82,12 @@ class SceneLoad extends Phaser.Scene{
             //tileCenterX, tileCenterY
 
             scene.tilemap.createStaticLayer("Floor", scene.tilemap.tilesets[0], -100, -100);
+            scene.tilemap.createDynamicLayer("Entities", scene.tilemap.tilesets[0], -100, -100).forEachTile(
+                SceneLoad.tileMapEntitySpawn, scene
+            );
             scene.tilemap.createStaticLayer("Walls", scene.tilemap.tilesets[0], -100, -100).setCollisionByProperty({collides: true});
         }
-        
-        
+
         //creating particle manager
 
         //creating sounds
@@ -58,63 +96,12 @@ class SceneLoad extends Phaser.Scene{
         scene.mmBlastSFX = scene.sound.add('magic_missile_explosionSound');
         scene.bossLaughSFX = scene.sound.add('bossLaugh');
 
-        //creating the player
-        scene.player = new Player(
-            scene, 
-            config.width/2, 
-            config.height*2/3, 
-            'player',
-            'back_walk8'
-        );
-
         //starting camera follow
         scene.cameras.main.startFollow(scene.player);
 
         /*
-            creating object groups
-        */
-        //creating invisible walls
-        /*scene.invisibleWallsGroup = scene.add.group({
-            classType: Phaser.Physics.Arcade.Sprite,
-            active: true,
-            runChildUpdate: false
-        }).addMultiple([
-            scene.physics.add.sprite(-50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
-            scene.physics.add.sprite(config.width+50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
-            scene.physics.add.sprite(config.width/2, 149, 'invisible_wall_rotated').setImmovable().setVisible(false)
-        ]);*/
-        
-        //creating the group to hold all the obstacles
-        scene.obstacleGroup = scene.add.group({
-            classType: Phaser.GameObjects.Sprite.Obstacle,
-            defaultKey: null,               //default texture to use
-            defaultFrame: null,             //default animation frame start to use
-            active: true,
-            maxSize: 15,
-            runChildUpdate: true,
-            createCallback: null,           //what to do when an object is added to the group
-            removeCallback: null,           //what to do when an object is removed from the group
-            createMultipleCallback: null    //what to do when multiple objects are added to the group
-        });
-
-        //creating the group to hold all the enemies
-        scene.enemyGroup = scene.add.group({
-            classType: Phaser.GameObjects.Sprite.Enemy,
-            active: true,
-            maxSize: 5,
-            runChildUpdate: true
-        });
-
-        //creating the group to hold all the attacks
-        scene.attackGroup = scene.add.group({
-            classType: Phaser.GameObjects.Sprite,
-            active: true,
-            maxSize: -1,
-            runChildUpdate: true
-        });        
-
-        /*
             creating spawning timers
+            DEPRECIATED
         */
         //obstacle spawning timer
         scene.obstacleSpawnTimer = scene.time.addEvent({
@@ -158,12 +145,13 @@ class SceneLoad extends Phaser.Scene{
         })
         //creating colliders for things that just need to collide
         scene.physics.add.collider(scene.player, scene.tilemap.getLayer("Walls").tilemapLayer);
-        scene.physics.add.collider(scene.enemyGroup, scene.obstacleGroup);
+        scene.physics.add.collider(scene.enemyGroup, scene.tilemap.getLayer("Walls").tilemapLayer);
         scene.physics.add.collider(scene.enemyGroup, scene.enemyGroup);
         //scene.physics.add.collider(scene.enemyGroup, scene.invisibleWallsGroup);
 
         /*
             creating UI
+            NEEDS IMPROVEMENT
         */
         scene.uiConfig = {
             fontFamily: 'PermanentMarker',
@@ -201,15 +189,18 @@ class SceneLoad extends Phaser.Scene{
         //game-over flag
         scene.gameOver = false;
 
+        //MIGHT BE DEPRECIATED
         //boss-spawning variables
         scene.bossLevel = 1;         //should start at 1
         scene.killsUntilBoss = 15;    //should start at 15
         scene.bossActive = false;
         scene.boss;
+
+        
     }
 
-    //And now, a whole bunch of loading methods. Might just do this in a different file... nah...
     defineGroups(){
+        //INVISIBLE WALLS DEPCRECIATED. MARKING FOR CLEANUP
         //creating invisible walls
         //don't forget to make these, ya know, actually invisible
         scene.invisibleWallsGroup = scene.add.group({
@@ -252,6 +243,7 @@ class SceneLoad extends Phaser.Scene{
         });        
     }
 
+    //DEPRECIATED. MARKING FOR CLEANUP
     defineSpawnTimers(){
         //obstacle spawning timer
         scene.obstacleSpawnTimer = scene.time.addEvent({
@@ -332,5 +324,47 @@ class SceneLoad extends Phaser.Scene{
         scene.heartMeter[0].depth = 1;
         scene.heartMeter[1].depth = 1;
         scene.heartMeter[2].depth = 1;
+    }
+
+    //spawn entities on the map based on tile placements
+    static tileMapEntitySpawn(tile){
+        let entityName = tile.properties.entity;
+
+        //unlike everything else in this script,
+        //this method is called on an object, thus
+        //everything is created with this
+
+        //it also checks entities directly by name,
+        //which isn't super efficient but the amount of
+        //enemies is small. I'm sure I can set it some other way too.
+
+        if(entityName == "Player"){
+            //creating the player
+            this.player = new Player(
+                this, 
+                tile.pixelX, 
+                tile.pixelY-64, 
+                'player',
+                'back_walk8'
+            );
+        }
+        else if(entityName == "Zombie"){
+            this.enemyGroup.add(new Zombie(
+                this,               //scene
+                tile.pixelX,        //x
+                tile.pixelY-64,     //y
+                'enemies',          //sprite
+                'forward_walk1',    //start frame of anim
+                )
+            );
+        }
+        else if(entityName != null){
+            console.log("TILE " + entityName + " NOT FOUND. ENEMY NOT SPAWNED");
+        }
+
+        if(tile != null){
+            tile.setAlpha(0);
+            tile.destroy();
+        }
     }
 }

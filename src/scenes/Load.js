@@ -19,9 +19,6 @@ class Load extends Phaser.Scene{
         this.load.image('title', './assets/Title.png');
         //this.load.image('start_button', './assets/start_button.png');
 
-        //background images
-        //this.load.image('backgroundTile', './assets/dirt.png');
-
         //placeholder assets
         this.load.image('invisible_wall', './assets/placeholders/invisible_wall.png');
         this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');     
@@ -30,6 +27,11 @@ class Load extends Phaser.Scene{
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
+
+        //map assets
+        this.load.image('cave_texture_map_tiles', './assets/tilemaps/cave_texture.png');
+        this.load.tilemapTiledJSON('cave_texture_map', './assets/tilemaps/cave_texture.json');
+
   
         //player images
         this.load.atlas({

@@ -6,6 +6,7 @@ class MagicMissile extends Attack{
         let speed = 300;
         this.range = this.y - range;
         this.damage = 5;
+        this.user = user;
         scene.physics.velocityFromAngle(this.angle + 90, -speed, this.body.velocity);
         
         this.xLaunch = x;

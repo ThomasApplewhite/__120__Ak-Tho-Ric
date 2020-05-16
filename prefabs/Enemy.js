@@ -20,9 +20,9 @@ class Enemy extends Phaser.GameObjects.Sprite{
             this.destroyCleanup();
         }
 
-        if(this.y > game.config.height){
+        /*if(this.y > game.config.height){
             this.destroyCleanup();
-        }
+        }*/
     }
 
     //frame-by-frame movement

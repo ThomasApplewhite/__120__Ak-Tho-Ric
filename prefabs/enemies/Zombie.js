@@ -25,11 +25,11 @@ class Zombie extends Enemy{
         this.lunge();
 
         //if the zombie passes the player...
-        if(this.y > this.scene.player.y){
+        /*if(this.y > this.scene.player.y){
             //run off the screen. It looks really weird tho.
             this.body.setVelocityY(this.speed);
-            this.body.setDragX(this.speed);
-        }else if(this.lunging == 1){
+            this.body.setDragX(this.speed);*/
+        if(this.lunging == 1){
             //run at them twice as fast as normal
             this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5);
         }else{
