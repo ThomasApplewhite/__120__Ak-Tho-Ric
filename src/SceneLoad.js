@@ -81,11 +81,11 @@ class SceneLoad extends Phaser.Scene{
             let tileCenterY = (game.config.height + scene.tilemap.heightInPixels) / 2;
             //tileCenterX, tileCenterY
 
-            scene.tilemap.createStaticLayer("Floor", scene.tilemap.tilesets[0], -100, -100);
-            scene.tilemap.createDynamicLayer("Entities", scene.tilemap.tilesets[0], -100, -100).forEachTile(
+            scene.tilemap.createStaticLayer("Floor", scene.tilemap.tilesets[0]);
+            scene.tilemap.createDynamicLayer("Entities", scene.tilemap.tilesets[0]).forEachTile(
                 SceneLoad.tileMapEntitySpawn, scene
             );
-            scene.tilemap.createStaticLayer("Walls", scene.tilemap.tilesets[0], -100, -100).setCollisionByProperty({collides: true});
+            scene.tilemap.createStaticLayer("Walls", scene.tilemap.tilesets[0]).setCollisionByProperty({collides: true});
         }
 
         //creating particle manager
@@ -97,7 +97,12 @@ class SceneLoad extends Phaser.Scene{
         scene.bossLaughSFX = scene.sound.add('bossLaugh');
 
         //starting camera follow
-        scene.cameras.main.startFollow(scene.player);
+        scene.cameras.main.startFollow(scene.player).setBounds(
+            0, 
+            0,
+            scene.tilemap.widthInPixels,
+            scene.tilemap.heightInPixels
+        );
 
         /*
             creating spawning timers
