@@ -3,7 +3,7 @@ class Zombie extends Enemy{
         super(scene, x, y, texture, frame, 1, 10);
 
         //properties
-        this.speed = 250;           //speed
+        this.speed = 125;           //speed
         this.body.setBounce(0, 0);  //bounciness
         this.lunging = 0;           //is it attacking? 0 = not attacking but can, 1 = attacking, 2 = not attacking but can't
         this.body.setSize(24, 28);  //hurtbox size
@@ -24,17 +24,13 @@ class Zombie extends Enemy{
         this.body.setAcceleration(0, 0);
         this.lunge();
 
-        //if the zombie passes the player...
-        /*if(this.y > this.scene.player.y){
-            //run off the screen. It looks really weird tho.
-            this.body.setVelocityY(this.speed);
-            this.body.setDragX(this.speed);*/
+        //accelerateToObject returns the angle the Zombie needs to go, and we add pi/2 radians to correct the art's offset
         if(this.lunging == 1){
             //run at them twice as fast as normal
-            this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5);
+            this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) + (Math.PI / 2);
         }else{
             //run towards them without lunging                               
-            this.scene.physics.accelerateToObject(this, this.scene.player, 10000, this.speed/2, this.speed);
+            this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 10000, this.speed/2, this.speed) + (Math.PI / 2);
         }
 
     }

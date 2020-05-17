@@ -16,6 +16,7 @@ class TestMap extends Phaser.Scene{
         this.enemySpawnTimer.paused = true;
 
         console.log(this.tilemap);
+        console.log(Math.PI);
     }
 
     update(){
@@ -29,7 +30,7 @@ class TestMap extends Phaser.Scene{
             this.textUpdate();
 
             //check to spawn boss
-            if(!this.bossActive && this.killsUntilBoss <= this.player.bodyCount){
+            /*if(!this.bossActive && this.killsUntilBoss <= this.player.bodyCount){
                 this.boss = new SkeletonKnightBoss(
                     this,                                   //scene
                     config.width/2,                         //x
@@ -39,7 +40,7 @@ class TestMap extends Phaser.Scene{
                     this.bossLevel
                     )
                 this.enemyGroup.add(this.boss);
-            }
+            }*/
         }
     }
 

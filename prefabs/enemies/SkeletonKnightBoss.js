@@ -8,20 +8,21 @@ class SkeletonKnightBoss extends Enemy{
             this.level = 3;
         }
 
-        this.scene.obstacleSpawnTimer.paused = true;
-        this.scene.enemySpawnTimer.paused = true;
+        //this.scene.obstacleSpawnTimer.paused = true;
+        //this.scene.enemySpawnTimer.paused = true;
 
         //this.setOrigin(0.5, 0);
+        //properties
         this.body.setSize(169, 172);
-
-        this.body.setImmovable();
+        this.body.setBounce(0, 0);
+        this.speed = 50;
 
         this.scene.bossLaughSFX.play();
         this.on('animationcomplete', () => {this.setTexture('enemies', 'mid_attack1',);}, this);
 
         this.scene.bossActive = true;
 
-        this.scene.physics.moveTo(this, config.width/2, 250, 125);
+        //this.scene.physics.moveTo(this, config.width/2, 250, 125);
         //this.body.setVelocityY(0);
 
         //console.log("Boss Level: " + this.level);
@@ -29,7 +30,7 @@ class SkeletonKnightBoss extends Enemy{
 
     //how the enemy will specificly attack, if at all
     attackPattern(){
-        console.log("Starting attack timer!");
+        /*console.log("Starting attack timer!");
         //five seconds between attacks, use attacks based on level
         this.attackTimer = this.scene.time.addEvent({
             delay: 6000,            //5 seconds
@@ -38,14 +39,16 @@ class SkeletonKnightBoss extends Enemy{
             callbackScope: this,
             loop: true,
             startAt: 1000
-        });
+        });*/
     }
 
     //I wish there was a better way to do this, but moveTo won's stop anything so...
     movementPattern(){
-        if(this.y >= 250){
+        /*if(this.y >= 250){
             this.body.setVelocityY(0);
-        }
+        }*/
+        this.body.setAcceleration(0, 0);
+        this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) + (Math.PI / 2);
     }
     
     //anything special that happens when the enemy dies

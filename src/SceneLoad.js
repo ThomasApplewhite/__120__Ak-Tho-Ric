@@ -53,7 +53,17 @@ class SceneLoad extends Phaser.Scene{
             active: true,
             maxSize: -1,
             runChildUpdate: true
-        });        
+        });
+
+        //creating particle manager
+
+
+        
+        //creating sounds
+        scene.punchSFX = scene.sound.add('punchSound');
+        scene.mmShotSFX = scene.sound.add('magic_missile_firingSound');
+        scene.mmBlastSFX = scene.sound.add('magic_missile_explosionSound');
+        scene.bossLaughSFX = scene.sound.add('bossLaugh');
 
         /*
             creating entities and their logic
@@ -82,19 +92,11 @@ class SceneLoad extends Phaser.Scene{
             //tileCenterX, tileCenterY
 
             scene.tilemap.createStaticLayer("Floor", scene.tilemap.tilesets[0]);
+            scene.tilemap.createStaticLayer("Walls", scene.tilemap.tilesets[0]).setCollisionByProperty({collides: true});
             scene.tilemap.createDynamicLayer("Entities", scene.tilemap.tilesets[0]).forEachTile(
                 SceneLoad.tileMapEntitySpawn, scene
             );
-            scene.tilemap.createStaticLayer("Walls", scene.tilemap.tilesets[0]).setCollisionByProperty({collides: true});
         }
-
-        //creating particle manager
-
-        //creating sounds
-        scene.punchSFX = scene.sound.add('punchSound');
-        scene.mmShotSFX = scene.sound.add('magic_missile_firingSound');
-        scene.mmBlastSFX = scene.sound.add('magic_missile_explosionSound');
-        scene.bossLaughSFX = scene.sound.add('bossLaugh');
 
         //starting camera follow
         scene.cameras.main.startFollow(scene.player).setBounds(
@@ -235,7 +237,7 @@ class SceneLoad extends Phaser.Scene{
         scene.enemyGroup = scene.add.group({
             classType: Phaser.GameObjects.Sprite.Enemy,
             active: true,
-            maxSize: 5,
+            maxSize: -1,
             runChildUpdate: true
         });
 
@@ -337,7 +339,8 @@ class SceneLoad extends Phaser.Scene{
 
         //unlike everything else in this script,
         //this method is called on an object, thus
-        //everything is created with this
+        //everything is created by using 'this'
+        //rather than 'scene'
 
         //it also checks entities directly by name,
         //which isn't super efficient but the amount of
@@ -362,6 +365,17 @@ class SceneLoad extends Phaser.Scene{
                 'forward_walk1',    //start frame of anim
                 )
             );
+        }
+        else if(entityName == "SkeletonKnightBoss"){
+            this.boss = new SkeletonKnightBoss(
+                this,               //scene
+                tile.pixelX,        //x
+                tile.pixelY-64,     //y
+                'enemies',          //sprite
+                'mid_attack1',      //start frame of anim
+                this.bossLevel
+                )
+            this.enemyGroup.add(this.boss);
         }
         else if(entityName != null){
             console.log("TILE " + entityName + " NOT FOUND. ENEMY NOT SPAWNED");
