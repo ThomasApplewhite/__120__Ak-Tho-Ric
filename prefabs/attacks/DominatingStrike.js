@@ -4,6 +4,7 @@ class DominatingStrike extends Attack{
 
         this.setAlpha(0.2);
         this.active = false;
+        this.user = user;
         this.bossAnim;
         //console.log(this.boss);*/
 
@@ -52,5 +53,6 @@ class DominatingStrike extends Attack{
     //what happens when this attack is finished
     removeSelf(){
         this.destroy();
+        this.user.attacking = false;
     }
 }

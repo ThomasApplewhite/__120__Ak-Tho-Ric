@@ -74,7 +74,7 @@ class TestMap extends Phaser.Scene{
     }
 
     textUpdate(){
-        this.meterText.setText("Meters: " + this.player.distance);
+        //this.meterText.setText("Meters: " + this.player.distance);
         this.scoreText.setText("Score: " + this.player.score);
     }
 

@@ -16,6 +16,7 @@ class SkeletonKnightBoss extends Enemy{
         this.body.setSize(169, 172);
         this.body.setBounce(0, 0);
         this.speed = 50;
+        this.attacking = false;
 
         this.scene.bossLaughSFX.play();
         this.on('animationcomplete', () => {this.setTexture('enemies', 'mid_attack1',);}, this);
@@ -30,7 +31,7 @@ class SkeletonKnightBoss extends Enemy{
 
     //how the enemy will specificly attack, if at all
     attackPattern(){
-        /*console.log("Starting attack timer!");
+        console.log("Starting attack timer!");
         //five seconds between attacks, use attacks based on level
         this.attackTimer = this.scene.time.addEvent({
             delay: 6000,            //5 seconds
@@ -39,7 +40,7 @@ class SkeletonKnightBoss extends Enemy{
             callbackScope: this,
             loop: true,
             startAt: 1000
-        });*/
+        });
     }
 
     //I wish there was a better way to do this, but moveTo won's stop anything so...
@@ -48,7 +49,12 @@ class SkeletonKnightBoss extends Enemy{
             this.body.setVelocityY(0);
         }*/
         this.body.setAcceleration(0, 0);
-        this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) + (Math.PI / 2);
+        if(!this.attacking){
+            this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) + (Math.PI / 2);
+        }
+        else{
+            this.body.setVelocity(0, 0);
+        }
     }
     
     //anything special that happens when the enemy dies
@@ -77,6 +83,7 @@ class SkeletonKnightBoss extends Enemy{
 
         console.log("Attack Calling: " + attackCall);
         
+        this.attacking = true;
         if(attackCall == 3){
             this.lashingStrike();
         }
@@ -84,7 +91,9 @@ class SkeletonKnightBoss extends Enemy{
             this.sweepingStrike();
         }
         else{
-            this.dominatingStrike();
+            //Dominating Strike is disabled until it gets designed to not be bad
+            //this.dominatingStrike();
+            this.attacking = false;
         }
 
     }
@@ -106,12 +115,12 @@ class SkeletonKnightBoss extends Enemy{
     }
 
     sweepingStrike(){
-        let attack = new DominatingStrike(this.scene, this.x, this.y+86, 'sweeping_strike', 0, this, 1);
+        let attack = new DominatingStrike(this.scene, this.x, this.y, 'sweeping_strike', 0, this, 1);
         this.scene.attackGroup.add(attack);
     }
 
     lashingStrike(){
-        let attack = new LashingStrike(this.scene, this.x, this.y+86, 'lashing_strike', 0, this);
+        let attack = new LashingStrike(this.scene, this.x, this.y, 'lashing_strike', 0, this);
         this.scene.attackGroup.add(attack);
     }
 }
