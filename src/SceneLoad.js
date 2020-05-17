@@ -170,11 +170,12 @@ class SceneLoad extends Phaser.Scene{
             strokeThickness: 10,
             fixedWidth: 0
         }
-        scene.meterText = scene.add.text(20, 20, "Meters: 0", scene.uiConfig).setScrollFactor(0);
-        scene.meterText.depth = 1;
-        scene.uiConfig.color = '#D62109';
+        //METER COUNTER DEPRECIATED
+        //scene.meterText = scene.add.text(20, 20, "Meters: 0", scene.uiConfig).setScrollFactor(0);
+        //scene.meterText.depth = 1;
+        //scene.uiConfig.color = '#D62109';
         //scene.uiConfig.align = 'right';
-        scene.scoreText = scene.add.text(20, 60, "Score: 0", scene.uiConfig,).setScrollFactor(0);
+        scene.scoreText = scene.add.text(20, 20, "Score: 0", scene.uiConfig,).setScrollFactor(0);
         scene.scoreText.depth = 1;
         scene.magicMissileMeter = [
             scene.add.sprite(game.config.width - 40, 110, 'magic_missileUI').setScrollFactor(0),
