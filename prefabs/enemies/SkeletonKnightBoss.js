@@ -2,17 +2,12 @@ class SkeletonKnightBoss extends Enemy{
     constructor(scene, x, y, texture, frame, level){
         super(scene, x, y, texture, frame, 500, 100);
 
+        //properties
         this.attackTimer;
         this.level = level;
-        if(this.level > 3){
+        if(this.level > 3){ //level determines which attacks the boss can use
             this.level = 3;
         }
-
-        //this.scene.obstacleSpawnTimer.paused = true;
-        //this.scene.enemySpawnTimer.paused = true;
-
-        //this.setOrigin(0.5, 0);
-        //properties
         this.body.setSize(169, 172);
         this.body.setBounce(0, 0);
         this.speed = 50;
@@ -22,11 +17,6 @@ class SkeletonKnightBoss extends Enemy{
         this.on('animationcomplete', () => {this.setTexture('entities', 'sb_dominating_strike18',);}, this);
 
         this.scene.bossActive = true;
-
-        //this.scene.physics.moveTo(this, config.width/2, 250, 125);
-        //this.body.setVelocityY(0);
-
-        //console.log("Boss Level: " + this.level);
     }
 
     //how the enemy will specificly attack, if at all
@@ -34,7 +24,7 @@ class SkeletonKnightBoss extends Enemy{
         console.log("Starting attack timer!");
         //five seconds between attacks, use attacks based on level
         this.attackTimer = this.scene.time.addEvent({
-            delay: 6000,            //5 seconds
+            delay: 6000,            //5 seconds, plus 1 for the actual attack
             callback: this.pickAttack,
             //args: [],
             callbackScope: this,
@@ -43,11 +33,9 @@ class SkeletonKnightBoss extends Enemy{
         });
     }
 
-    //I wish there was a better way to do this, but moveTo won's stop anything so...
+    //I wish there was a better way to do this, but moveTo won't stop anything so...
     movementPattern(){
-        /*if(this.y >= 250){
-            this.body.setVelocityY(0);
-        }*/
+        //accelerate towards the player
         this.body.setAcceleration(0, 0);
         if(!this.attacking){
             this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) - (Math.PI / 2);
@@ -68,16 +56,17 @@ class SkeletonKnightBoss extends Enemy{
         this.scene.killsUntilBoss = this.scene.player.bodyCount + 15;   //should be at 15
         this.scene.bossActive = false;
 
-        this.scene.obstacleSpawnTimer.paused = false;
-        this.scene.enemySpawnTimer.paused = false;
+        //this.scene.obstacleSpawnTimer.paused = false;
+        //this.scene.enemySpawnTimer.paused = false;
 
         this.attackTimer.remove();
 
-        console.log("Kills to boss: " + this.scene.killsUntilBoss);
+        //console.log("Kills to boss: " + this.scene.killsUntilBoss);
     }
 
+    //randomly throws an attack, based on the boss' level
     pickAttack(){
-        console.log("SkeletonKnight Health:" + this.health);
+        //console.log("SkeletonKnight Health:" + this.health);
 
         let attackCall = Phaser.Math.Between(1, this.level);
 
@@ -92,6 +81,7 @@ class SkeletonKnightBoss extends Enemy{
         }
         else{
             //Dominating Strike is disabled until it gets designed to not be bad
+            //                  i mean functions with the new perspective
             //this.dominatingStrike();
             this.attacking = false;
         }
@@ -99,7 +89,8 @@ class SkeletonKnightBoss extends Enemy{
     }
 
     dominatingStrike(){
-        let attackSpacer = Phaser.Math.Between(1, 3);
+        //SUPER DEPRECEATED
+        /*let attackSpacer = Phaser.Math.Between(1, 3);
         if(attackSpacer == 1){
             attackSpacer = game.config.width/6;
         }
@@ -111,7 +102,7 @@ class SkeletonKnightBoss extends Enemy{
         }
         
         let attack = new DominatingStrike(this.scene, attackSpacer, game.config.height/2, 'dominating_strike', 0, this);
-        this.scene.attackGroup.add(attack);
+        this.scene.attackGroup.add(attack);*/
     }
 
     sweepingStrike(){

@@ -27,9 +27,11 @@ class OrcPunch extends Attack{
     }
 
     strike(target){
-        console.log(target);
+        //console.log(target);
+        //if you actually hit someone, damage them
         if(target !== null && target !== this.user){
             target.onDamage(this.damage, this.destroyTimer.elapsed);
+            //recharge the magic missile if this punch hasn't already
             if(!this.mmGiven){
                 ++this.user.canSpecial;
                 this.scene.meterUpdate(this.user.canSpecial);

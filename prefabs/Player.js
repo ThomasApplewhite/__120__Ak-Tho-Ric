@@ -50,6 +50,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
     }
 
+    //handles keyboard inputs the do things
     controlOperations(){
         //left-right movement
         if(this.moveLeft.isDown){
@@ -93,7 +94,7 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
-    //stuns the player for 1 second
+    //stuns the player for stunTime seconds, then makes them immune for that much time afterwards
     startStun(stunTime){
         if(!this.stunned && !this.immune){
             console.log("You've been stunned!");
@@ -111,6 +112,7 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
+    //takes off one of the player's lives, if they aren't immune
     takeDamage(){
         if(!this.stunned && !this.immune){
             this.scene.healthUpdate(this.lives);
@@ -123,6 +125,7 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
+    //ends the game on player death
     defeat(){
         this.stunned = true;
         this.setVisible(false);
@@ -156,7 +159,7 @@ class Player extends Phaser.GameObjects.Sprite{
                 delay: 500,     //total time before next punch is 30 frames i.e. half a second
                 callback: function(){
                     this.canNormal = true;
-                    console.log("PUNCH ready!");
+                    //console.log("PUNCH ready!");
                 },
                 callbackScope: this,
                 loop: false
@@ -186,8 +189,7 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
-    //not actually an attack
-    //yet
+    //locks player controls and launches them in the direction they're currently facing.
     dashAttack(){
         if(this.canDash){
             console.log("Dashing!");
@@ -197,6 +199,7 @@ class Player extends Phaser.GameObjects.Sprite{
             this.scene.physics.moveTo(this, this.x + destination.x, this.y + destination.y, 60, 250);
             this.controlLock = true;
             this.canDash = true;
+            //The dash takes 1/4 of a second, and the player stops on arrival
             this.actionTimers.dashTime = this.scene.time.addEvent({
                 delay: 250, 
                 callback: () => {
@@ -205,6 +208,7 @@ class Player extends Phaser.GameObjects.Sprite{
                 },
                 callbackScope: this
             });
+            //dash cools off after 4 seconds
             this.actionTimers.dashCooldown = this.scene.time.addEvent({
                 delay: 4000,
                 callback: () => {
@@ -216,11 +220,13 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
+    //exposes the player's score
     exportScores(){
         let scores = new Array(this.score, this.distance, this.bodyCount);
         return scores;
     }
 
+    //resets animations when an action ends
     walkAnim(){
         if(!this.anims.isPlaying && !this.stunned){
             this.anims.play('orc_walkAnim');

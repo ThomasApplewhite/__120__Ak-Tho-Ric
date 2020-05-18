@@ -5,11 +5,15 @@ class Enemy extends Phaser.GameObjects.Sprite{
         scene.physics.add.existing(this);
         scene.add.existing(this);
 
+        //properties
         this.health = health;
         this.points = points;
         this.immune = false;
         this.timers = new Array();
         this.attackPattern();
+
+        //Enemies are really anything that isn't the player that still moves.
+        //They come with methods to handle getting hurt, but are otherwise just moving images.
     }
 
     update(){

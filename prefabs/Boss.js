@@ -3,12 +3,16 @@ class Boss extends Enemy{
         super(scene, x, y, texture, frame, health, points);
 
         this.bossVibes();
+
+        //Bosses are spicy enemies that run bossVibes on spawn,
+        //which usually sets logical flags to tell the level that
+        //it's boss time.
     }
 
     //what happens when the boss spawns
     bossVibes(){
-        this.scene.obstacleSpawnTimer = false;
-        this.scene.enemySpawnTimer.paused = false;
+        //this.scene.obstacleSpawnTimer = false;
+        //this.scene.enemySpawnTimer.paused = false;
     }
     
     //anything special that happens when the enemy dies

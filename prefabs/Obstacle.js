@@ -1,6 +1,8 @@
 /*
 In a perfect world, most obstacles with strange behaviors will just inherit from this class
     and define their behavior in different files. Makes things easy, yeah?
+
+h e l l a DEPRECEATED
 */
 class Obstacle extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture, frame){

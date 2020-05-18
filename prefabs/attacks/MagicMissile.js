@@ -50,6 +50,7 @@ class MagicMissile extends Attack{
     }
 
     movementPattern(){
+        //explode at max range
         if(Phaser.Math.Distance.Between(this.x, this.y, this.xLaunch, this.yLaunch) > this.range){
             this.strike(null);
         }

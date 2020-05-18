@@ -1,18 +1,12 @@
 /*
-INTO THE DARKWORLD
+INTO THE DARKWORLD... 2?
 CREATED BY AKASH D. KAPADIA, ERIC LONG, & THOMAS APPLEWHITE
 COMPLETED MAY 3RD, 2020
 
-From a technical perspective, we're really proud of how everything is handled under the hood.
-    Each object (with the exception of the player) inherits from a base class, which itself
-    inherits from Sprite. This inheritence not only makes collision groups easy to make 
-    (as objects can by grouped by literal type), but also makes adding new obstacles, enemies,
-    and attacks a breeze. It also makes it easier to integrate the beat 'em up/shoot 'em up
-    mechanics our game has.
-From an artistic perspective, we decided to go for a pixel-art style because it's an homage 
-    to the retro genre of gaming. Also our artist is best at pixel art. All assets 
-    (with the exception of the font) are hand-made by our artist, and designed to be goofy 
-    while creating a brutal, gothic atmosphere by using relatively simple visuals and sounds.
+Hi. While walking around, you might notice a lot of old, commented code that's marked
+DEPRECEATED
+or is otherwise unused. This is because I am a code hoarder. I will clean it up eventually.
+    -Thomas.
 */
 
 let config = {

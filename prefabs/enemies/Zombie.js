@@ -47,15 +47,19 @@ class Zombie extends Enemy{
         this.health -= damage;
     }
 
-    //Thomas, did you just declare a timer within another timer's unnamed callback? Yes. Yes, I did.
+    //The zombie's attack. When close to the player, zombies will enter a speedy rage for
+    //  attackDuration seconds, then take a break
     lunge(){
         let dist = Phaser.Math.Distance.Between(this.x, this.y , this.scene.player.x, this.scene.player.y);
+        //if close enough and not on cool down
         if(this.lunging == 0 && dist <= this.attackRange){
+            //lunge at 'em
             this.lunging = 1;
             this.anims.play('zombie_attackAnim');
             Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
                 delay: this.attackDuration,
                 callback: () => {
+                    //after the lunge, enter cooldown
                     this.lunging = 2;
                     this.anims.play('zombie_walkAnim');
                 },
@@ -63,6 +67,7 @@ class Zombie extends Enemy{
             }));
             Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
                 delay: this.attackDuration * 2,
+                //after the cooldown, back to normal
                 callback: () => {this.lunging = 0;},
                 callbackScope: this
             }));
