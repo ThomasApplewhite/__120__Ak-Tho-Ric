@@ -19,7 +19,7 @@ class SkeletonKnightBoss extends Enemy{
         this.attacking = false;
 
         this.scene.bossLaughSFX.play();
-        this.on('animationcomplete', () => {this.setTexture('enemies', 'mid_attack1',);}, this);
+        this.on('animationcomplete', () => {this.setTexture('entities', 'sb_dominating_strike18',);}, this);
 
         this.scene.bossActive = true;
 
@@ -50,7 +50,7 @@ class SkeletonKnightBoss extends Enemy{
         }*/
         this.body.setAcceleration(0, 0);
         if(!this.attacking){
-            this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) + (Math.PI / 2);
+            this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) - (Math.PI / 2);
         }
         else{
             this.body.setVelocity(0, 0);

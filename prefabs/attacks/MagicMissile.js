@@ -28,23 +28,25 @@ class MagicMissile extends Attack{
     }
 
     strike(target){
-        //stop
-        this.body.stop();
-        //become invisible
-        this.setVisible(false);
-        //create the blast
-        this.scene.attackGroup.add(new MagicMissileBlast(
-            this.scene, 
-            this.x, 
-            this.y, 
-            'attacks', 
-            'missle_explode1',
-            this, 
-            this.damage
-            )
-        );
-        //cease to be
-        this.removeSelf();
+        if(target != this.user){
+            //stop
+            this.body.stop();
+            //become invisible
+            this.setVisible(false);
+            //create the blast
+            this.scene.attackGroup.add(new MagicMissileBlast(
+                this.scene, 
+                this.x, 
+                this.y, 
+                'attacks', 
+                'missle_explode1',
+                this, 
+                this.damage
+                )
+            );
+            //cease to be
+            this.removeSelf();
+        }
     }
 
     movementPattern(){

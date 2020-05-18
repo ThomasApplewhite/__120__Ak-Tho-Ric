@@ -142,7 +142,7 @@ class SceneLoad extends Phaser.Scene{
         scene.physics.add.overlap(scene.attackGroup, scene.enemyGroup, function(attack, enemy){
             attack.strike(enemy);
         })
-        scene.physics.add.overlap(scene.attackGroup, scene.obstacleGroup, function(attack, enemy){
+        scene.physics.add.collider(scene.attackGroup, scene.tilemap.getLayer("Walls").tilemapLayer, function(attack, enemy){
             //to simulate that it has struck nothing
             attack.strike(null);
         })
@@ -353,8 +353,8 @@ class SceneLoad extends Phaser.Scene{
                 this, 
                 tile.pixelX, 
                 tile.pixelY-64, 
-                'player',
-                'back_walk8'
+                'entities',
+                'om_punch4'
             );
         }
         else if(entityName == "Zombie"){
@@ -362,8 +362,8 @@ class SceneLoad extends Phaser.Scene{
                 this,               //scene
                 tile.pixelX,        //x
                 tile.pixelY-64,     //y
-                'enemies',          //sprite
-                'forward_walk1',    //start frame of anim
+                'entities',          //sprite
+                'zom_walk1',    //start frame of anim
                 )
             );
         }
@@ -372,8 +372,8 @@ class SceneLoad extends Phaser.Scene{
                 this,               //scene
                 tile.pixelX,        //x
                 tile.pixelY-64,     //y
-                'enemies',          //sprite
-                'mid_attack1',      //start frame of anim
+                'entities',          //sprite
+                'sb_dominating_strike18',      //start frame of anim
                 3
                 );
             this.enemyGroup.add(this.boss);

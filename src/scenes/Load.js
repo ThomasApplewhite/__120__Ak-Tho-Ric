@@ -34,11 +34,11 @@ class Load extends Phaser.Scene{
         this.load.tilemapTiledJSON('cave_texture_map', './assets/tilemaps/level_1_map.json');
 
   
-        //player images
+        //entity images
         this.load.atlas({
-            key: 'player',
-            textureURL: './assets/atlases/orc_monk.png',
-            atlasURL: './assets/atlases/orc_monk.json'
+            key: 'entities',
+            textureURL: './assets/atlases/all_animations.png',
+            atlasURL: './assets/atlases/all_animations.json'
         });
 
         //attack images
@@ -52,21 +52,13 @@ class Load extends Phaser.Scene{
         this.load.image('dominating_strike', './assets/dominating_strike.png');
         this.load.image('sweeping_strike', './assets/sweeping_strike.png');
 
+        //DEPRECIATED
         //obstacle images
-        this.load.atlas({
+        /*this.load.atlas({
             key: 'obstacles',
             textureURL: './assets/atlases/obstacles.png',
             atlasURL: './assets/atlases/obstacles.json'
-        });
-        
-
-        //enemy images
-        this.load.image('zombie', './assets/zombie.png');
-        this.load.atlas({
-            key: 'enemies',
-            textureURL: './assets/atlases/enemies.png',
-            atlasURL: './assets/atlases/enemies.json'
-        })
+        });*/
 
         //UI images
         this.load.image('heartUI', './assets/heart.png');
@@ -114,34 +106,35 @@ class Load extends Phaser.Scene{
         //---ORC ANIMS---
         this.anims.create({
             key: 'orc_punchAnim',
-            frameRate: 5,
-            frames: this.anims.generateFrameNames('player', {
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
                 start: 1,
-                end: 4,
-                prefix: 'back_punch'
+                end: 6,
+                prefix: 'om_punch'
             }),
             repeat: 0
         });
         this.anims.create({
             key: 'orc_stunAnim',
-            frameRate: 5,
-            frames: this.anims.generateFrameNames('player', {
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
                 start: 1,
-                end: 4,
-                prefix: 'back_stun'
+                end: 3,
+                prefix: 'om_stun'
             }),
             repeat: -1
         });
         this.anims.create({
             key: 'orc_walkAnim',
             frameRate: 10,
-            frames: this.anims.generateFrameNames('player', {
+            frames: this.anims.generateFrameNames('entities', {
                 start: 1,
-                end: 8,
-                prefix: 'back_walk'
+                end: 6,
+                prefix: 'om_run'
             }),
             repeat: -1
         });
+
         //---ATTACK ANIMS---
         this.anims.create({
             key: 'punch_effectAnim',
@@ -164,40 +157,40 @@ class Load extends Phaser.Scene{
         //---ENEMY ANIMS
         this.anims.create({
             key: 'zombie_walkAnim',
-            frameRate: 10,
-            frames: this.anims.generateFrameNames('enemies', {
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
                 start: 1,
-                end: 5,
-                prefix: 'forward_walk' 
+                end: 12,
+                prefix: 'zom_walk' 
             }),
             repeat: -1
         });
         this.anims.create({
             key: 'zombie_attackAnim',
-            frameRate: 10,
-            frames: this.anims.generateFrameNames('enemies', {
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
                 start: 1,
-                end: 3,
-                prefix: 'forward_attack' 
+                end: 12,
+                prefix: 'zom_attack' 
             }),
             repeat: -1
         });
         this.anims.create({
             key: 'boss_dominatingAnim',
-            frameRate: 10,
-            frames: this.anims.generateFrameNames('enemies', {
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
                 start: 1,
-                end: 4,
-                prefix: 'mid_attack'
+                end: 18,
+                prefix: 'sb_dominating_strike'
             })
         });
         this.anims.create({
             key: 'boss_sweepingAnim',
-            frameRate: 10,
-            frames: this.anims.generateFrameNames('enemies', {
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
                 start: 1,
-                end: 4,
-                prefix: 'skelly_boss_sweep'
+                end: 18,
+                prefix: 'sb_slashing_strike'
             })
         });
 

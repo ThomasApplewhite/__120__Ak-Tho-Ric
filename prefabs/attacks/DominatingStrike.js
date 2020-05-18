@@ -2,9 +2,10 @@ class DominatingStrike extends Attack{
     constructor(scene, x, y, texture, frame, user, type){
         super(scene, x, y, texture, frame, user);
 
-        this.setAlpha(0.2);
+        this.setAlpha(0);
         this.active = false;
         this.user = user;
+        this.type = type;
         this.bossAnim;
         //console.log(this.boss);*/
 
@@ -17,7 +18,6 @@ class DominatingStrike extends Attack{
 
         //type determines the nature of the attack
         //type 0 = DominatingStrike, type 1 = SweepingStrike
-        this.type = type;
         if(this.type == 1){
             this.body.isCircle = true;
         }
