@@ -358,14 +358,14 @@ class SceneLoad extends Phaser.Scene{
             );
         }
         else if(entityName == "Zombie"){
-            /*this.enemyGroup.add(new Zombie(
+            this.enemyGroup.add(new Zombie(
                 this,               //scene
                 tile.pixelX,        //x
                 tile.pixelY-64,     //y
                 'enemies',          //sprite
                 'forward_walk1',    //start frame of anim
                 )
-            );*/
+            );
         }
         else if(entityName == "SkeletonKnightBoss"){
             this.boss = new SkeletonKnightBoss(
@@ -375,8 +375,17 @@ class SceneLoad extends Phaser.Scene{
                 'enemies',          //sprite
                 'mid_attack1',      //start frame of anim
                 3
-                )
+                );
             this.enemyGroup.add(this.boss);
+        }
+        else if(entityName == "BreakableWall"){
+            this.enemyGroup.add(new BreakableWall(
+                this,               //scene
+                tile.pixelX+32,        //x
+                tile.pixelY+32,     //y
+                'breakable_wall'
+                )
+            );
         }
         else if(entityName != null){
             console.log("TILE " + entityName + " NOT FOUND. ENEMY NOT SPAWNED");

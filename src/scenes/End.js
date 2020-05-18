@@ -87,7 +87,7 @@ class End extends Phaser.Scene{
         this.background.tilePositionY -= 1;
 
         if(keyQ.isDown){
-            this.scene.start("playScene");
+            this.scene.start("menuScene");
         }
 
         if(keyDOWN.isDown){

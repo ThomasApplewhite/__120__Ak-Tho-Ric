@@ -24,13 +24,14 @@ class Load extends Phaser.Scene{
         this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');     
         this.load.image('placeholder_map_tiles', './assets/placeholders/tiles_placeholder.png');
         this.load.tilemapTiledJSON('placeholder_map', './assets/placeholders/tilemap_placeholder.json'); 
+        this.load.image('breakable_wall', './assets/placeholders/breakableWall_placeholder.png');
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
 
         //map assets
         this.load.image('cave_texture_map_tiles', './assets/tilemaps/cave_texture.png');
-        this.load.tilemapTiledJSON('cave_texture_map', './assets/tilemaps/cave_texture.json');
+        this.load.tilemapTiledJSON('cave_texture_map', './assets/tilemaps/level_1_map.json');
 
   
         //player images
@@ -245,7 +246,7 @@ class Load extends Phaser.Scene{
                     delay: 0
                 });
                 //CHANGE THIS TO CHANGE WHAT SCENE THE GAME STARTS IN
-                this.scene.start("testMapScene");},
+                this.scene.start("menuScene");},
             loop: false,
         });
         this.nextSceneTime.paused = true;

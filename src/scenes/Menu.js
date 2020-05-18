@@ -85,7 +85,7 @@ class Menu extends Phaser.Scene{
         this.background.tilePositionY -= 1;
 
         if(keyUP.isDown){
-            this.scene.start("playScene");
+            this.scene.start("levelOneScene");
         }
 
         if(keyDOWN.isDown){
