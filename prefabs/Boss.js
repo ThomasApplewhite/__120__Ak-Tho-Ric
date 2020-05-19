@@ -11,16 +11,12 @@ class Boss extends Enemy{
 
     //what happens when the boss spawns
     bossVibes(){
-        //this.scene.obstacleSpawnTimer = false;
-        //this.scene.enemySpawnTimer.paused = false;
+        //might be depreciated? We'll see
     }
     
     //anything special that happens when the enemy dies
     onDeath(){
         ++this.scene.player.bodyCount;
         this.scene.player.score += this.points;
-
-        this.scene.obstacleSpawnTimer = true;
-        this.scene.enemySpawnTimer.paused = true;
     }
 }

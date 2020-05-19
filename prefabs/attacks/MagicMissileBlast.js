@@ -19,6 +19,7 @@ class MagicMissileBlast extends Attack{
             loop: false
             }
         )
+        Phaser.Utils.Array.Add(this.timers, this.destroyTimer);
     }
 
     strike(target){

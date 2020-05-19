@@ -22,7 +22,6 @@ class Player extends Phaser.GameObjects.Sprite{
         this.speed = 250;
         this.bodyCount = 0;
         this.score = 0;
-        this.distance = 0;
         //action cooldowns
         this.canNormal = true;
         this.canDash = true;
@@ -222,7 +221,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
     //exposes the player's score
     exportScores(){
-        let scores = new Array(this.score, this.distance, this.bodyCount);
+        let scores = new Array(this.score, this.bodyCount);
         return scores;
     }
 

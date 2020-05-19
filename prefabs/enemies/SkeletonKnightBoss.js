@@ -12,7 +12,7 @@ class SkeletonKnightBoss extends Enemy{
         this.body.setBounce(0, 0);
         this.speed = 50;
         this.attacking = false;
-
+        
         this.scene.bossLaughSFX.play();
         this.on('animationcomplete', () => {this.setTexture('entities', 'sb_dominating_strike18',);}, this);
 
@@ -23,14 +23,14 @@ class SkeletonKnightBoss extends Enemy{
     attackPattern(){
         console.log("Starting attack timer!");
         //five seconds between attacks, use attacks based on level
-        this.attackTimer = this.scene.time.addEvent({
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 6000,            //5 seconds, plus 1 for the actual attack
             callback: this.pickAttack,
             //args: [],
             callbackScope: this,
             loop: true,
             startAt: 1000
-        });
+        }));
     }
 
     //I wish there was a better way to do this, but moveTo won't stop anything so...
@@ -58,8 +58,6 @@ class SkeletonKnightBoss extends Enemy{
 
         //this.scene.obstacleSpawnTimer.paused = false;
         //this.scene.enemySpawnTimer.paused = false;
-
-        this.attackTimer.remove();
 
         //console.log("Kills to boss: " + this.scene.killsUntilBoss);
     }
@@ -89,29 +87,16 @@ class SkeletonKnightBoss extends Enemy{
     }
 
     dominatingStrike(){
-        //SUPER DEPRECEATED
-        /*let attackSpacer = Phaser.Math.Between(1, 3);
-        if(attackSpacer == 1){
-            attackSpacer = game.config.width/6;
-        }
-        else if( attackSpacer == 2){
-            attackSpacer = game.config.width/2;
-        }
-        else{
-            attackSpacer = game.config.width*5/6;
-        }
-        
-        let attack = new DominatingStrike(this.scene, attackSpacer, game.config.height/2, 'dominating_strike', 0, this);
-        this.scene.attackGroup.add(attack);*/
+        //awaiting new behavior
     }
 
     sweepingStrike(){
         let attack = new DominatingStrike(this.scene, this.x, this.y, 'sweeping_strike', 0, this, 1);
-        this.scene.attackGroup.add(attack);
+        this.scene.hostileAttackGroup.add(attack);
     }
 
     lashingStrike(){
         let attack = new LashingStrike(this.scene, this.x, this.y, 'lashing_strike', 0, this);
-        this.scene.attackGroup.add(attack);
+        this.scene.hostileAttackGroup.add(attack);
     }
 }

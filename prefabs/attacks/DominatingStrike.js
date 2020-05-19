@@ -25,16 +25,16 @@ class DominatingStrike extends Attack{
 
         //setting timers so the attack happens in-sync with the animation
         this.scene.boss.anims.delayedPlay(250, this.bossAnim);
-        this.scene.time.addEvent({
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 750,
             callback: this.activateMove,
             callbackScope: this
-        });
-        this.scene.time.addEvent({
+        }));
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 1000,
             callback: this.removeSelf,
             callbackScope: this
-        });
+        }));
     }
 
     //turns on the 'hurt' part of the hurtbox

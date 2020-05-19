@@ -24,6 +24,7 @@ class OrcPunch extends Attack{
             callbackScope: this,
             loops: false
         });
+        Phaser.Utils.Array.Add(this.timers, this.destroyTimer);
     }
 
     strike(target){

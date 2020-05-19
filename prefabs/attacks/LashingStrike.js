@@ -13,7 +13,7 @@ class LashingStrike extends Attack{
         this.setAlpha(0.2);
 
         //sets a timer to launch the hook in 3/4 of a second
-        this.scene.time.addEvent({
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 750,
             callback: () => {
                 this.setAlpha(1);
@@ -21,7 +21,7 @@ class LashingStrike extends Attack{
                 this.rotation = this.scene.physics.moveTo(this, this.destX, this.destY, 125, 500);
             },
             callbackScope: this
-        });
+        }));
     }
 
     //what happens when the attack collides with a target

@@ -23,10 +23,6 @@ class Enemy extends Phaser.GameObjects.Sprite{
             this.onDeath();
             this.destroyCleanup();
         }
-
-        /*if(this.y > game.config.height){
-            this.destroyCleanup();
-        }*/
     }
 
     //frame-by-frame movement
@@ -54,11 +50,11 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
     startImmunity(immuneTime){
         this.immune = true;
-        this.scene.time.addEvent({
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: immuneTime,
             callback: () => {this.immune = false},
             callbackScope: this
-        });
+        }));
     }
 
     //anything special that happens when the enemy dies
