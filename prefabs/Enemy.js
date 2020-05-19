@@ -1,5 +1,5 @@
 class Enemy extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y, texture, frame, health, points){
+    constructor(scene, x, y, texture, frame, health, points, aggroRange){
         super(scene, x, y, texture, frame);
 
         scene.physics.add.existing(this);
@@ -9,8 +9,12 @@ class Enemy extends Phaser.GameObjects.Sprite{
         this.health = health;
         this.points = points;
         this.immune = false;
+        this.aggroRange = aggroRange;
+        this.aggressive = false;
         this.timers = new Array();
-        this.attackPattern();
+        //adding a one-time event to cause a g g r e v a t i o n
+        //I'm typing in an argument to make sure aggro'ing one enemy doesn't aggro them all
+        this.once("aggressived", (enemy) => {enemy.aggressive = true; enemy.attackPattern();});
 
         //Enemies are really anything that isn't the player that still moves.
         //They come with methods to handle getting hurt, but are otherwise just moving images.
@@ -18,6 +22,12 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
     update(){
         this.movementPattern();
+
+        if(!this.aggressive && 
+            Phaser.Math.Distance.BetweenPoints(this.body.position, this.scene.player.body.position) < this.aggroRange)
+        {
+            this.emit("aggressived", this);
+        }
 
         if(this.health <= 0){
             this.onDeath();

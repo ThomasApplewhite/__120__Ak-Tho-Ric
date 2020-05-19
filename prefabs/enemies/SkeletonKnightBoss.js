@@ -1,6 +1,6 @@
 class SkeletonKnightBoss extends Enemy{
     constructor(scene, x, y, texture, frame, level){
-        super(scene, x, y, texture, frame, 500, 100);
+        super(scene, x, y, texture, frame, 500, 100, 320);
 
         //properties
         this.attackTimer;
@@ -12,7 +12,7 @@ class SkeletonKnightBoss extends Enemy{
         this.body.setBounce(0, 0);
         this.speed = 50;
         this.attacking = false;
-        
+
         this.scene.bossLaughSFX.play();
         this.on('animationcomplete', () => {this.setTexture('entities', 'sb_dominating_strike18',);}, this);
 

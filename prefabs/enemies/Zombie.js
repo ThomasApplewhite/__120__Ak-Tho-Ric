@@ -1,6 +1,6 @@
 class Zombie extends Enemy{
     constructor(scene, x, y, texture, frame){
-        super(scene, x, y, texture, frame, 1, 10);
+        super(scene, x, y, texture, frame, 1, 10, 320);
 
         //properties
         this.speed = 125;           //speed
@@ -12,27 +12,24 @@ class Zombie extends Enemy{
 
         //animation
         this.anims.play('zombie_walkAnim');
-        /*this.on('animationcomplete', () => {
-            this.anims.play('zombie_walkAnim');
-            this.lunging = false;
-        }, this);*/
     }
 
     //frame-by-frame movement
     //the movement right now is REALLY stiff. I might need some time to clean this up
     movementPattern(){
-        this.body.setAcceleration(0, 0);
-        this.lunge();
+        if(this.aggressive){
+            this.body.setAcceleration(0, 0);
+            this.lunge();
 
-        //accelerateToObject returns the angle the Zombie needs to go, and we add pi/2 radians to correct the art's offset
-        if(this.lunging == 1){
-            //run at them twice as fast as normal
-            this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) + (Math.PI / 2);
-        }else{
-            //run towards them without lunging                               
-            this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 10000, this.speed/2, this.speed) + (Math.PI / 2);
+            //accelerateToObject returns the angle the Zombie needs to go, and we add pi/2 radians to correct the art's offset
+            if(this.lunging == 1){
+                //run at them twice as fast as normal
+                this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) + (Math.PI / 2);
+            }else{
+                //run towards them without lunging                               
+                this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 10000, this.speed/2, this.speed) + (Math.PI / 2);
+            }
         }
-
     }
 
     //what happens when the enemy collides with the player
