@@ -35,7 +35,7 @@ class OrcPunch extends Attack{
             //recharge the magic missile if this punch hasn't already
             if(!this.mmGiven){
                 ++this.user.canSpecial;
-                this.scene.meterUpdate(this.user.canSpecial);
+                //this.scene.meterUpdate(this.user.canSpecial);
                 this.mmGiven = true;
             }
             //cuts 0.5 seconds off of dash cooldown
