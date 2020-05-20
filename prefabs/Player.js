@@ -16,7 +16,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.specialAttack  =   keyE;
         this.dash           =   keyW;
         //player properties
-        this.lives = 3;
+        this.health = 30;
         this.stunned = false;
         this.immune = false;
         this.speed = 250;
@@ -111,12 +111,12 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
-    //takes off one of the player's lives, if they aren't immune
-    takeDamage(){
+    //player takes damage, if they're not immune
+    takeDamage(damage){
         if(!this.stunned && !this.immune){
-            this.scene.healthUpdate(this.lives);
-            this.lives -= 1;
-            if(this.lives > 0){
+            //this.scene.healthUpdate(this.lives);
+            this.health -= damage;
+            if(this.health > 0){
                 this.startStun(250);
             }else{
                 this.defeat();

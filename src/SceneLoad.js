@@ -136,7 +136,7 @@ class SceneLoad extends Phaser.Scene{
             creating UI
             NEEDS IMPROVEMENT
             will be turned into one group later
-        */
+        
         scene.uiConfig = {
             fontFamily: 'PermanentMarker',
             fontSize: '28px',
@@ -165,6 +165,7 @@ class SceneLoad extends Phaser.Scene{
         scene.heartMeter[0].depth = 1;
         scene.heartMeter[1].depth = 1;
         scene.heartMeter[2].depth = 1;
+        */
 
         //game-over flag
         scene.gameOver = false;

@@ -15,11 +15,11 @@ class LevelOne extends Phaser.Scene{
         if(!this.gameOver){
             //entity updating
             this.player.update();
-            this.textUpdate();
+            //this.textUpdate();
         }
     }
 
-    //Will be moved to a UI group eventually
+    /*//Will be moved to a UI group eventually
     textUpdate(){
         this.scoreText.setText("Score: " + this.player.score);
     }
@@ -38,7 +38,7 @@ class LevelOne extends Phaser.Scene{
     //Will be moved to a UI group eventually
     healthUpdate(param){
         this.heartMeter[param-1].visible = false;
-    }
+    }*/
 
     finishGame(){
         let scores = this.player.exportScores();

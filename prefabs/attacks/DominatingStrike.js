@@ -52,7 +52,7 @@ class DominatingStrike extends Attack{
                 this.scene.player.startStun(1500);
             //kill 'em if they're far
             }else{
-                this.scene.player.defeat();
+                this.scene.player.takeDamage(15);   //boss attacks do 15 damages
             }
         }
     }

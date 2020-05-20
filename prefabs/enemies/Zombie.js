@@ -36,7 +36,7 @@ class Zombie extends Enemy{
     //  other forms of attack should go in attackPattern
     onAttack(player){
         if(this.lunging == 1){
-            player.takeDamage();
+            player.takeDamage(2);   //melee enemies do 2 damage
         }
     }
 
