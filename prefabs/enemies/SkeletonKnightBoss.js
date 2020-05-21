@@ -1,6 +1,6 @@
 class SkeletonKnightBoss extends Enemy{
     constructor(scene, x, y, texture, frame, level){
-        super(scene, x, y, texture, frame, 500, 100, 320);
+        super(scene, x, y, texture, frame, 50, 100, 320);
 
         //properties
         this.attackTimer;
@@ -8,20 +8,21 @@ class SkeletonKnightBoss extends Enemy{
         if(this.level > 3){ //level determines which attacks the boss can use
             this.level = 3;
         }
+        this.health = this.health +  (25 * (this.level - 1));
+        this.points = this.points * this.level;
         this.body.setSize(169, 172);
         this.body.setBounce(0, 0);
         this.speed = 50;
         this.attacking = false;
 
         this.scene.bossLaughSFX.play();
-        this.on('animationcomplete', () => {this.setTexture('entities', 'sb_dominating_strike18',);}, this);
+        this.on('animationcomplete', () => {this.setTexture('entities', frame,);}, this);
 
         this.scene.bossActive = true;
     }
 
     //how the enemy will specificly attack, if at all
     attackPattern(){
-        console.log("Starting attack timer!");
         //five seconds between attacks, use attacks based on level
         Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 6000,            //5 seconds, plus 1 for the actual attack
@@ -55,11 +56,6 @@ class SkeletonKnightBoss extends Enemy{
         ++this.scene.bossLevel;                                        //should start at 1
         this.scene.killsUntilBoss = this.scene.player.bodyCount + 15;   //should be at 15
         this.scene.bossActive = false;
-
-        //this.scene.obstacleSpawnTimer.paused = false;
-        //this.scene.enemySpawnTimer.paused = false;
-
-        //console.log("Kills to boss: " + this.scene.killsUntilBoss);
     }
 
     //randomly throws an attack, based on the boss' level

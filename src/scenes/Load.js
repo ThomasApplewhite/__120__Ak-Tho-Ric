@@ -23,6 +23,10 @@ class Load extends Phaser.Scene{
         this.load.image('placeholder_map_tiles', './assets/placeholders/tiles_placeholder.png');
         this.load.tilemapTiledJSON('placeholder_map', './assets/placeholders/tilemap_placeholder.json'); 
         this.load.image('breakable_wall', './assets/placeholders/breakableWall_placeholder.png');
+        this.load.image('dread_eyes', './assets/placeholders/dread_eyes_placeholder.png');
+        this.load.image('blight_beam', './assets/placeholders/blight_beam_placeholder.png');
+        this.load.image('shattering_stones', './assets/placeholders/shattering_stones_placeholder.png');
+        this.load.image('cardinal_ray', './assets/placeholders/cardinal_ray_placeholder.png');
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');

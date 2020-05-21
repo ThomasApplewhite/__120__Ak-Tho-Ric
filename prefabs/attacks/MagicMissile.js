@@ -54,9 +54,5 @@ class MagicMissile extends Attack{
         if(Phaser.Math.Distance.Between(this.x, this.y, this.xLaunch, this.yLaunch) > this.range){
             this.strike(null);
         }
-
-        /*if(this.y < 0){
-            this.removeSelf();
-        }*/
     }
 }
