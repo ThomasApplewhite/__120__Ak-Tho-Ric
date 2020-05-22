@@ -97,6 +97,7 @@ class Player extends Phaser.GameObjects.Sprite{
     startStun(stunTime){
         if(!this.stunned && !this.immune){
             console.log("You've been stunned!");
+            this.body.stop();
             this.anims.play('orc_stunAnim');
             this.stunned = true;
             this.actionTimers.stunTime = this.scene.time.delayedCall(stunTime, () => {

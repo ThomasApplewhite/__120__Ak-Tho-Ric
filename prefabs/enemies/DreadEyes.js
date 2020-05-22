@@ -1,4 +1,4 @@
-class DreadEyes extends Boss{
+class DreadEyes extends Enemy{
     constructor(scene, x, y, texture, frame, level){
         super(scene, x, y, texture, frame, 50, 100, 6 * 64);
 
@@ -16,7 +16,13 @@ class DreadEyes extends Boss{
         this.attacking = false;
 
         //this.scene.bossLaughSFX.play();
+
+        //listeners list
         this.on('animationcomplete', () => {this.setTexture('entities', frame,);}, this);
+        this.on('dreadeyes_attackcomplete', () => {
+            this.attackTimer.paused = false;
+            this.attacking = false;
+        }, this);
 
         this.scene.bossActive = true;
     }
@@ -34,8 +40,6 @@ class DreadEyes extends Boss{
             callbackScope: this,
             loop: true,
         }));
-
-        this.on('dreadeyes_attackcomplete', () => {this.attackTimer.paused = false}, this);
     }
 
     movementPattern(){
@@ -82,13 +86,13 @@ class DreadEyes extends Boss{
     }
 
     blightBeams(){
-        Phaser.Utils.Array.Add(this.timers, this.scene.addEvent({
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 750,
             callback: () => {
                 this.scene.hostileAttackGroup.addMultiple([
-                    new BlightBeam(this, this.x, this.y, 'blight_beam', 0, this, this.rotation - 35),
-                    new BlightBeam(this, this.x, this.y, 'blight_beam', 0, this, this.rotation),
-                    new BlightBeam(this, this.x, this.y, 'blight_beam', 0, this, this.rotation + 35),
+                    new BlightBeam(this.scene, this.x, this.y, 'blight_beam', 0, this, 35),
+                    new BlightBeam(this.scene, this.x, this.y, 'blight_beam', 0, this, 0),
+                    new BlightBeam(this.scene, this.x, this.y, 'blight_beam', 0, this, -35),
                 ]);
             },
             loop: 0
@@ -101,37 +105,37 @@ class DreadEyes extends Boss{
         let yOff;   //the distance from the boss the rock should spawn on the y Axis
 
         //timer that spawns the rocks
-        let spawnTimer = this.scene.addEvent({
+        let spawnTimer = this.scene.time.addEvent({
             delay: 250,
             callback: () => {
                 xOff = Phaser.Math.Between(-256, 256);
                 yOff = Phaser.Math.Between(-256, 256);
                 this.scene.hostileAttackGroup.add(
-                    new ShatteringStone(this, this.x + xOff, this.y + yOff, 'shattering_stone', 0, this, Phaser.Math.Between(1, 4))
+                    new ShatteringStone(this.scene, this.x + xOff, this.y + yOff, 'shattering_stone', 0, this, Phaser.Math.Between(1, 4))
                 );
             },
-            loop: stoneCount,   //this timer will repeat once for each rock
-            paused: true
+            repeat: stoneCount,   //this timer will repeat once for each rock
+            //paused: true
         });
         Phaser.Utils.Array.Add(this.timers, spawnTimer);
 
         /*//timer that starts the rock fall
-        Phaser.Utils.Array.Add(this.timers, this.scene.addEvent({
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 750,
             callback: () => {spawnTimer.paused = true},
             callbackScope: this
-        }));*/
+        }))*/
     }
 
     cardinalRays(){
-        Phaser.Utils.Array.Add(this.timers, this.scene.addEvent({
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 1000,
             callback: () => {
                 this.scene.hostileAttackGroup.addMultiple([
-                    new CardinalRay(this, this.x, this.y, 'cardinal_ray', 0, this, 1),
-                    new CardinalRay(this, this.x, this.y, 'cardinal_ray', 0, this, 2),
-                    new CardinalRay(this, this.x, this.y, 'cardinal_ray', 0, this, 3),
-                    new CardinalRay(this, this.x, this.y, 'cardinal_ray', 0, this, 4),
+                    new CardinalRay(this.scene, this.x, this.y, 'cardinal_ray', 0, this, 1),
+                    new CardinalRay(this.scene, this.x, this.y, 'cardinal_ray', 0, this, 2),
+                    new CardinalRay(this.scene, this.x, this.y, 'cardinal_ray', 0, this, 3),
+                    new CardinalRay(this.scene, this.x, this.y, 'cardinal_ray', 0, this, 4),
                 ]);
             },
             loop: 0

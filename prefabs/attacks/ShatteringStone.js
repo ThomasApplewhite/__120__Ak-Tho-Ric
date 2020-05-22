@@ -5,23 +5,26 @@ class ShatteringStone extends Attack{
         this.damage = 3;
         this.active = false;
         this.setScale(scale, scale);
-        this.body.setSize();
+        this.body.setCircle(scale/2 * this.width/2, -scale * this.width/4, -scale * this.width/4);
         this.setAlpha(0.2);
 
         //this timer will also be replaced with an animation event
-        this.telegraphTimer =  this.scene.addEvent({
+        this.telegraphTimer =  this.scene.time.addEvent({
             delay: 750,
             callback: () => {
                 this.setAlpha(1);
                 this.active = true;
-                this.durationTimer.paused = true;
+                this.durationTimer.paused = false;
             },
             callbackScope: this
         });
         //wil probably remain a timer
-        this.durationTimer = this.scene.addEvent({
+        this.durationTimer = this.scene.time.addEvent({
             delay: 250,
-            callback: this.removeSelf(),
+            callback: () => {
+                user.emit('dreadeyes_attackcomplete');
+                this.removeSelf();
+            },
             callbackScope: this,
             paused: true
         });
@@ -31,7 +34,7 @@ class ShatteringStone extends Attack{
     }
 
     strike(target){
-        if(this.active){
+        if(this.active && target != null){
             target.takeDamage(this.damage);
         }
     }

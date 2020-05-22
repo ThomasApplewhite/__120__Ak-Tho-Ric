@@ -48,6 +48,7 @@ class Menu extends Phaser.Scene{
         //listening for up and down key
         keyUP    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN  =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyW     =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
@@ -90,6 +91,10 @@ class Menu extends Phaser.Scene{
 
         if(keyDOWN.isDown){
             this.scene.start("creditsScene");
+        }
+
+        if(keyW.isDown){
+            this.scene.start("testMapScene");
         }
     }
     

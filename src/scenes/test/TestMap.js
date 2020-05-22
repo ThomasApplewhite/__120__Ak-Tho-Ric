@@ -9,71 +9,21 @@ class TestMap extends Phaser.Scene{
     }
 
     create(){
-        SceneLoad.genericCreate(this, 'cave_texture_map');
+        SceneLoad.genericCreate(this, 'placeholder_map');
 
-        //temporarily removing obstacle and spawn timers
-        this.obstacleSpawnTimer.paused = true;
-        this.enemySpawnTimer.paused = true;
-
-        console.log(this.tilemap);
-        console.log(Math.PI);
+        this.enemyGroup.add(new DreadEyes(this, 0, 0, 'dread_eyes', 0, 3));
     }
 
     update(){
-        //background scrolling
-        //this.background.tilePositionY -= 1;
-
         //game functionality
         if(!this.gameOver){
             //entity updating
             this.player.update();
-            this.textUpdate();
-
-            //check to spawn boss
-            /*if(!this.bossActive && this.killsUntilBoss <= this.player.bodyCount){
-                this.boss = new SkeletonKnightBoss(
-                    this,                                   //scene
-                    config.width/2,                         //x
-                    -325,                                    //y
-                    'enemies',                   //sprite
-                    'mid_attack1',                                      //start frame of anim
-                    this.bossLevel
-                    )
-                this.enemyGroup.add(this.boss);
-            }*/
+            //this.textUpdate();
         }
     }
 
-    //DEPRECIATED
-    createObstacle(){
-        let obstacle = this.obstacleList[Phaser.Math.Between(0, this.obstacleList.length-1)];
-        if(!this.gameOver && !this.obstacleGroup.isFull()){
-            this.obstacleGroup.add(new Obstacle(
-                this,                                   //scene
-                Phaser.Math.Between(0, config.width),   //x
-                -32,                                    //y
-                'obstacles',                                //sprite
-                obstacle
-                )
-            );
-        }
-    }
-
-    //DEPRECIATED
-    createEnemy(){
-        if(!this.gameOver && !this.enemyGroup.isFull()){
-            this.enemyGroup.add(new Zombie(
-                this,                                   //scene
-                Phaser.Math.Between(0, config.width),    //x
-                -32,                                    //y
-                'enemies',                               //sprite
-                'forward_walk1',                                      //start frame of anim
-                )
-            );
-        }
-    }
-
-    textUpdate(){
+    /*textUpdate(){
         //this.meterText.setText("Meters: " + this.player.distance);
         this.scoreText.setText("Score: " + this.player.score);
     }
@@ -90,7 +40,7 @@ class TestMap extends Phaser.Scene{
 
     healthUpdate(param){
         this.heartMeter[param-1].visible = false;
-    }
+    }*/
 
     finishGame(){
         let scores = this.player.exportScores();

@@ -93,6 +93,17 @@ class SceneLoad extends Phaser.Scene{
             );
         }
 
+        //generates a player in the middle of the screen, in case "Entities" didn't have a player tile
+        if(this.player == null){
+            scene.player = new Player(
+                scene, 
+                game.config.width/2, 
+                game.config.height/2, 
+                'entities',
+                'om_punch4'
+            );
+        }
+
         //starting camera follow
         scene.cameras.main.startFollow(scene.player).setBounds(
             0, 
@@ -123,7 +134,7 @@ class SceneLoad extends Phaser.Scene{
             //to simulate that it has struck nothing
             attack.strike(null);
         })
-        scene.physics.add.overlap(scene.hostileAttackGroup, scene.tilemap.getLayer("Walls").tilemapLayer, function(attack, target){
+        scene.physics.add.collider(scene.hostileAttackGroup, scene.tilemap.getLayer("Walls").tilemapLayer, function(attack, target){
             //to simulate that it has struck nothing
             attack.strike(null);
         })
