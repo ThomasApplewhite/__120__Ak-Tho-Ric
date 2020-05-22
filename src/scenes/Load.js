@@ -31,6 +31,7 @@ class Load extends Phaser.Scene{
         this.load.image('health_bar', './assets/placeholders/health_bar_placeholder.png');
         this.load.image('frog', './assets/placeholders/frog_placeholder.png');
         this.load.image('acid_spit', './assets/placeholders/acid_spit_placeholder.png');
+        this.load.image('distortion_effect', './assets/placeholders/distortion_placeholder.png');
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');

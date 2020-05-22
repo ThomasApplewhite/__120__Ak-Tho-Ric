@@ -58,6 +58,14 @@ class SceneLoad extends Phaser.Scene{
             runChildUpdate: false   //I'll set this to true if I need to later
         });
 
+        //creating the group to hold fogs (items that do effects when stood in)
+        scene.fogGroup = scene.add.group({
+            classType: Phaser.GameObjects.Sprite.Enemy,
+            active: true,
+            maxSize: -1,
+            runChildUpdate: false   //I'll set this to true if I need to later
+        })
+
         //creating particle manager
 
 
@@ -111,9 +119,14 @@ class SceneLoad extends Phaser.Scene{
             scene.tilemap.widthInPixels,
             scene.tilemap.heightInPixels
         );
+
+        //create distortion fog
+        SceneLoad.distortionGenerator(scene, 20, scene.tilemap);
+        //The 20 is how many clouds are made. They're made on every level right now
         
         /*
             creating colliders
+            these should be specifically idenntified
         */
         scene.physics.add.collider(scene.player, scene.obstacleGroup, function(player){
             player.startStun(250);
@@ -129,6 +142,9 @@ class SceneLoad extends Phaser.Scene{
         });
         scene.physics.add.overlap(scene.hostileAttackGroup, scene.player, function(attack, target){
             attack.strike(target);
+        });
+        scene.physics.add.overlap(scene.fogGroup, scene.player, function(fog, player){
+            fog.onAttack(player);
         });
         scene.physics.add.collider(scene.attackGroup, scene.tilemap.getLayer("Walls").tilemapLayer, function(attack, target){
             //to simulate that it has struck nothing
@@ -218,6 +234,20 @@ class SceneLoad extends Phaser.Scene{
         if(tile != null){
             tile.setAlpha(0);
             tile.destroy();
+        }
+    }
+
+    static distortionGenerator(scene, count, tilemap){
+        let coords;
+        while(count > 0){
+            coords = {
+                x: Phaser.Math.Between(0, tilemap.widthInPixels),
+                y: Phaser.Math.Between(0, tilemap.heightInPixels)
+            }
+            console.log("Fog remaining: " + count);
+            scene.fogGroup.add(new Distortion(scene, coords.x, coords.y, 'distortion_effect'));
+            console.log("Generated fog at " + coords.x + ", " + coords.y);
+            --count;
         }
     }
 }
