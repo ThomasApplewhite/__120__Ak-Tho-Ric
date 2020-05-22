@@ -6,38 +6,46 @@ class Frog extends Enemy{
         this.body.setBounce(0, 0);  //bounciness
         this.body.setSize(24, 28);  //hurtbox size
         this.attacking = false;
-        this.tooClose = false;
+        //this.tooClose = false;
         this.scene = scene;
     }
 
     attackPattern(){
-        Phaser.Util.Array.Add(this.timers, this.scene.time.addEvent({
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 2000,     //time between attacks
             callback: this.shoot,
+            callbackScope: this,
             loop: true
         }));
     }
 
     movementPattern(){
+        let dist = Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y);
+
         //if aggro'd and the player's not too close
-        if(this.aggressive && !this.tooClose){
-            //walk towards the player
+        if(this.aggressive && dist > 64 * 6){
+            //walk towards the player if they're too far away
             this.rotation = this.scene.physics.moveToObject(this, this.scene.player, this.speed) + Math.PI/2;
         }
         //if aggro'd and the player's too close
-        else if(this.aggressive && this.tooClose){
+        else if(this.aggressive && dist < 64 * 4){
             //walk away from the player while still facing them
-            this.rotation = -(this.scene.physics.moveToObject(this, this.scene.player, -this.speed) + Math.PI/2);
+            this.rotation = -(this.scene.physics.moveToObject(this, this.scene.player, -this.speed) - Math.PI/2);
+        }
+        //if the frog is in the goldilocks zone
+        else{
+            //don't actually move, just face them
+            this.rotation = this.scene.physics.moveToObject(this, this.scene.player, 0) + Math.PI/2;
         }
 
-        //if the player's too close
+        /*//if the player's too close
         if(Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y) < 64 * 4){
             //make note of that
             this.tooClose = true;
         }
         else{
             this.tooClose = false;
-        }
+        }*/
     }
 
     //fire the projectile
@@ -52,9 +60,11 @@ class Frog extends Enemy{
             this.scene.time.delayedCall(
                 500,
                 () => {
-                    this.scene.hostileAttackGroup(new AcidSpit(this.scene, this.x, this.y, 'acid_spit', 0, this));
+                    this.scene.hostileAttackGroup.add(new AcidSpit(this.scene, this.x, this.y, 'acid_spit', 0, this));
                     this.attacking = false;
-                }
+                },
+                null,
+                this
             );
         }
         
@@ -62,7 +72,8 @@ class Frog extends Enemy{
 }
 
 //I'm goint to experiment with Frog's attack being a 'private' class within the frog itself.
-class AcidSpit extends Attack{
+//Nope, didn't work
+/*class AcidSpit extends Attack{
     constructor(scene, x, y, texture, frame, user){
         super(scene, x, y, texture, frame, user);
 
@@ -82,4 +93,4 @@ class AcidSpit extends Attack{
 
         this.removeSelf();
     }
-}
+}*/

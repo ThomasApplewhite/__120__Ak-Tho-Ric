@@ -10,15 +10,11 @@ class TestMap extends Phaser.Scene{
     create(){
         SceneLoad.genericCreate(this, 'placeholder_map');
 
-        this.boss = new SkeletonKnightBoss(
-            this,               //scene
-            100,        //x
-            100,     //y
-            'entities',          //sprite
-            'sb_dominating_strike18',      //start frame of anim
-            3
-            );
-        this.enemyGroup.add(this.boss);
+        this.enemyGroup.addMultiple([
+            new Frog(this, 100, 200, 'frog'),
+            new Frog(this, 200, 200, 'frog'),
+            new Frog(this, 300, 200, 'frog'),
+        ]);
     }
 
     update(){
