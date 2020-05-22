@@ -71,6 +71,10 @@ class Enemy extends Phaser.GameObjects.Sprite{
     onDeath(){
         ++this.scene.player.bodyCount;
         this.scene.player.score += this.points;
+
+        if(Phaser.Math.Between(1, 100) <= 5){
+            this.scene.collectableGroup.add(new HealthOrb(this.scene, this.x, this.y, 'health_orb'));
+        }
     }
 
     destroyCleanup(){

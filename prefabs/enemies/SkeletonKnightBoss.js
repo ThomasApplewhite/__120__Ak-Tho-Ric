@@ -45,18 +45,6 @@ class SkeletonKnightBoss extends Enemy{
             this.body.setVelocity(0, 0);
         }
     }
-    
-    //anything special that happens when the enemy dies
-    onDeath(){
-        //update player score
-        ++this.scene.player.bodyCount;
-        this.scene.player.score += this.points;
-
-        //update boss scene variables
-        ++this.scene.bossLevel;                                        //should start at 1
-        this.scene.killsUntilBoss = this.scene.player.bodyCount + 15;   //should be at 15
-        this.scene.bossActive = false;
-    }
 
     //randomly throws an attack, based on the boss' level
     pickAttack(){

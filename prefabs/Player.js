@@ -16,7 +16,8 @@ class Player extends Phaser.GameObjects.Sprite{
         this.specialAttack  =   keyE;
         this.dash           =   keyW;
         //player properties
-        this.health = 30;
+        this.maxHealth = 30;
+        this.health = this.maxHealth;
         this.stunned = false;
         this.immune = false;
         this.speed = 250;

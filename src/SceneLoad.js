@@ -50,6 +50,14 @@ class SceneLoad extends Phaser.Scene{
             runChildUpdate: true
         });
 
+        //creating the group to hold all the 'collectable' entities
+        scene.collectableGroup = scene.add.group({
+            classType: Phaser.GameObjects.Sprite,
+            active: true,
+            maxSize: -1,
+            runChildUpdate: false   //I'll set this to true if I need to later
+        });
+
         //creating particle manager
 
 
@@ -133,11 +141,14 @@ class SceneLoad extends Phaser.Scene{
         scene.physics.add.collider(scene.attackGroup, scene.tilemap.getLayer("Walls").tilemapLayer, function(attack, target){
             //to simulate that it has struck nothing
             attack.strike(null);
-        })
+        });
         scene.physics.add.collider(scene.hostileAttackGroup, scene.tilemap.getLayer("Walls").tilemapLayer, function(attack, target){
             //to simulate that it has struck nothing
             attack.strike(null);
-        })
+        });
+        scene.physics.add.collider(scene.collectableGroup, scene.player, function(collectable){
+            collectable.onPickup();
+        });
         //creating colliders for things that just need to collide
         scene.physics.add.collider(scene.player, scene.tilemap.getLayer("Walls").tilemapLayer);
         scene.physics.add.collider(scene.enemyGroup, scene.tilemap.getLayer("Walls").tilemapLayer);
