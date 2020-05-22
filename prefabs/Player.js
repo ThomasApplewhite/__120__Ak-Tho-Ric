@@ -43,6 +43,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
     update(){
         ++this.distance;
+        this.stats.update();
 
         if(!this.stunned && !this.controlLock){
             this.controlOperations();
@@ -130,11 +131,9 @@ class Player extends Phaser.GameObjects.Sprite{
     defeat(){
         this.stunned = true;
         this.setVisible(false);
-        /*console.log("You lose!");
-        console.log("Score: " + this.score);
-        console.log("Distance: " + this.distance);
-        console.log("Body Count: " + this.bodyCount);
-        console.log("Press Q to Restart");*/
+        
+        this.stats.healthUpdate(0);
+
         this.scene.gameOver = true;
         this.scene.time.delayedCall(1000, this.scene.finishGame());
     }

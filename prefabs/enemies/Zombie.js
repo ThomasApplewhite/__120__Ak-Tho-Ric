@@ -18,16 +18,15 @@ class Zombie extends Enemy{
     //the movement right now is REALLY stiff. I might need some time to clean this up
     movementPattern(){
         if(this.aggressive){
-            this.body.setAcceleration(0, 0);
             this.lunge();
 
             //accelerateToObject returns the angle the Zombie needs to go, and we add pi/2 radians to correct the art's offset
             if(this.lunging == 1){
                 //run at them twice as fast as normal
-                this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) + (Math.PI / 2);
+                this.rotation = this.scene.physics.moveToObject(this, this.scene.player, this.speed * 2) + Math.PI/2;;
             }else{
                 //run towards them without lunging                               
-                this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 10000, this.speed/2, this.speed) + (Math.PI / 2);
+                this.rotation = this.scene.physics.moveToObject(this, this.scene.player, this.speed) + Math.PI/2;;
             }
         }
     }

@@ -28,6 +28,7 @@ class Load extends Phaser.Scene{
         this.load.image('shattering_stone', './assets/placeholders/shattering_stones_placeholder.png');
         this.load.image('cardinal_ray', './assets/placeholders/cardinal_ray_placeholder.png');
         this.load.image('health_orb', './assets/placeholders/health_orb_placeholder.png');
+        this.load.image('health_bar', './assets/placeholders/health_bar_placeholder.png');
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');

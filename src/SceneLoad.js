@@ -101,6 +101,9 @@ class SceneLoad extends Phaser.Scene{
             );
         }
 
+        //create stat display
+        scene.player.stats = new StatDisplay(scene);
+
         //starting camera follow
         scene.cameras.main.startFollow(scene.player).setBounds(
             0, 
@@ -142,41 +145,6 @@ class SceneLoad extends Phaser.Scene{
         scene.physics.add.collider(scene.player, scene.tilemap.getLayer("Walls").tilemapLayer);
         scene.physics.add.collider(scene.enemyGroup, scene.tilemap.getLayer("Walls").tilemapLayer);
         scene.physics.add.collider(scene.enemyGroup, scene.enemyGroup);
-
-        /*
-            creating UI
-            NEEDS IMPROVEMENT
-            will be turned into one group later
-        
-        scene.uiConfig = {
-            fontFamily: 'PermanentMarker',
-            fontSize: '28px',
-            //backgroundColor: '#F3B141',
-            color: '#6ABE30',
-            align: 'left',
-            stroke: '#000000',
-            strokeThickness: 10,
-            fixedWidth: 0
-        }
-        scene.scoreText = scene.add.text(20, 20, "Score: 0", scene.uiConfig,).setScrollFactor(0);
-        scene.scoreText.depth = 1;
-        scene.magicMissileMeter = [
-            scene.add.sprite(game.config.width - 40, 110, 'magic_missileUI').setScrollFactor(0),
-            scene.add.sprite(game.config.width - 110, 110, 'magic_missileUI').setScrollFactor(0),
-            scene.add.sprite(game.config.width - 180, 110, 'magic_missileUI').setScrollFactor(0)
-        ];
-        scene.magicMissileMeter[0].depth = 1;
-        scene.magicMissileMeter[1].depth = 1;
-        scene.magicMissileMeter[2].depth = 1;
-        scene.heartMeter = [
-            scene.add.sprite(game.config.width - 40, 40, 'heartUI').setScrollFactor(0),
-            scene.add.sprite(game.config.width - 110, 40, 'heartUI').setScrollFactor(0),
-            scene.add.sprite(game.config.width - 180, 40, 'heartUI').setScrollFactor(0)
-        ]
-        scene.heartMeter[0].depth = 1;
-        scene.heartMeter[1].depth = 1;
-        scene.heartMeter[2].depth = 1;
-        */
 
         //game-over flag
         scene.gameOver = false;

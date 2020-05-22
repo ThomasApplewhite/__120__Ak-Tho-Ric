@@ -1,6 +1,6 @@
 class SkeletonKnightBoss extends Enemy{
     constructor(scene, x, y, texture, frame, level){
-        super(scene, x, y, texture, frame, 50, 100, 320);
+        super(scene, x, y, texture, frame, 50, 100, 384);
 
         //properties
         this.attackTimer;
@@ -37,9 +37,9 @@ class SkeletonKnightBoss extends Enemy{
     //I wish there was a better way to do this, but moveTo won't stop anything so...
     movementPattern(){
         //accelerate towards the player
-        this.body.setAcceleration(0, 0);
-        if(!this.attacking){
-            this.rotation = this.scene.physics.accelerateToObject(this, this.scene.player, 15000, this.speed*1.5/2,  this.speed*1.5) - (Math.PI / 2);
+        //this.body.setAcceleration(0, 0);
+        if(this.aggressive && !this.attacking){
+            this.rotation = this.scene.physics.moveToObject(this, this.scene.player, this.speed) - Math.PI/2;
         }
         else{
             this.body.setVelocity(0, 0);

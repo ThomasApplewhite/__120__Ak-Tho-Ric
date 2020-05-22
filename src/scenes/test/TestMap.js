@@ -4,14 +4,21 @@ class TestMap extends Phaser.Scene{
     }
 
     preload(){
-        //helpful array for obstacle generation
-        this.obstacleList = ['rock1', 'rock2', 'rock3', 'rock4', 'rock5', 'rock6'];
+
     }
 
     create(){
         SceneLoad.genericCreate(this, 'placeholder_map');
 
-        this.enemyGroup.add(new DreadEyes(this, 0, 0, 'dread_eyes', 0, 3));
+        this.boss = new SkeletonKnightBoss(
+            this,               //scene
+            100,        //x
+            100,     //y
+            'entities',          //sprite
+            'sb_dominating_strike18',      //start frame of anim
+            3
+            );
+        this.enemyGroup.add(this.boss);
     }
 
     update(){
@@ -22,25 +29,6 @@ class TestMap extends Phaser.Scene{
             //this.textUpdate();
         }
     }
-
-    /*textUpdate(){
-        //this.meterText.setText("Meters: " + this.player.distance);
-        this.scoreText.setText("Score: " + this.player.score);
-    }
-
-    meterUpdate(param){
-        if(param == 0){
-            this.magicMissileMeter[0].visible = false;
-            this.magicMissileMeter[1].visible = false;
-            this.magicMissileMeter[2].visible = false;
-        }else if(param <= 3){
-            this.magicMissileMeter[param-1].visible = true;
-        }
-    }
-
-    healthUpdate(param){
-        this.heartMeter[param-1].visible = false;
-    }*/
 
     finishGame(){
         let scores = this.player.exportScores();
