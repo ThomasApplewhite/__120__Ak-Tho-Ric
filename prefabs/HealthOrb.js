@@ -1,4 +1,4 @@
-class HealthOrb extends Phaser.GameObject.Sprite{
+class HealthOrb extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
 

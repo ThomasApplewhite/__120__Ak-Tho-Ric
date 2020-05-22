@@ -33,6 +33,7 @@ class Load extends Phaser.Scene{
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
 
         //map assets
+        //--level 1--
         this.load.image('cave_texture_map_tiles', './assets/tilemaps/cave_texture.png');
         this.load.tilemapTiledJSON('cave_texture_map', './assets/tilemaps/level_1_map.json');
 
