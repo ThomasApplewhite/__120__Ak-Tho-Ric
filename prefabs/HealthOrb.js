@@ -6,13 +6,14 @@ class HealthOrb extends Phaser.GameObjects.Sprite{
         scene.add.existing(this);
 
         this.healAmount = 5;
+        this.player = scene.player;
     }
 
-    onPickup(player){
-        player.health += this.healAmount;
+    onPickup(){
+        this.player.health += this.healAmount;
 
-        if(player.health > player.maxHealth){
-            player.health = player.maxHealth;
+        if(this.player.health > player.maxHealth){
+            this.player.health = player.maxHealth;
         }
 
         this.destroy();
