@@ -53,6 +53,8 @@ class SkeletonKnightBoss extends Enemy{
         let attackCall = Phaser.Math.Between(1, this.level);
 
         console.log("Attack Calling: " + attackCall);
+
+        attackCall = 2;
         
         this.attacking = true;
         if(attackCall == 3){

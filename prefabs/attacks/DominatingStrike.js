@@ -20,7 +20,9 @@ class DominatingStrike extends Attack{
         //type determines the nature of the attack
         //type 0 = DominatingStrike, type 1 = SweepingStrike
         if(this.type == 1){
+            this.body.setSize(512, 512);
             this.body.isCircle = true;
+            
         }
 
         //setting timers so the attack happens in-sync with the animation
@@ -48,7 +50,7 @@ class DominatingStrike extends Attack{
         //if this hits the player...
         if(this.active && target === this.scene.player){
             //stun them if they're close
-            if(this.type == 1 && Phaser.Math.Distance.Between(target.x, target.y, this.x, this.y) < 50){
+            if(this.type == 1 && Phaser.Math.Distance.Between(target.x, target.y, this.x, this.y) < 64 * 2.5){
                 this.scene.player.startStun(1500);
             //kill 'em if they're far
             }else{
