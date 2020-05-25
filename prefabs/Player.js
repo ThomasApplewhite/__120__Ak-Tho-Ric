@@ -196,9 +196,10 @@ class Player extends Phaser.GameObjects.Sprite{
             //if the player is facing forward, their destination is 128 pixels infront of them.
             //attackRotation will automatically set the destination coods based off of this offset and player rotation
             let destination = this.attackRotation(128, -128);  
-            this.scene.physics.moveTo(this, this.x + destination.x, this.y + destination.y, 60, 250);
+            console.log("Dash destination: " + destination.x/2 + ", " + destination.y);
+            this.scene.physics.moveTo(this, this.x + destination.x/2, this.y + destination.y, 60, 250);
             this.controlLock = true;
-            this.canDash = true;
+            this.canDash = false;
             //The dash takes 1/4 of a second, and the player stops on arrival
             this.actionTimers.dashTime = this.scene.time.addEvent({
                 delay: 250, 

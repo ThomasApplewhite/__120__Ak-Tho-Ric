@@ -254,6 +254,11 @@ class Load extends Phaser.Scene{
 
         this.add.text(this.textShift, this.textSpace, "Press (Q) to Continue...", this.textConfig);
         this.textSpace += 20;
+
+        //if debugging mode is on, skip directly to menu
+        if(game.config.physics.arcade.debug){
+            this.scene.start("menuScene");
+        }
     }
 
     update(){

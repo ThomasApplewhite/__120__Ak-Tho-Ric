@@ -118,7 +118,7 @@ class SceneLoad extends Phaser.Scene{
             0,
             scene.tilemap.widthInPixels,
             scene.tilemap.heightInPixels
-        );
+        ).setZoom(1.5); //how far in the camera is zoomed in by default
 
         //create distortion fog
         SceneLoad.distortionGenerator(scene, 20, scene.tilemap);

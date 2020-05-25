@@ -8,8 +8,6 @@ class LevelOne extends Phaser.Scene{
 
     create(){
         SceneLoad.genericCreate(this, 'cave_texture_map');
-
-        
     }
 
     update(){
