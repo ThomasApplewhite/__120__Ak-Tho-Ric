@@ -80,6 +80,6 @@ class LashingStrike extends Attack{
     //what happens when this attack is finished
     removeSelf(){
         this.destroy();
-        this.user.attacking = false;
+        this.user.emit('skeleton_attackComplete');
     }
 }

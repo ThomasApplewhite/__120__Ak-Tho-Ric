@@ -19,19 +19,29 @@ class SkeletonKnightBoss extends Enemy{
         this.on('animationcomplete', () => {this.setTexture('entities', frame,);}, this);
 
         this.scene.bossActive = true;
+        this.emit('skeleton_attackComplete');
     }
 
     //how the enemy will specificly attack, if at all
     attackPattern(){
         //five seconds between attacks, use attacks based on level
-        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
+        this.on('skeleton_attackComplete', () => {
+            this.attacking = false;
+            this.scene.time.delayedCall(
+                5000,
+                this.pickAttack,
+                null,
+                this
+            );
+        });
+        /*Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 6000,            //5 seconds, plus 1 for the actual attack
             callback: this.pickAttack,
             //args: [],
             callbackScope: this,
             loop: true,
             startAt: 1000
-        }));
+        }));*/
     }
 
     //I wish there was a better way to do this, but moveTo won't stop anything so...
@@ -53,8 +63,6 @@ class SkeletonKnightBoss extends Enemy{
         let attackCall = Phaser.Math.Between(1, this.level);
 
         console.log("Attack Calling: " + attackCall);
-
-        attackCall = 2;
         
         this.attacking = true;
         if(attackCall == 3){
