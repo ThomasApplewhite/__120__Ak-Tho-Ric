@@ -244,9 +244,9 @@ class SceneLoad extends Phaser.Scene{
                 x: Phaser.Math.Between(0, tilemap.widthInPixels),
                 y: Phaser.Math.Between(0, tilemap.heightInPixels)
             }
-            console.log("Fog remaining: " + count);
+            //console.log("Fog remaining: " + count);
             scene.fogGroup.add(new Distortion(scene, coords.x, coords.y, 'distortion_effect'));
-            console.log("Generated fog at " + coords.x + ", " + coords.y);
+            //console.log("Generated fog at " + coords.x + ", " + coords.y);
             --count;
         }
     }

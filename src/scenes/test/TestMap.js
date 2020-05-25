@@ -10,11 +10,7 @@ class TestMap extends Phaser.Scene{
     create(){
         SceneLoad.genericCreate(this, 'placeholder_map');
 
-        this.enemyGroup.addMultiple([
-            new Frog(this, 100, 200, 'frog'),
-            new Frog(this, 200, 200, 'frog'),
-            new Frog(this, 300, 200, 'frog'),
-        ]);
+        this.enemyGroup.add(new Frog(this, 300, 200, 'frog'));
     }
 
     update(){

@@ -6,21 +6,25 @@ class Frog extends Enemy{
         this.body.setBounce(0, 0);  //bounciness
         this.body.setSize(24, 28);  //hurtbox size
         this.attacking = false;
+        this.attackCharge = 500;    //how long it takes for an attack to charge
+        this.attackCooldown = 750;  //how long before a frog can attack again
         //this.tooClose = false;
         this.scene = scene;
     }
 
     attackPattern(){
-        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
+        /*Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 2000,     //time between attacks
             callback: this.shoot,
             callbackScope: this,
             loop: true
-        }));
+        }));*/
     }
 
     movementPattern(){
         let dist = Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y);
+
+        this.shoot();
 
         //if aggro'd and the player's not too close
         if(this.aggressive && dist > 64 * 6){
@@ -30,22 +34,13 @@ class Frog extends Enemy{
         //if aggro'd and the player's too close
         else if(this.aggressive && dist < 64 * 4){
             //walk away from the player while still facing them
-            this.rotation = -(this.scene.physics.moveToObject(this, this.scene.player, -this.speed) - Math.PI/2);
+            this.rotation = this.scene.physics.moveToObject(this, this.scene.player, -this.speed) - Math.PI*3/2;
         }
         //if the frog is in the goldilocks zone
         else{
             //don't actually move, just face them
             this.rotation = this.scene.physics.moveToObject(this, this.scene.player, 0) + Math.PI/2;
         }
-
-        /*//if the player's too close
-        if(Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y) < 64 * 4){
-            //make note of that
-            this.tooClose = true;
-        }
-        else{
-            this.tooClose = false;
-        }*/
     }
 
     //fire the projectile
@@ -53,19 +48,25 @@ class Frog extends Enemy{
         //this will have an animation tied to it at some point, for right now it will just shoot
 
         //if the frog is in range
-        if(Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y) < 64 * 5){
+        if(!this.attacking && Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y) < 64 * 5){
             //attack in half a second
             this.attacking = true;
-            //delayed call consistently does nothing when not called in a scene, but I'll try again here
+            
+            //attack timer
             this.scene.time.delayedCall(
-                500,
-                () => {
-                    this.scene.hostileAttackGroup.add(new AcidSpit(this.scene, this.x, this.y, 'acid_spit', 0, this));
-                    this.attacking = false;
-                },
+                this.attackCharge,
+                () => {this.scene.hostileAttackGroup.add(new AcidSpit(this.scene, this.x, this.y, 'acid_spit', 0, this));},
                 null,
                 this
             );
+
+            this.scene.time.delayedCall(
+                this.attackCharge + this.attackCooldown,
+                () => {this.attacking = false;},
+                null,
+                this
+            );
+
         }
         
     }
