@@ -1,13 +1,13 @@
-class LevelOne extends Phaser.Scene{
+class LevelTwo extends Phaser.Scene{
     constructor(){
-        super("levelOneScene");
+        super("levelTwoScene");
     }
 
     preload(){
     }
 
     create(){
-        SceneLoad.genericCreate(this, 'level_one_map');
+        SceneLoad.genericCreate(this, 'level_two_map');
     }
 
     update(){

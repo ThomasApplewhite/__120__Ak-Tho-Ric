@@ -38,8 +38,11 @@ class Load extends Phaser.Scene{
 
         //map assets
         //--level 1--
-        this.load.image('cave_texture_map_tiles', './assets/tilemaps/cave_texture.png');
-        this.load.tilemapTiledJSON('cave_texture_map', './assets/tilemaps/level_1_map.json');
+        this.load.image('level_one_map_tiles', './assets/tilemaps/cave_texture.png');
+        this.load.tilemapTiledJSON('level_one_map', './assets/tilemaps/level_1_map.json');
+        //--level 2--
+        this.load.image('level_two_map_tiles', './assets/tilemaps/cave_texture.png');
+        this.load.tilemapTiledJSON('level_two_map', './assets/tilemaps/level_2_map.json');
 
   
         //entity images

@@ -12,7 +12,7 @@ class SceneLoad extends Phaser.Scene{
     }
 
     //creates generic scene elements
-    static genericCreate(scene, tilemap){
+    static genericCreate(scene, tilemap, tileset){
         //setting keyboard controls
         keyLEFT  =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT =  scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -207,6 +207,16 @@ class SceneLoad extends Phaser.Scene{
                 )
             );
         }
+        else if(entityName == "Frog"){
+            this.enemyGroup.add(new Frog(
+                this,               //scene
+                tile.pixelX,        //x
+                tile.pixelY-64,     //y
+                'frog',          //sprite
+                0,    //start frame of anim
+                )
+            );
+        }
         else if(entityName == "SkeletonKnightBoss"){
             this.boss = new SkeletonKnightBoss(
                 this,               //scene
@@ -214,7 +224,18 @@ class SceneLoad extends Phaser.Scene{
                 tile.pixelY-64,     //y
                 'entities',          //sprite
                 'sb_dominating_strike18',      //start frame of anim
-                3
+                3                   //boss level
+                );
+            this.enemyGroup.add(this.boss);
+        }
+        else if(entityName == "DreadEyes"){
+            this.boss = new DreadEyes(
+                this,               //scene
+                tile.pixelX,        //x
+                tile.pixelY-64,     //y
+                'dread_eyes',          //sprite
+                0,      //start frame of anim
+                3                   //boss level
                 );
             this.enemyGroup.add(this.boss);
         }
