@@ -19,7 +19,6 @@ class SkeletonKnightBoss extends Enemy{
         this.on('animationcomplete', () => {this.setTexture('entities', frame,);}, this);
 
         this.scene.bossActive = true;
-        this.emit('skeleton_attackComplete');
     }
 
     //how the enemy will specificly attack, if at all
@@ -34,14 +33,12 @@ class SkeletonKnightBoss extends Enemy{
                 this
             );
         });
-        /*Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-            delay: 6000,            //5 seconds, plus 1 for the actual attack
-            callback: this.pickAttack,
-            //args: [],
-            callbackScope: this,
-            loop: true,
-            startAt: 1000
-        }));*/
+        this.scene.time.delayedCall(
+            5000,
+            this.pickAttack,
+            null,
+            this
+        );
     }
 
     //I wish there was a better way to do this, but moveTo won't stop anything so...
@@ -72,16 +69,16 @@ class SkeletonKnightBoss extends Enemy{
             this.sweepingStrike();
         }
         else{
-            //Dominating Strike is disabled until it gets designed to not be bad
-            //                  i mean functions with the new perspective
-            //this.dominatingStrike();
-            this.attacking = false;
+            this.dominatingStrike();
+            //this.attacking = true;
+            //this.emit('skeleton_attackComplete');
         }
 
     }
 
     dominatingStrike(){
-        //awaiting new behavior
+        let attack = new DominatingStrike(this.scene, this.x, this.y, 'sweeping_strike', 0, this, 0);
+        this.scene.hostileAttackGroup.add(attack);
     }
 
     sweepingStrike(){

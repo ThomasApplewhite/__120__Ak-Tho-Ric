@@ -16,7 +16,7 @@ class TestMap extends Phaser.Scene{
             300,     //y
             'entities',          //sprite
             'sb_dominating_strike18',      //start frame of anim
-            3
+            1           //level
             );
         this.enemyGroup.add(this.boss);
     }
