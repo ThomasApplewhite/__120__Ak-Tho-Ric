@@ -53,19 +53,19 @@ class Frog extends Enemy{
             this.attacking = true;
             
             //attack timer
-            this.scene.time.delayedCall(
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
                 this.attackCharge,
                 () => {this.scene.hostileAttackGroup.add(new AcidSpit(this.scene, this.x, this.y, 'acid_spit', 0, this));},
                 null,
                 this
-            );
+            ));
 
-            this.scene.time.delayedCall(
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
                 this.attackCharge + this.attackCooldown,
                 () => {this.attacking = false;},
                 null,
                 this
-            );
+            ));
 
         }
         

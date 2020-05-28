@@ -7,6 +7,7 @@ class MagicMissile extends Attack{
         this.range = this.y - range;
         this.damage = 5;
         this.user = user;
+
         scene.physics.velocityFromAngle(this.angle + 90, -speed, this.body.velocity);
         
         this.xLaunch = x;
@@ -19,12 +20,11 @@ class MagicMissile extends Attack{
             this.user.actionTimers.dashCooldown += 1000;
         }
 
-        //add to collision group
-        //console.log(this.body);
-
-        //I'd really like to group these two together but uhhhh
-        /*this.missileCheckingEnemies = this.scene.physics.add.collider(this, this.scene.enemyGroup, this.detonate);
-        this.missileCheckingObstacles = this.scene.physics.add.collider(this, this.scene.obstacleGroup, this.detonate);*/
+        //if the missile spawns in something
+        if(this.body.touching){
+            //detonate it
+            this.strike(null);
+        }
     }
 
     strike(target){

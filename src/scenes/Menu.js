@@ -95,7 +95,7 @@ class Menu extends Phaser.Scene{
 
         //secret debug scene skipper!
         if(keyW.isDown){
-            this.scene.start("levelTwoScene");
+            this.scene.start("levelThreeScene");
         }
     }
     
