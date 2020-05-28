@@ -69,8 +69,8 @@ class DominatingStrike extends Attack{
 
     //what happens when this attack is finished
     removeSelf(){
-        //this.destroy();
-        //this.user.emit('skeleton_attackComplete');
+        this.destroy();
+        this.user.emit('skeleton_attackComplete');
     }
 
     //Aligns the hitCircle with where it should end up in world space.
