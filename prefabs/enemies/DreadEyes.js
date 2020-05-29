@@ -129,5 +129,12 @@ class DreadEyes extends Enemy{
         }));
     }
 
+    //anything special that happens when the enemy dies
+    onDeath(){
+        ++this.scene.player.bodyCount;
+        this.scene.player.score += this.points;
+
+        this.scene.collectableGroup.add(new Portal(this.scene, this.x, this.y, 'portal', 0, this.scene.nextScene));
+    }
 
 }

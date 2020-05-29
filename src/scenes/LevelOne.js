@@ -4,6 +4,8 @@ class LevelOne extends Phaser.Scene{
     }
 
     preload(){
+        this.nextScene = "levelTwoScene";
+        this.bossFactor = 1;
     }
 
     create(){

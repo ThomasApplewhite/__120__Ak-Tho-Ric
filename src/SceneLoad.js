@@ -235,7 +235,7 @@ class SceneLoad extends Phaser.Scene{
                 tile.pixelY-64,     //y
                 'dread_eyes',          //sprite
                 0,      //start frame of anim
-                3                   //boss level
+                scene.bossFactor                   //boss level
                 );
             this.enemyGroup.add(this.boss);
         }

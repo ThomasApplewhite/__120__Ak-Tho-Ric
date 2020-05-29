@@ -35,10 +35,14 @@ class SkeletonKnightBoss extends Enemy{
             /*  when the player first gets in for sweeping...
                 Stop checking for range, sweep the axe, wait one
                 second, then start checking for dominating range. Once
-                in range, repeat the process, but either sweep or swing*/
+                in range, repeat the process, but either sweep or swing
+                
+                Level Two's behavior can't be shunted into a method entirely
+                because its behavior changes after its first attack*/
             this.once('skeleton_inRangeFor_sweeping', () => {
                 this.attacking = true;  
                 this.sweepingStrike();        //start attacking
+
                 //once the attack is done...
                 this.once('skeleton_attackComplete', () => {
                     Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
@@ -54,16 +58,15 @@ class SkeletonKnightBoss extends Enemy{
             });
         }
         else if(this.level == 3){
+            this.once('skeleton_inRangeFor_lashing', this.phaseThreeBehaviors, this);
             /*  when the player first gets in for lashing (which will be as soon as the boss is aggro'd
                 because lashing has a bigger range than the aggro radius)...
                 Throw the hook. If it lands, follow up with Dominating strike half a second later.
                 Once the attack is resolved, act as if it's phaseTwo, but if the player is in lashing range
-                and the attack isn't on cooldown, throw it again.
-
-            */
-            this.once('skeleton_inRangeFor_lashing', this.phaseThreeBehaviors, this);
+                and the attack isn't on cooldown, throw it again.*/
         }
         else{
+            //some error handling if the levels miscount for any reason
             throw new Error("Skeleton Knight Boss in level is out of range");
         }
 
@@ -110,6 +113,8 @@ class SkeletonKnightBoss extends Enemy{
         }
     }
 
+    /*
+    DEPRECEATED by new boss behaviors
     //randomly throws an attack, based on the boss' level
     pickAttack(){
         //console.log("SkeletonKnight Health:" + this.health);
@@ -136,17 +141,18 @@ class SkeletonKnightBoss extends Enemy{
             //this.emit('skeleton_attackComplete');
         }
 
-    }
+        
+    }*/
 
     phaseOneBehaviors(){
         this.attacking = true;  
         this.dominatingStrike();        //start attacking
         //once the attack is done...
         this.once('skeleton_attackComplete', () => {
+            this.attacking = false;
             Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
                 1000,
                 () => {
-                    this.attacking = false;
                     this.once('skeleton_inRangeFor_dominating', this.phaseOneBehaviors, this);
                 },
                 null, 
@@ -167,10 +173,10 @@ class SkeletonKnightBoss extends Enemy{
         whichAttack == 1 ? this.dominatingStrike() : this.sweepingStrike()
         //once the attack is done...
         this.once('skeleton_attackComplete', () => {
+            this.attacking = false;
             Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
                 1000,
                 () => {
-                    this.attacking = false;
                     this.once('skeleton_inRangeFor_dominating', this.phaseTwoBehaviors, this);
                 },
                 null, 
@@ -199,6 +205,7 @@ class SkeletonKnightBoss extends Enemy{
             }
             //if it didn't
             else{
+                this.attacking = false;
                 //assume phaseTwo behaviors in one second
                 Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
                     1000,
@@ -237,5 +244,13 @@ class SkeletonKnightBoss extends Enemy{
     lashingStrike(){
         let attack = new LashingStrike(this.scene, this.x, this.y, 'lashing_strike', 0, this);
         this.scene.hostileAttackGroup.add(attack);
+    }
+
+    //anything special that happens when the enemy dies
+    onDeath(){
+        ++this.scene.player.bodyCount;
+        this.scene.player.score += this.points;
+
+        this.scene.collectableGroup.add(new Portal(this.scene, this.x, this.y, 'portal', 0, this.scene.nextScene));
     }
 }

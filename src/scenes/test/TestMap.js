@@ -4,7 +4,8 @@ class TestMap extends Phaser.Scene{
     }
 
     preload(){
-
+        this.nextScene = "levelOneScene";
+        this.bossFactor = 1;
     }
 
     create(){
