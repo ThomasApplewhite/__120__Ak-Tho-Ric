@@ -7,7 +7,9 @@ class LashingStrike extends Attack{
         this.speed = 300;
         this.active = false;
         this.user = user;
+        this.range = 64 * 7;         //range of the attack
         this.launchTime = -1;        //the time at which the hook was launched
+        this.home = {x: x, y: y};       //where the attack was launched from
         this.setAlpha(0.2);
 
         //sets a timer to launch the hook in 3/4 of a second
@@ -46,6 +48,14 @@ class LashingStrike extends Attack{
             this.active = false;
 
             this.scene.physics.add.collider(this, this.user, (hook) => {hook.removeSelf();});
+        }
+    }
+
+    //frame-by-frame movement
+    movementPattern(){
+        let distanceFromHome = Phaser.Math.Distance.Between(this.x, this.y, this.home.x, this.home.y);
+        if(distanceFromHome > this.range){
+            this.removeSelf();
         }
     }
 

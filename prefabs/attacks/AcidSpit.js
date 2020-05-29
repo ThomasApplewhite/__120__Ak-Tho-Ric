@@ -3,9 +3,10 @@ class AcidSpit extends Attack{
         super(scene, x, y, texture, frame, user);
 
         this.damage = 3;
-        this.range = 5 * 64;
+        this.range = 5 * 64;            //range of the attack
         this.angle = user.angle + 90;
         this.speed = 250;
+        this.home = {x: x, y: y};       //where the attack was launched from
 
         scene.physics.velocityFromAngle(this.angle, -this.speed, this.body.velocity);
     }
@@ -17,5 +18,13 @@ class AcidSpit extends Attack{
         }
 
         this.removeSelf();
+    }
+
+    //frame-by-frame movement
+    movementPattern(){
+        let distanceFromHome = Phaser.Math.Distance.Between(this.x, this.y, this.home.x, this.home.y);
+        if(distanceFromHome > this.range){
+            this.removeSelf();
+        }
     }
 }
