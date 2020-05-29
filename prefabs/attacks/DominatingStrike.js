@@ -29,7 +29,7 @@ class DominatingStrike extends Attack{
         this.body.isCircle = true;
 
         //setting timers so the attack happens in-sync with the animation
-        this.scene.boss.anims.delayedPlay(250, this.bossAnim);
+        this.scene.boss.anims.play(this.bossAnim);
         Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 750,
             callback: this.activateMove,

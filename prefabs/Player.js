@@ -138,7 +138,6 @@ class Player extends Phaser.GameObjects.Sprite{
         if(stunTime == null){
             stunTime = 250
         }
-        console.log(stunTime);
 
         if(!this.stunned && !this.immune){
             //emit some particles
