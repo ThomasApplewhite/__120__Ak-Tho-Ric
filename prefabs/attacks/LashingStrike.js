@@ -6,10 +6,6 @@ class LashingStrike extends Attack{
         this.hookedTarget;  //what's been grabbed
         this.speed = 300;
         this.active = false;
-        /*this.homeX = x;       //depreciated
-        this.homeY = y;
-        this.destX = this.scene.player.x;
-        this.destY = this.scene.player.y;*/
         this.user = user;
         this.launchTime = -1;        //the time at which the hook was launched
         this.setAlpha(0.2);
@@ -39,42 +35,18 @@ class LashingStrike extends Attack{
         //if this hits the boss and the player's been hooked
         else if (this.active){
             //hook 'em. Launch both the player and the hook towards the boss
-            console.log("hooked!");
+            this.user.emit('skeleton_hooked!');
             this.hookedTarget = this.scene.player;
 
             this.rotation = this.scene.physics.moveToObject(this, this.user, this.speed);//this.scene.physics.moveTo(this, this.homeX, this.homeY, 125, 500);
                        
             //need to stun, then launch, as stunning stops the player
-            this.hookedTarget.startStun(this.scene.time.now - this.launchTime);
+            this.hookedTarget.startStun(this.scene.time.now - this.launchTime + 1000);
             this.scene.physics.moveToObject(this.hookedTarget, this.user, this.speed);
             this.active = false;
 
             this.scene.physics.add.collider(this, this.user, (hook) => {hook.removeSelf();});
         }
-
-        /*
-            //hook 'em. Launch both the player and the hook towards the boss
-            console.log("hooked!");
-            this.hookedTarget = this.scene.player;
-            this.rotation = this.scene.physics.moveToObject(this, this.user, this.speed);//this.scene.physics.moveTo(this, this.homeX, this.homeY, 125, 500);
-            this.hookedTarget.startStun(2000);
-            this.scene.physics.moveTo(this.hookedTarget, this.user, 125);
-            this.active = false;
-        */
-    }
-
-    //frame-by-frame movement
-    movementPattern(){
-        //DEPRECIATED
-        //this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.scene.player.x, this.scene.player.y);
-
-        /*if(this.hookedTarget == null && this.y ==this.homeY && this.x == this.homeX){
-            this.removeSelf()
-        }
-
-        if(this.hookedTarget != null && this.y == this.homeY && this.x == this.homeX){
-            this.removeSelf();
-        }*/
     }
 
     //what happens when this attack is finished
