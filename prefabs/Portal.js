@@ -15,6 +15,7 @@ class Portal extends Phaser.GameObjects.Sprite{
     }
 
     update(){
+        //this should make the portal sprite spin.
         this.rotation += 1;
     }
 

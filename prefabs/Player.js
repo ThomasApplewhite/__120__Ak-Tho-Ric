@@ -39,6 +39,24 @@ class Player extends Phaser.GameObjects.Sprite{
         //animation logic
         this.walkAnim();
         this.on('animationcomplete', () => {this.anims.play('orc_walkAnim');}, this);
+        //particle Logic
+        /*console.log("particling");
+        if(this.scene.particleManager == null){
+            console.log("Something's wrong with the manager");
+        }
+        console.log(this.scene.particleManager.texture);
+        this.particleEmitter = this.scene.particleManager.createEmitter({
+            x: 400,
+            y: 300,
+            follow: this,
+            frame: 0,
+            lifespan: 1000,
+            scale: 10,
+            speed: 100,
+            quantity: 100,
+            blendMode: 'ADD'
+        });
+        console.log("particling done");*/
     }
 
     update(){
@@ -97,7 +115,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
     //stuns the player for stunTime seconds, then makes them immune for that much time afterwards
     startStun(stunTime){
-        if(!this.stunned && !this.immune){
+        if(!this.stunned && !this.immune && stunTime != 0){
             console.log("You've been stunned!");
             this.body.stop();
             this.anims.play('orc_stunAnim');
@@ -115,12 +133,20 @@ class Player extends Phaser.GameObjects.Sprite{
     }
 
     //player takes damage, if they're not immune
-    takeDamage(damage){
+    takeDamage(damage, stunTime){
+        //If an attack doesn't stun for a specific amount of time, make it stun for 250
+        if(stunTime == null){
+            stunTime = 250
+        }
+        console.log(stunTime);
+
         if(!this.stunned && !this.immune){
-            //this.scene.healthUpdate(this.lives);
+            //emit some particles
+            //this.particleEmitter.explode(damage, this.x, this.y)
+
             this.health -= damage;
             if(this.health > 0){
-                this.startStun(250);
+                this.startStun(stunTime);
             }else{
                 this.defeat();
             }

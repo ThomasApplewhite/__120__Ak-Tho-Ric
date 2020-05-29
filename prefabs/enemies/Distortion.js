@@ -6,7 +6,7 @@ class Distortion extends Enemy{
     }
 
     onAttack(target){
-        target.takeDamage(this.damage);
+        target.takeDamage(this.damage, 0);
     }
 }
 

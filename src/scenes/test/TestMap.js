@@ -9,7 +9,41 @@ class TestMap extends Phaser.Scene{
     }
 
     create(){
+        console.log(this);
+        
+
+        //var particles = this.add.particles('particle');
+        //this.particleManager = this.add.particles('particle');
+        /*var emitter = this.particleManager.createEmitter();
+        emitter.setPosition(600, 600);
+        emitter.setSpeed(200);
+        emitter.setBlendMode(Phaser.BlendModes.ADD);*/
+        
         SceneLoad.genericCreate(this, 'placeholder_map');
+
+        //particle Logic
+        /*console.log("particling");
+        if(this.scene.particleManager == null){
+            console.log("Something's wrong with the manager");
+        }
+        console.log(this.scene.particleManager.texture);
+        this.particleEmitter = this.particleManager.createEmitter();
+        this.particleEmitter.setLifespan(1000);
+        this.particleEmitter.startFollow(this.player);
+        
+        {
+            x: this.player.x,
+            y: this.particleEmitter.player.y,
+            follow: this.player,
+            frame: 0,
+            lifespan: 1000,
+            scale: 10,
+            speed: 100,
+            quantity: 100,
+            blendMode: 'ADD'
+        }
+        
+        console.log("particling done");*/
 
         this.boss = new SkeletonKnightBoss(
             this,               //scene
