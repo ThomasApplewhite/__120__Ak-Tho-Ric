@@ -44,16 +44,20 @@ class TestMap extends Phaser.Scene{
         }
         
         console.log("particling done");*/
-
-        this.boss = new SkeletonKnightBoss(
-            this,               //scene
-            300,        //x
-            300,     //y
-            'entities',          //sprite
-            'sb_dominating_strike18',      //start frame of anim
-            1           //level
+        let i = 0
+        while(i < 15){
+            new BreakableWall(
+                this,               //scene
+                100 + (i*64),        //x
+                100,     //y
+                'breakable_wall_tiles',
+                //tiled counts these from one, but phaser counts them from zero.
+                i
             );
-        this.enemyGroup.add(this.boss);
+            ++i;
+        }
+        
+        //this.enemyGroup.add(this.boss);
     }
 
     update(){

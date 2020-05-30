@@ -3,7 +3,7 @@ class StatDisplay{
     constructor(scene){
         this.scene = scene;
         this.player = scene.player;
-        this.cameraZoom = scene.cameras.main.zoom;
+        //this.cameraView = scene.cameras.main
 
         //display the score text
         this.scoreText = scene.add.text(20, 20, "Score: 0", {
@@ -20,11 +20,11 @@ class StatDisplay{
 
         //display the Magic Missile charge
         this.magicMissileMeter = [
-            scene.add.sprite(game.config.width - (40 * this.cameraZoom), (110 * this.cameraZoom), 
+            scene.add.sprite(game.config.width - 40, 110, 
                 'magic_missileUI').setScrollFactor(0),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
-            scene.add.sprite(game.config.width - (110 * this.cameraZoom), (110 * this.cameraZoom), 
+            scene.add.sprite(game.config.width - 110, 110, 
                 'magic_missileUI').setScrollFactor(0),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
-            scene.add.sprite(game.config.width - (180 * this.cameraZoom), (110 * this.cameraZoom), 
+            scene.add.sprite(game.config.width - 180, 110, 
                 'magic_missileUI').setScrollFactor(0)//.setScale(this.cameraZoom - 1, this.cameraZoom - 1)
         ];
         this.magicMissileMeter[0].depth = 1;
@@ -32,7 +32,7 @@ class StatDisplay{
         this.magicMissileMeter[2].depth = 1;
 
         //display the Health Bar
-        this.healthBar = scene.add.sprite(game.config.width - (100  * this.cameraZoom), (40  * this.cameraZoom), 
+        this.healthBar = scene.add.sprite(game.config.width - 100, 40, 
             'health_bar').setScrollFactor(0);//.setScale(this.cameraZoom - 1, this.cameraZoom - 1);
         this.healthBar.depth = 1;
     }

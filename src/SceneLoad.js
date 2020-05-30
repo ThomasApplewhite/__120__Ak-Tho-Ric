@@ -243,9 +243,12 @@ class SceneLoad extends Phaser.Scene{
                 this,               //scene
                 tile.pixelX+32,        //x
                 tile.pixelY+32,     //y
-                'breakable_wall'
+                'breakable_wall_tiles',
+                //tiled counts these from one, but phaser counts them from zero.
+                tile.properties.orientation-1
                 )
             );
+            console.log(tile.properties.orientation);
         }
         else if(entityName != null){
             console.log("TILE " + entityName + " NOT FOUND. ENEMY NOT SPAWNED");

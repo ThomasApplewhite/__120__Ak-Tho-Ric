@@ -161,6 +161,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":1
                         }]
                 }, 
                 {
@@ -170,6 +175,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":2
                         }]
                 }, 
                 {
@@ -179,6 +189,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":3
                         }]
                 }, 
                 {
@@ -188,6 +203,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":4
                         }]
                 }, 
                 {
@@ -197,6 +217,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":5
                         }]
                 }, 
                 {
@@ -233,6 +258,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":6
                         }]
                 }, 
                 {
@@ -242,6 +272,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":7
                         }]
                 }, 
                 {
@@ -251,6 +286,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":8
                         }]
                 }, 
                 {
@@ -260,6 +300,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":9
                         }]
                 }, 
                 {
@@ -269,6 +314,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":10
                         }]
                 }, 
                 {
@@ -278,6 +328,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":11
                         }]
                 }, 
                 {
@@ -287,6 +342,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":12
                         }]
                 }, 
                 {
@@ -296,6 +356,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":13
                         }]
                 }, 
                 {
@@ -305,6 +370,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":14
                         }]
                 }, 
                 {
@@ -314,6 +384,11 @@
                          "name":"entity",
                          "type":"string",
                          "value":"BreakableWall"
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"int",
+                         "value":15
                         }]
                 }, 
                 {

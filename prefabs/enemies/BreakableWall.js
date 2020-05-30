@@ -1,6 +1,6 @@
 class BreakableWall extends Enemy{
-    constructor(scene, x, y, texture){
-        super(scene, x, y, texture, 0, 1, 0, 0);
+    constructor(scene, x, y, texture, frame){
+        super(scene, x, y, texture, frame, 1, 0, 0);
 
         this.body.setImmovable(true);
     }

@@ -57,6 +57,17 @@ class Load extends Phaser.Scene{
             textureURL: './assets/atlases/all_animations.png',
             atlasURL: './assets/atlases/all_animations.json'
         });
+        this.load.spritesheet(
+            'breakable_wall_tiles', 
+            './assets/breakable_wall.png',
+            //they're numbered 1-15 in Tiled, but phaser counts from 0
+            {
+                frameWidth: 64,
+                frameHeight: 64,
+                startFrame: 0,
+                endFrame: 14
+            }
+        );
 
         //attack images
         this.load.atlas({
