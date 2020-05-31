@@ -13,6 +13,12 @@ class Load extends Phaser.Scene{
     }
 
     preload(){
+        //loading plugins
+        this.add.text(this.textShift, this.textSpace, "Importing plugins...", this.textConfig);
+        this.textSpace += 20;
+        
+        this.load.scenePlugin('rexuiplugin', './lib/rexuiplugin.min.js', 'rexUI', 'rexUI');
+
         this.add.text(this.textShift, this.textSpace, "Loading images...", this.textConfig);
         this.textSpace += 20;
 
@@ -22,7 +28,7 @@ class Load extends Phaser.Scene{
         //placeholder assets   
         this.load.image('placeholder_map_tiles', './assets/placeholders/tiles_placeholder.png');
         this.load.tilemapTiledJSON('placeholder_map', './assets/placeholders/tilemap_placeholder.json'); 
-        this.load.image('breakable_wall', './assets/placeholders/breakableWall_placeholder.png');
+        //this.load.image('breakable_wall', './assets/placeholders/breakableWall_placeholder.png');
         this.load.image('dread_eyes', './assets/placeholders/dread_eyes_placeholder.png');
         this.load.image('blight_beam', './assets/placeholders/blight_beam_placeholder.png');
         this.load.image('shattering_stone', './assets/placeholders/shattering_stones_placeholder.png');
@@ -35,6 +41,9 @@ class Load extends Phaser.Scene{
         this.load.image('portal', './assets/placeholders/portal_placeholder.png');
         this.load.image('particle', './assets/placeholders/particle_placeholder.png');
         this.load.image('spark', './assets/placeholders/blue_placeholder.png');
+        this.load.image('volumeSlider_background', './assets/placeholders/volume_slider_background_placeholder.png');
+        this.load.image('volumeSlider_track', './assets/placeholders/volume_slider_track_placeholder.png');
+        this.load.image('volumeSlider_thumb', './assets/placeholders/volume_slider_thumb_placeholder.png');
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
@@ -255,7 +264,7 @@ class Load extends Phaser.Scene{
         this.nextSceneTime = this.time.addEvent({
             delay: 3000,
             callback: () => {
-                //setting background music
+                        //setting background music
                 this.music = this.sound.add('bgm');
                 this.music.play({
                     mute: false,
@@ -266,6 +275,7 @@ class Load extends Phaser.Scene{
                     loop: true,
                     delay: 0
                 });
+
                 //CHANGE THIS TO CHANGE WHAT SCENE THE GAME STARTS IN
                 this.scene.start("menuScene");},
             loop: false,

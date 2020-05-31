@@ -12,9 +12,12 @@ class SkeletonKnightBoss extends Enemy{
         this.points = this.points * this.level;
         this.body.setSize(169, 172);
         this.body.setBounce(0, 0);
+        this.body.setImmovable(true);
         this.speed = 50;
         this.attacking = false;
         this.lashCatch = false;     //whether or not the previous lashing strike hit something
+
+        //this.attackContainer = this.scene.add.container(this.x, this.y);
 
         this.scene.bossLaughSFX.play();
         this.on('animationcomplete', () => {this.setTexture('entities', frame,);}, this);
@@ -91,6 +94,7 @@ class SkeletonKnightBoss extends Enemy{
 
     //I wish there was a better way to do this, but moveTo won't stop anything so...
     movementPattern(){
+        
         //check ranges on attacks
         let playerDistance = Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y);
         if(playerDistance <= 64 * 2.5){ //if player within range of dominatingStrike
@@ -166,7 +170,7 @@ class SkeletonKnightBoss extends Enemy{
         //If we aren't told which attack to use
         if(whichAttack == null){
             //randomly do either a sweeping strike or a dominating strike
-            Phaser.Math.Between(0, 1) == 1
+            whichAttack = Phaser.Math.Between(0, 1);
         }
         //Do the attack the method told us to do
         //I'm using a ternary here because I like them

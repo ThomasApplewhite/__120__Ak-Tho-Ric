@@ -4,6 +4,7 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
         scene.physics.add.existing(this);
         scene.add.existing(this);
+        this.body.setBounce(0, 0);
 
         //properties
         this.health = health;
@@ -40,8 +41,8 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
     }
 
-    //how the enemy will specificly attack, if at all
-    attackPattern(){
+    //attack related behavior that needs to be checked on a frame-by-frame basis
+    attackBehavior(){
 
     }
 

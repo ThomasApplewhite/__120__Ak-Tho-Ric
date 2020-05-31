@@ -4,7 +4,7 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
-
+        this.load.scenePlugin('rexuiplugin', './lib/rexuiplugin.min.js', 'rexUI', 'rexUI');
     }
 
     create(){
@@ -80,6 +80,42 @@ class Menu extends Phaser.Scene{
             strokeThickness: 10,
             fixedWidth: 0
         }).setOrigin(0.5);
+
+        //creating the volume slider
+        this.volumeSlider = this.rexUI.add.slider({
+            x: 300,
+            y: 100,
+            // anchor: undefined,
+            width: 500,
+            height: 50,
+        
+            orientation: 0,
+        
+            background: this.add.image(300, 100, 'volumeSlider_background'),
+            track: this.add.image(300, 100, 'volumeSlider_track'),
+            //indicator: indicatorGameObject,
+            thumb: this.add.image(300, 100, 'volumeSlider_thumb'),
+        
+            input: 'drag',
+        
+            value: 0,
+            gap: undefined,
+            valuechangeCallback: function(newValue, oldValue, slider) {
+
+            },
+        
+            space: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+            },
+        
+            enable: true,
+        
+            // name: '',
+            // draggable: false
+        });
     }
 
     update(){

@@ -1,7 +1,9 @@
 /*
-INTO THE DARKWORLD... 2?
+DARKWORLD's Descent
 CREATED BY AKASH D. KAPADIA, ERIC LONG, & THOMAS APPLEWHITE
-COMPLETED MAY 3RD, 2020
+
+UI Slider plugin by Rex Rainbow, liscensed with MIT Liscence. This technically means
+    I don't need to credit them but I'll write it here anyways.
 
 Hi. While walking around, you might notice a lot of old, commented code that's marked
 DEPRECEATED
