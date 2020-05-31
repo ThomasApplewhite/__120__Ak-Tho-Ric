@@ -61,7 +61,8 @@ class SkeletonKnightBoss extends Enemy{
             });
         }
         else if(this.level == 3){
-            this.once('skeleton_inRangeFor_lashing', this.phaseThreeBehaviors, this);
+            this.phaseThreeBehaviors();
+            //this.once('skeleton_inRangeFor_lashing', this.phaseThreeBehaviors, this);
             /*  when the player first gets in for lashing (which will be as soon as the boss is aggro'd
                 because lashing has a bigger range than the aggro radius)...
                 Throw the hook. If it lands, follow up with Dominating strike half a second later.
