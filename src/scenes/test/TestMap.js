@@ -42,18 +42,30 @@ class TestMap extends Phaser.Scene{
             quantity: 100,
             blendMode: 'ADD'
         }*/
-        
-        this.boss
-        
-        this.boss = new SkeletonKnightBoss(
-            this,               //scene
-            1000,        //x
-            1000,     //y
-            'entities',          //sprite
-            'sb_dominating_strike18',      //start frame of anim
-            2                   //boss level
-            );
-        this.enemyGroup.add(this.boss);
+
+        this.enemyGroup.addMultiple([
+            new Frog(
+                this,               //scene
+                1000,        //x
+                500,     //y
+                'frog',          //sprite
+                0,    //start frame of anim
+            ),
+            new Frog(
+                this,               //scene
+                1250,        //x
+                500,     //y
+                'frog',          //sprite
+                0,    //start frame of anim
+            ),
+            new Frog(
+                this,               //scene
+                1500,        //x
+                500,     //y
+                'frog',          //sprite
+                0,    //start frame of anim
+            ),
+        ]);
     }
 
     update(){
