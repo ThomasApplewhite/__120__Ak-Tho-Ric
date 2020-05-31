@@ -8,6 +8,9 @@ class Attack extends Phaser.GameObjects.Sprite{
         this.rotation = user.rotation;
         this.body.rotation = user.rotation;
 
+        this.scene = scene;
+        this.user = user;
+
         this.timers = new Array();
 
         //Attacks are like advertisements: they are specifically designed to hurt people
