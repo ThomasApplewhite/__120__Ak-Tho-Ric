@@ -7,6 +7,7 @@ class AcidSpit extends Attack{
         this.angle = user.angle + 90;
         this.speed = 250;
         this.home = {x: x, y: y};       //where the attack was launched from
+        this.scene = scene;
 
         scene.physics.velocityFromAngle(this.angle, -this.speed, this.body.velocity);
     }

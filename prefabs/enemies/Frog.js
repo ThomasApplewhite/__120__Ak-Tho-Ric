@@ -34,7 +34,7 @@ class Frog extends Enemy{
         //if aggro'd and the player's too close
         else if(this.aggressive && dist < 64 * 4){
             //walk away from the player while still facing them
-            this.rotation = this.scene.physics.moveToObject(this, this.scene.player, -this.speed) - Math.PI*3/2;
+            this.rotation = this.scene.physics.moveToObject(this, this.scene.player, -this.speed/2) - Math.PI*3/2;
         }
         //if the frog is in the goldilocks zone
         else{
