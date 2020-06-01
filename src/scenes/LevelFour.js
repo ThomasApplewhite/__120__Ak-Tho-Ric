@@ -1,15 +1,15 @@
-class LevelThree extends Phaser.Scene{
+class LevelFour extends Phaser.Scene{
     constructor(){
-        super("levelThreeScene");
+        super("levelFourScene");
     }
 
     preload(){
-        this.nextScene = "levelFourscene";
+        this.nextScene = "menuScene";
         this.bossFactor = 2;
     }
 
     create(){
-        SceneLoad.genericCreate(this, 'level_three_map');
+        SceneLoad.genericCreate(this, 'level_four_map');
     }
 
     update(){

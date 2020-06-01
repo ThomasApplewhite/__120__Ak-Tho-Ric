@@ -16,7 +16,7 @@ let config = {
     width: 1024,
     height: 640,
     pixelArt: true,
-    scene: [ Load, Menu, End, Credits, TestMap, LevelOne, LevelTwo, LevelThree ],
+    scene: [ Load, Menu, End, Credits, TestMap, LevelOne, LevelTwo, LevelThree, LevelFour ],
     physics:{
         default: "arcade",
         arcade:{
@@ -40,6 +40,11 @@ game.registry.set("bodyCount", 0);
 //reserving keyboard keys
 let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE, keyW;
 
+//reserving music-related variables
+let music;
+let musicVolume = 1;
+
+//resuming game sound if paused by browser
 if (game.sound.context.state === 'suspended') {
     game.sound.context.resume();
 }

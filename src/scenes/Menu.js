@@ -82,7 +82,7 @@ class Menu extends Phaser.Scene{
         }).setOrigin(0.5);
 
         //creating the volume slider
-        this.volumeSlider = this.rexUI.add.slider({
+        /*this.volumeSlider = this.rexUI.add.slider({
             x: 300,
             y: 100,
             // anchor: undefined,
@@ -115,7 +115,7 @@ class Menu extends Phaser.Scene{
         
             // name: '',
             // draggable: false
-        });
+        });*/
     }
 
     update(){
@@ -131,7 +131,7 @@ class Menu extends Phaser.Scene{
 
         //secret debug scene skipper!
         if(keyW.isDown){
-            this.scene.start("testMapScene");
+            this.scene.start("levelFourScene");
         }
     }
     
