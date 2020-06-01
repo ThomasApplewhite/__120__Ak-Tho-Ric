@@ -82,40 +82,30 @@ class Menu extends Phaser.Scene{
         }).setOrigin(0.5);
 
         //creating the volume slider
-        /*this.volumeSlider = this.rexUI.add.slider({
-            x: 300,
-            y: 100,
-            // anchor: undefined,
-            width: 500,
-            height: 50,
-        
-            orientation: 0,
-        
-            background: this.add.image(300, 100, 'volumeSlider_background'),
-            track: this.add.image(300, 100, 'volumeSlider_track'),
-            //indicator: indicatorGameObject,
-            thumb: this.add.image(300, 100, 'volumeSlider_thumb'),
-        
-            input: 'drag',
-        
-            value: 0,
-            gap: undefined,
-            valuechangeCallback: function(newValue, oldValue, slider) {
+        //experimental stuff
+        /*
+        this.rexUI.add.slider({
+            x: 200,
+            y: game.config.height - 30,
+            width: 200,
+            height: 20,
+            orientation: 'x',
 
+            background: this.add.image(0, 0, 'volumeSlider_background'),
+            track: this.add.image(0, 0, 'volumeSlider_track'), //this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
+            thumb: this.add.image(0, 0, 'volumeSlider_thumb'),
+
+            valuechangeCallback: function (value) {
+                //musicVolume = value;
+                //music.setVolume(musicVolume);
             },
-        
             space: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
+                top: 4,
+                bottom: 4
             },
-        
-            enable: true,
-        
-            // name: '',
-            // draggable: false
-        });*/
+            input: 'drag', // 'drag'|'click'
+        })
+            .layout();*/
     }
 
     update(){
