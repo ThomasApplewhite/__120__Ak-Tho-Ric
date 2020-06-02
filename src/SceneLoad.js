@@ -162,8 +162,10 @@ class SceneLoad extends Phaser.Scene{
         scene.physics.add.collider(scene.enemyGroup, scene.enemyGroup);
 
         //background music
-        scene.bgm = scene.sound.add(scene.backgroundMusic);
-        scene.sound.play(scene.bgm.key);
+        if(scene.backgroundMusic != null){
+            scene.bgm = scene.sound.add(scene.backgroundMusic);
+            scene.sound.play(scene.bgm.key);
+        }
 
         //game-over flag
         scene.gameOver = false;
@@ -216,7 +218,7 @@ class SceneLoad extends Phaser.Scene{
                 tile.pixelX,        //x
                 tile.pixelY-64,     //y
                 'entities',          //sprite
-                'frog_walk1',    //start frame of anim
+                'frog_walkAnim1',    //start frame of anim
                 )
             );
         }
