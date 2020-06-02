@@ -224,13 +224,17 @@ class Player extends Phaser.GameObjects.Sprite{
             //attackRotation will automatically set the destination coods based off of this offset and player rotation
             let destination = this.attackRotation(128, -128);  
             console.log("Dash destination: " + destination.x/2 + ", " + destination.y);
+            this.anims.play('orc_dashAnim');    //start the anim
             this.scene.physics.moveTo(this, this.x + destination.x/2, this.y + destination.y, 60, 250);
+            this.anims.pause(this.anims.currentAnim.getFrameAt(2));   //and immediately pause it at the lunge part
+            //lock controls and raise dash flag
             this.controlLock = true;
             this.canDash = false;
             //The dash takes 1/4 of a second, and the player stops on arrival
             this.actionTimers.dashTime = this.scene.time.addEvent({
                 delay: 250, 
                 callback: () => {
+                    this.anims.resume();    //finish the dash animation
                     this.body.stop()
                     this.controlLock = false;
                 },

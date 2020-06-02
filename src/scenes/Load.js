@@ -174,7 +174,15 @@ class Load extends Phaser.Scene{
             }),
             repeat: -1
         });
-
+        this.anims.create({
+            key: 'orc_dashAnim',
+            frameRate: 10,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 3,
+                prefix: 'om_dash' 
+            }),
+        });
         //---ATTACK ANIMS---
         this.anims.create({
             key: 'punch_effectAnim',
