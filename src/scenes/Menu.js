@@ -4,6 +4,7 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
+        //might want to move this to a global manager and load in load cause it takes a little while
         this.load.scenePlugin('rexuiplugin', './lib/rexuiplugin.min.js', 'rexUI', 'rexUI');
     }
 
@@ -32,18 +33,6 @@ class Menu extends Phaser.Scene{
             config.height/2, 
             'backgroundTile'
         ).setOrigin(0, 0).setScale(4);
-
-        /*//setting background music
-        this.music = this.sound.add('bgm');
-        this.music.play({
-            mute: false,
-            volume: 1,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: true,
-            delay: 0
-        });*/
 
         //listening for up and down key
         keyUP    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -106,22 +95,46 @@ class Menu extends Phaser.Scene{
             input: 'drag', // 'drag'|'click'
         })
             .layout();*/
+
+
+        //setting background music
+        this.menuSoundSetter();
     }
 
     update(){
         this.background.tilePositionY -= 1;
 
         if(keyUP.isDown){
+            this.sound.removeByKey('pulsating_wrists');
+            menuMusicPlaying = false;
             this.scene.start("levelOneScene");
         }
 
         if(keyDOWN.isDown){
+            //this.music.stop();
             this.scene.start("creditsScene");
         }
 
         //secret debug scene skipper!
         if(keyW.isDown){
-            this.scene.start("testMapScene");
+            this.sound.removeByKey('pulsating_wrists');
+            menuMusicPlaying = false;
+            this.scene.start("endScene");
+            
+        }
+    }
+
+    menuSoundSetter(){
+        //okay fun fact phaser 3 doesn't have accessor functions for sound ANYMORE so instead...
+        this.music = Phaser.Utils.Array.GetFirst(this.sound.sounds, 'key', 'pulsating_wrists');
+        //I also need to use these global variables for if the sound is playing because phaser is a mess
+        if(this.music == null && !menuMusicPlaying){
+            this.music = this.sound.add('pulsating_wrists');
+        }
+
+        if(!this.music.isPlaying && !menuMusicPlaying){
+            this.sound.play(this.music.key);
+            menuMusicPlaying = true;
         }
     }
     

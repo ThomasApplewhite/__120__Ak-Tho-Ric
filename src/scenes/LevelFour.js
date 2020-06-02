@@ -6,6 +6,7 @@ class LevelFour extends Phaser.Scene{
     preload(){
         this.nextScene = "menuScene";
         this.bossFactor = 2;
+        this.backgroundMusic = 'extreme_foe';
     }
 
     create(){
@@ -27,6 +28,7 @@ class LevelFour extends Phaser.Scene{
         this.time.addEvent({
             delay: 1000,
             callback: () => {
+                this.sound.removeByKey(this.backgroundMusic);
                 this.scene.start("endScene");
             },
             callbackScope: this,

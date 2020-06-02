@@ -36,6 +36,7 @@ class Portal extends Phaser.GameObjects.Sprite{
             false,      //won't start again if already going
             (camera, complete) => {if(complete == 1){
                 console.log(this);
+                this.scene.sound.removeByKey(this.scene.backgroundMusic);
                 this.scene.scene.start(this.destination)}}
         );
     }

@@ -40,6 +40,9 @@ game.registry.set("bodyCount", 0);
 //reserving keyboard keys
 let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE, keyW;
 
+//reserving other global variables
+let menuMusicPlaying = false;
+
 //resuming game sound if paused by browser
 if (game.sound.context.state === 'suspended') {
     game.sound.context.resume();

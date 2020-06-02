@@ -161,6 +161,10 @@ class SceneLoad extends Phaser.Scene{
         scene.physics.add.collider(scene.enemyGroup, scene.tilemap.getLayer("Walls").tilemapLayer);
         scene.physics.add.collider(scene.enemyGroup, scene.enemyGroup);
 
+        //background music
+        scene.bgm = scene.sound.add(scene.backgroundMusic);
+        scene.sound.play(scene.bgm.key);
+
         //game-over flag
         scene.gameOver = false;
 
@@ -248,7 +252,6 @@ class SceneLoad extends Phaser.Scene{
                 tile.properties.orientation-1
                 )
             );
-            console.log(tile.properties.orientation);
         }
         else if(entityName != null){
             console.log("TILE " + entityName + " NOT FOUND. ENEMY NOT SPAWNED");

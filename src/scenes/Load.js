@@ -111,7 +111,9 @@ class Load extends Phaser.Scene{
         this.textSpace += 20;
 
         //audio
-        this.load.audio('bgm', './assets/sounds/BGM.mp3');
+        this.load.audio('into_darkworld', './assets/sounds/INTO_DARKWORLD.mp3');
+        this.load.audio('extreme_foe', './assets/sounds/VERSUS_EXTREME_FOE.mp3');
+        this.load.audio('pulsating_wrists', './assets/sounds/Pulsating_Wrists.mp3');
         this.load.audio('magic_missile_explosionSound', './assets/sounds/Magic Missile Explosion.mp3');
         this.load.audio('magic_missile_firingSound', './assets/sounds/Magic Missile Firing.mp3');
         this.load.audio('punchSound', './assets/sounds/Punch.mp3');

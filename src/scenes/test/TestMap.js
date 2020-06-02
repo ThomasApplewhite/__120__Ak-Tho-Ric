@@ -12,6 +12,8 @@ class TestMap extends Phaser.Scene{
         
         SceneLoad.genericCreate(this, 'placeholder_map');
 
+        //this.cameras.main.setTint('#FF0000')
+
         this.enemyGroup.addMultiple([
             new Frog(
                 this,               //scene

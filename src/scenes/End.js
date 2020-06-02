@@ -81,6 +81,8 @@ class End extends Phaser.Scene{
             fixedWidth: 0
         }).setOrigin(0.5);
 
+        //setting background music
+        this.menuSoundSetter();
     }
 
     update(){
@@ -92,6 +94,21 @@ class End extends Phaser.Scene{
 
         if(keyDOWN.isDown){
             this.scene.start("creditsScene");
+        }
+    }
+
+    menuSoundSetter(){
+        //okay fun fact phaser 3 doesn't have accessor functions for sound ANYMORE so instead...
+        this.music = Phaser.Utils.Array.GetFirst(this.sound.sounds, 'key', 'pulsating_wrists');
+        //I also need to use these global variables for if the sound is playing because phaser is a mess
+
+        if(this.music == null && !menuMusicPlaying){
+            this.music = this.sound.add('pulsating_wrists');
+        }
+
+        if(!this.music.isPlaying && !menuMusicPlaying){
+            this.sound.play(this.music.key);
+            menuMusicPlaying = true;
         }
     }
     

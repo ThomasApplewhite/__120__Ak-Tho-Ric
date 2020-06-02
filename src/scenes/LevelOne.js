@@ -6,6 +6,7 @@ class LevelOne extends Phaser.Scene{
     preload(){
         this.nextScene = "levelTwoScene";
         this.bossFactor = 1;
+        this.backgroundMusic = 'into_darkworld';
     }
 
     create(){
@@ -27,6 +28,7 @@ class LevelOne extends Phaser.Scene{
         this.time.addEvent({
             delay: 1000,
             callback: () => {
+                this.sound.removeByKey(this.backgroundMusic);
                 this.scene.start("endScene");
             },
             callbackScope: this,
