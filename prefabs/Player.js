@@ -141,6 +141,12 @@ class Player extends Phaser.GameObjects.Sprite{
             stunTime = 250
         }
 
+        //shake the screen while stunned which magnitude relative to damage
+        this.scene.cameras.main.shake(
+            stunTime,
+            damage/300
+        );
+
         if(!this.stunned && !this.immune){
             //emit some particles
             //this.particleEmitter.explode(damage, this.x, this.y)
