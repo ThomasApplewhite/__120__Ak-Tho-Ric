@@ -66,8 +66,8 @@ class Load extends Phaser.Scene{
         //entity images
         this.load.atlas({
             key: 'entities',
-            textureURL: './assets/atlases/all_animations.png',
-            atlasURL: './assets/atlases/all_animations.json'
+            textureURL: './assets/atlases/entities.png',
+            atlasURL: './assets/atlases/entities.json'
         });
         this.load.spritesheet(
             'breakable_wall_tiles', 
@@ -214,6 +214,26 @@ class Load extends Phaser.Scene{
                 prefix: 'zom_attack' 
             }),
             repeat: -1
+        });
+        this.anims.create({
+            key: 'frog_walkAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 12,
+                prefix: 'fm_walk' 
+            }),
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'frog_spitAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 9,
+                prefix: 'fm_spit' 
+            }),
+            repeat: 0
         });
         this.anims.create({
             key: 'boss_dominatingAnim',
