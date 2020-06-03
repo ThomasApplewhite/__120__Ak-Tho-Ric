@@ -13,6 +13,10 @@ class MagicMissile extends Attack{
         this.xLaunch = x;
         this.yLaunch = y;
 
+        if(this.x != x || this.y != y){
+            console.log("missile moved during creation");
+        }
+
         this.scene.mmShotSFX.play();
 
         //cuts 1 second off of dash cooldown
@@ -21,10 +25,16 @@ class MagicMissile extends Attack{
         }
 
         //if the missile spawns in something
+        /*this.once('collide', () => {
+            if(this.body.touching){
+                this.strike(null)
+            }
+        });
         if(this.body.touching){
             //detonate it
-            this.strike(null);
-        }
+            //this.strike(null);
+            console.log("spawned in something");
+        }*/
     }
 
     strike(target){

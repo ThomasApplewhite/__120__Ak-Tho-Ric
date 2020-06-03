@@ -206,7 +206,7 @@ class Player extends Phaser.GameObjects.Sprite{
             //this.scene.meterUpdate(0);
             //create magic missile
             //new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
-            let attackOffset = this.attackRotation(32, -32); //change the numbers here to determine where the attack goes relative to the player
+            let attackOffset = this.attackRotation(16, -32); //change the numbers here to determine where the attack goes relative to the player
             this.scene.attackGroup.add(new MagicMissile(
                 this.scene, 
                 this.x + attackOffset.x, 

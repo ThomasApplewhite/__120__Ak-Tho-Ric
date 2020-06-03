@@ -9,7 +9,7 @@ class Zombie extends Enemy{
         this.lunging = 0;           //is it attacking? 
         //^0 = not attacking but can, 1 = about to attack, 2 = attacking, 3 = not attacking but can't
         this.body.setSize(24, 28);  //hurtbox size
-        this.attackDuration = (1.5 * 64) / this.lungeSpeed; //how many miliseconds a zombie attack lasts. 
+        this.attackDuration = ((1.5 * 64) / this.lungeSpeed) * 1000 //how many miliseconds a zombie attack lasts. 
         //^Determined by how long it should take for a zombie to cross a certain number of tiles (currently 1.5)
         this.recoveryTimeShort = 500;     //how long recovering from a lunge takes on whiff
         this.recoveryTimeLong = 1000;     //how long recovering from a lunge takes on hit

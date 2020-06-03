@@ -15,27 +15,14 @@ class TestMap extends Phaser.Scene{
         //this.cameras.main.setTint('#FF0000')
 
         this.enemyGroup.addMultiple([
-            new Frog(
+            new Zombie(
                 this,               //scene
-                1000,        //x
+                600,        //x
                 500,     //y
-                'frog',          //sprite
-                0,    //start frame of anim
+                'entities',          //sprite
+                'zom_walk1',    //start frame of anim
             ),
-            new Frog(
-                this,               //scene
-                1250,        //x
-                500,     //y
-                'frog',          //sprite
-                0,    //start frame of anim
-            ),
-            new Frog(
-                this,               //scene
-                1500,        //x
-                500,     //y
-                'frog',          //sprite
-                0,    //start frame of anim
-            ),
+
         ]);
 
         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
