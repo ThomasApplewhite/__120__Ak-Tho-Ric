@@ -120,7 +120,7 @@ class SceneLoad extends Phaser.Scene{
         ).setZoom(1.5); //how far in the camera is zoomed in by default
 
         //create distortion fog
-        SceneLoad.distortionGenerator(scene, 20, scene.tilemap);
+        SceneLoad.distortionGenerator(scene, scene.distortionFactor.count, scene.tilemap);
         //The 20 is how many clouds are made. They're made on every level right now
         
         /*

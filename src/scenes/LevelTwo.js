@@ -7,6 +7,7 @@ class LevelTwo extends Phaser.Scene{
         this.nextScene = "levelThreeScene";
         this.bossFactor = 1;
         this.backgroundMusic = 'extreme_foe';
+        this.distortionFactor = {count: 20, damage: 2};
     }
 
     create(){

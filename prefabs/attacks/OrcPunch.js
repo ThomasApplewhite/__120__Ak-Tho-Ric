@@ -8,7 +8,7 @@ class OrcPunch extends Attack{
         this.user = user;
         
         //physical properties
-        this.body.setSize(16, 16);
+        this.body.setSize(32, 32);
         this.setOrigin(0.5, 0.5);
         this.distX = user.x - this.x;
         this.distY = user.y - this.y;

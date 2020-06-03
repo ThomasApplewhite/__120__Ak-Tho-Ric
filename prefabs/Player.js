@@ -174,12 +174,12 @@ class Player extends Phaser.GameObjects.Sprite{
     punchAttack(){
         if(this.canNormal){
             //PUNCH HIM
-            let attackOffset = this.attackRotation(16, -32); //change the numbers here to determine where the attack goes relative to the player
+            let attackOffset = this.spawningRotation(32); //change the number here to determine where the attack goes relative to the player
             this.anims.play('orc_punchAnim');
             this.scene.attackGroup.add(new OrcPunch(
                 this.scene,
-                this.x + attackOffset.x, 
-                this.y + attackOffset.y, 
+                attackOffset.x, 
+                attackOffset.y, 
                 'attacks',
                 'power_punch1',
                 this,
@@ -206,11 +206,11 @@ class Player extends Phaser.GameObjects.Sprite{
             //this.scene.meterUpdate(0);
             //create magic missile
             //new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
-            let attackOffset = this.attackRotation(16, -32); //change the numbers here to determine where the attack goes relative to the player
+            let attackOffset = this.spawningRotation(16) //change the numbers here to determine where the attack goes relative to the player
             this.scene.attackGroup.add(new MagicMissile(
                 this.scene, 
-                this.x + attackOffset.x, 
-                this.y + attackOffset.y, 
+                attackOffset.x, 
+                attackOffset.y, 
                 'magic_missile', 
                 0,
                 this, 
@@ -228,10 +228,9 @@ class Player extends Phaser.GameObjects.Sprite{
             console.log("Dashing!");
             //if the player is facing forward, their destination is 128 pixels infront of them.
             //attackRotation will automatically set the destination coods based off of this offset and player rotation
-            let destination = this.attackRotation(128, -128);  
-            console.log("Dash destination: " + destination.x/2 + ", " + destination.y);
+            let destination = this.spawningRotation(128);
             this.anims.play('orc_dashAnim');    //start the anim
-            this.scene.physics.moveTo(this, this.x + destination.x/2, this.y + destination.y, 60, 250);
+            this.scene.physics.moveTo(this, destination.x, destination.y, 60, 250);
             this.anims.pause(this.anims.currentAnim.getFrameAt(2));   //and immediately pause it at the lunge part
             //lock controls and raise dash flag
             this.controlLock = true;
@@ -286,32 +285,16 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
-    //calculates where an attack should be generated based on rotation
-    attackRotation(offsetX, offsetY){
-        let xOut = offsetX;
-        let yOut = offsetY;
-
-        //console.log("Percieved Angle: " + this.angle);
-
-        if(this.angle == 0 || this.angle == -180){
-            xOut = 0;
-        }
-        else if(this.angle < 0){
-            xOut -= offsetX * 3;
-        }else if(this.angle > 0){
-            xOut += offsetX;
-        }
-
-        //I have a feeling there is a more formulaic way to do this, but I'll figure it out later.
-        if(this.angle == -90 || this.angle == 90){
-            yOut -= offsetY;
-        }
-        else if(this.angle == -135 || this.angle == 135 || this.angle == -180){
-            yOut -= offsetY * 2;
-        }
-
-        //console.log("Offset X: " + xOut + ". Offset Y: " + yOut);
-
-        return {x: xOut, y: yOut}
+    //calculates where a point should be based on player rotation
+    //offset is how high above the point starts at
+    spawningRotation(offset){
+        let finalPoint = Phaser.Math.RotateAroundDistance(
+            new Phaser.Geom.Point(this.x, this.y), 
+            this.x, 
+            this.y,
+            this.rotation - (Math.PI/2),
+            offset      //how far the hitCircle should be from the boss
+        );
+        return finalPoint;
     }
 }

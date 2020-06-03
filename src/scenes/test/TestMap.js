@@ -6,6 +6,7 @@ class TestMap extends Phaser.Scene{
     preload(){
         this.nextScene = "levelOneScene";
         this.bossFactor = 1;
+        this.distortionFactor = {count: 40, damage: 3};
     }
 
     create(){
