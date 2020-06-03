@@ -23,7 +23,7 @@ class DominatingStrike extends Attack{
             this.body.setSize(512, 512);
         }
         else{
-            this.body.setSize(64, 64);
+            this.body.setSize(128, 128);
             this.alignHitCircle();
         }
         this.body.isCircle = true;
