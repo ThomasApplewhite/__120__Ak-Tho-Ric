@@ -41,6 +41,7 @@ class Player extends Phaser.GameObjects.Sprite{
         //animation logic
         this.walkAnim();
         this.on('animationcomplete', () => {this.anims.play('orc_walkAnim');}, this);
+        this.standingFrame = frame;
         //particle Logic
         /*console.log("particling");
         if(this.scene.particleManager == null){
@@ -97,6 +98,12 @@ class Player extends Phaser.GameObjects.Sprite{
         }
         else{
             this.body.setVelocityY(0);
+        }
+
+        //if the player stopped moving, stop the animation
+        if(this.body.velocity.equals(Phaser.Math.Vector2.ZERO)){
+            this.anims.pause();
+            this.setFrame(this.standingFrame);
         }
 
         this.updateRotation();
