@@ -272,13 +272,11 @@ class SceneLoad extends Phaser.Scene{
                 x: Phaser.Math.Between(0, tilemap.widthInPixels),
                 y: Phaser.Math.Between(0, tilemap.heightInPixels)
             }
-            //adjust the spawn position if it happens to be within the player
-            if(Math.abs(scene.player.x - coords.x) <= 32){coords.x + 64;}
-            if(Math.abs(scene.player.y - coords.y) <= 32){coords.y + 64;}
-            //console.log("Fog remaining: " + count);
-            scene.fogGroup.add(new Distortion(scene, coords.x, coords.y, 'distortion_effect'));
-            //console.log("Generated fog at " + coords.x + ", " + coords.y);
-            --count;
+            //only spawn the fog if it spawns within half a tile of the player
+            if(Phaser.Math.Distance.Between(coords.x, coords.y, scene.player.x, scene.player.y) > 32){
+                scene.fogGroup.add(new Distortion(scene, coords.x, coords.y, 'distortion_effect'));
+                --count;
+            }
         }
     }
 }
