@@ -10,7 +10,6 @@ DEPRECEATED
 or is otherwise unused. This is because I am a code hoarder. I will clean it up eventually.
     -Thomas.
 */
-
 let config = {
     type: Phaser.CANVAS,
     width: 1024,
@@ -42,6 +41,7 @@ let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE, keyW;
 
 //reserving other global variables
 let menuMusicPlaying = false;
+let musicVolume = 0.5;
 
 //resuming game sound if paused by browser
 if (game.sound.context.state === 'suspended') {

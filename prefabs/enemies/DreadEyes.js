@@ -73,6 +73,7 @@ class DreadEyes extends Enemy{
     }
 
     blightBeams(){
+        this.anims.play('dread_blightAnim');
         Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 750,
             callback: () => {
@@ -92,6 +93,7 @@ class DreadEyes extends Enemy{
         let yOff;   //the distance from the boss the rock should spawn on the y Axis
 
         //timer that spawns the rocks
+        this.anims.play('dread_stonesAnim');
         let spawnTimer = this.scene.time.addEvent({
             delay: 250,
             callback: () => {
@@ -115,6 +117,9 @@ class DreadEyes extends Enemy{
     }
 
     cardinalRays(){
+        //I want to tween this, but I can do that later
+        this.rotation = 0;
+        this.anims.play('dread_cardinalAnim');
         Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 1000,
             callback: () => {

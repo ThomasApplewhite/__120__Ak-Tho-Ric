@@ -9,6 +9,7 @@ class End extends Phaser.Scene{
 
         //background images
         //this.load.image('backgroundTile', './assets/dirt.png');
+        //this.sound.volune = musicVolume;
     }
 
     create(){

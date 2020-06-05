@@ -17,7 +17,8 @@ class Load extends Phaser.Scene{
         this.add.text(this.textShift, this.textSpace, "Importing plugins...", this.textConfig);
         this.textSpace += 20;
         
-        this.load.scenePlugin('rexuiplugin', './lib/rexuiplugin.min.js', 'rexUI', 'rexUI');
+        //might want to move this to a global manager and load in load cause it takes a little while
+        //this.load.scenePlugin('rexuiplugin', './lib/rexuiplugin.min.js', 'rexUI', 'rexUI');
 
         this.add.text(this.textShift, this.textSpace, "Loading images...", this.textConfig);
         this.textSpace += 20;
@@ -34,16 +35,16 @@ class Load extends Phaser.Scene{
         this.load.image('shattering_stone', './assets/placeholders/shattering_stones_placeholder.png');
         this.load.image('cardinal_ray', './assets/placeholders/cardinal_ray_placeholder.png');
         this.load.image('health_orb', './assets/placeholders/health_orb_placeholder.png');
-        this.load.image('health_bar', './assets/placeholders/health_bar_placeholder.png');
+        //this.load.image('health_bar', './assets/placeholders/health_bar_placeholder.png');
         //this.load.image('frog', './assets/placeholders/frog_placeholder.png');
         this.load.image('acid_spit', './assets/placeholders/acid_spit_placeholder.png');
         this.load.image('distortion_effect', './assets/placeholders/distortion_placeholder.png');
         this.load.image('portal', './assets/placeholders/portal_placeholder.png');
         //this.load.image('particle', './assets/placeholders/particle_placeholder.png');
         //this.load.image('spark', './assets/placeholders/blue_placeholder.png');
-        this.load.image('volumeSlider_background', './assets/placeholders/volume_slider_background_placeholder.png');
-        this.load.image('volumeSlider_track', './assets/placeholders/volume_slider_track_placeholder.png');
-        this.load.image('volumeSlider_thumb', './assets/placeholders/volume_slider_thumb_placeholder.png');
+        //this.load.image('volumeSlider_background', './assets/placeholders/volume_slider_background_placeholder.png');
+        //this.load.image('volumeSlider_track', './assets/placeholders/volume_slider_track_placeholder.png');
+        //this.load.image('volumeSlider_thumb', './assets/placeholders/volume_slider_thumb_placeholder.png');
 
         //misc. images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
@@ -63,6 +64,12 @@ class Load extends Phaser.Scene{
         this.load.image('level_four_map_tiles', './assets/tilemaps/cave_texture.png');
         this.load.tilemapTiledJSON('level_four_map', './assets/tilemaps/level_4_map.json');
 
+        //UI assets
+        this.load.atlas({
+            key: 'UI',
+            textureURL: './assets/atlases/UI.png',
+            atlasURL: './assets/atlases/UI.json'
+        });
   
         //entity images
         this.load.atlas({
@@ -70,6 +77,7 @@ class Load extends Phaser.Scene{
             textureURL: './assets/atlases/entities.png',
             atlasURL: './assets/atlases/entities.json'
         });
+
         this.load.spritesheet(
             'breakable_wall_tiles', 
             './assets/breakable_wall.png',
@@ -102,8 +110,8 @@ class Load extends Phaser.Scene{
         });*/
 
         //UI images
-        this.load.image('heartUI', './assets/heart.png');
-        this.load.image('magic_missileUI', './assets/missle_charge.png');
+        /*this.load.image('heartUI', './assets/heart.png');
+        this.load.image('magic_missileUI', './assets/missle_charge.png');*/
 
 
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
@@ -247,7 +255,7 @@ class Load extends Phaser.Scene{
             repeat: 0
         });
         this.anims.create({
-            key: 'boss_dominatingAnim',
+            key: 'skeleton_dominatingAnim',
             frameRate: 12,
             frames: this.anims.generateFrameNames('entities', {
                 start: 1,
@@ -256,12 +264,39 @@ class Load extends Phaser.Scene{
             })
         });
         this.anims.create({
-            key: 'boss_sweepingAnim',
+            key: 'skeleton_sweepingAnim',
             frameRate: 12,
             frames: this.anims.generateFrameNames('entities', {
                 start: 1,
                 end: 18,
                 prefix: 'sb_slashing_strike'
+            })
+        });
+        this.anims.create({
+            key: 'dread_blightAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 15,
+                prefix: 'de_blight_beams'
+            })
+        });
+        this.anims.create({
+            key: 'dread_cardinalAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 21,
+                prefix: 'de_cardinal_rays'
+            })
+        });
+        this.anims.create({
+            key: 'dread_stonesAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 18,
+                prefix: 'de_shattering_stones'
             })
         });
 

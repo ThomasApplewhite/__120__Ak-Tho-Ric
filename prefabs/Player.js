@@ -238,6 +238,7 @@ class Player extends Phaser.GameObjects.Sprite{
     dashAttack(){
         if(this.canDash){
             console.log("Dashing!");
+            this.stats.dashIcon.emit('dashStarted');    //I need them to emit off of the icon because their container isn't a GameObject
             //if the player is facing forward, their destination is 128 pixels infront of them.
             //attackRotation will automatically set the destination coods based off of this offset and player rotation
             let destination = this.spawningRotation(128);
@@ -263,6 +264,7 @@ class Player extends Phaser.GameObjects.Sprite{
                 callback: () => {
                     this.canDash = true;
                     console.log("Dash ready!")
+                    this.stats.dashIcon.emit('dashReady');
                 },
                 callbackScope: this
             });

@@ -4,7 +4,6 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
-        //might want to move this to a global manager and load in load cause it takes a little while
         this.load.scenePlugin('rexuiplugin', './lib/rexuiplugin.min.js', 'rexUI', 'rexUI');
     }
 
@@ -70,35 +69,36 @@ class Menu extends Phaser.Scene{
             fixedWidth: 0
         }).setOrigin(0.5);
 
+        //setting background music
+        this.menuSoundSetter();
+
         //creating the volume slider
         //experimental stuff
-        /*
         this.rexUI.add.slider({
-            x: 200,
-            y: game.config.height - 30,
-            width: 200,
-            height: 20,
-            orientation: 'x',
+            x: 50,
+            y: game.config.height - 150,
+            width: 100,
+            height: 200,
+            orientation: 'y',
 
-            background: this.add.image(0, 0, 'volumeSlider_background'),
-            track: this.add.image(0, 0, 'volumeSlider_track'), //this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
-            thumb: this.add.image(0, 0, 'volumeSlider_thumb'),
+            background: this.add.image(0, 0, 'UI', 'Volume_Bar'),
+            track: this.add.image(0, 0, 'UI', 'Volume_bar_Slider'), //this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
+            thumb: this.add.image(0, 0, 'UI', 'Volume_Knob'),
 
-            valuechangeCallback: function (value) {
-                //musicVolume = value;
-                //music.setVolume(musicVolume);
+            value: musicVolume,
+            valuechangeCallback: function (value, oldValue, slider) {
+                //because for some reason, the top is 0 and the bottom is 1
+                musicVolume = 1 - value;
+                slider.scene.sound.volume = musicVolume;
             },
             space: {
-                top: 4,
-                bottom: 4
+                //top: -36,
+                //bottom: -36,
             },
             input: 'drag', // 'drag'|'click'
         })
-            .layout();*/
+            .layout();
 
-
-        //setting background music
-        this.menuSoundSetter();
     }
 
     update(){

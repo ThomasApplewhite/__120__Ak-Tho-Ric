@@ -5,7 +5,7 @@ class TestMap extends Phaser.Scene{
 
     preload(){
         this.nextScene = "levelOneScene";
-        this.bossFactor = 1;
+        this.bossFactor = 3;
         this.distortionFactor = {count: 40, damage: 3};
     }
 
@@ -15,16 +15,15 @@ class TestMap extends Phaser.Scene{
 
         //this.cameras.main.setTint('#FF0000')
 
-        this.enemyGroup.addMultiple([
-            new Zombie(
-                this,               //scene
-                600,        //x
-                500,     //y
-                'entities',          //sprite
-                'zom_walk1',    //start frame of anim
-            ),
-
-        ]);
+        this.boss = new DreadEyes(
+            this,               //scene
+            500,        //x
+            500,     //y
+            'entities',          //sprite
+            'de_blight_beams1',      //start frame of anim
+            this.bossFactor                   //boss level
+            );
+        this.enemyGroup.add(this.boss);
 
         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }

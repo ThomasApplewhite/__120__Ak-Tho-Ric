@@ -11,10 +11,10 @@ class DominatingStrike extends Attack{
 
         //choosing animation based on type
         if(this.type == 1){
-            this.bossAnim = 'boss_sweepingAnim';
+            this.bossAnim = 'skeleton_sweepingAnim';
         }
         else{
-            this.bossAnim = 'boss_dominatingAnim';
+            this.bossAnim = 'skeleton_dominatingAnim';
         }
 
         //type determines the nature of the attack
