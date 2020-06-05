@@ -40,7 +40,7 @@ class TestMap extends Phaser.Scene{
             500,        //x
             500,     //y
             'entities',          //sprite
-            'frog_walkAnim1',    //start frame of anim
+            'fm_walk1',    //start frame of anim
             )
         );
 

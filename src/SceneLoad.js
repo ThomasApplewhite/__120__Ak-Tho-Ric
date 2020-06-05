@@ -218,7 +218,7 @@ class SceneLoad extends Phaser.Scene{
                 tile.pixelX,        //x
                 tile.pixelY-64,     //y
                 'entities',          //sprite
-                'frog_walkAnim1',    //start frame of anim
+                'fm_walk1',    //start frame of anim
                 )
             );
         }
