@@ -82,7 +82,7 @@ class Menu extends Phaser.Scene{
             orientation: 'y',
 
             background: this.add.image(0, 0, 'UI', 'Volume_Bar'),
-            track: this.add.image(0, 0, 'UI', 'Volume_bar_Slider'), //this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
+            //track: this.add.image(0, 0, 'UI', 'Volume_bar_Slider'), //this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
             thumb: this.add.image(0, 0, 'UI', 'Volume_Knob'),
 
             value: musicVolume,
