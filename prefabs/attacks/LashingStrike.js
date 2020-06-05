@@ -43,7 +43,15 @@ class LashingStrike extends Attack{
             this.rotation = this.scene.physics.moveToObject(this, this.user, this.speed);//this.scene.physics.moveTo(this, this.homeX, this.homeY, 125, 500);
                        
             //need to stun, then launch, as stunning stops the player
-            this.hookedTarget.startStun(this.scene.time.now - this.launchTime + 1000);
+            //this.hookedTarget.startStun(this.scene.time.now - this.launchTime + 1000);
+            this.hookedTarget.controlLock = true;
+            this.hookedTarget.anims.play('orc_stunAnim');
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
+                this.scene.time.now - this.launchTime + 1000,
+                () => {this.hookedTarget.controlLock = false;},
+                null,
+                this
+            ));
             this.scene.physics.moveToObject(this.hookedTarget, this.user, this.speed);
             this.active = false;
 
