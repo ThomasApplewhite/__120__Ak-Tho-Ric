@@ -15,12 +15,22 @@ class TestMap extends Phaser.Scene{
 
         //this.cameras.main.setTint('#FF0000')
 
-        this.boss = new DreadEyes(
+        /*this.boss = new DreadEyes(
             this,               //scene
             500,        //x
             500,     //y
             'entities',          //sprite
             'de_blight_beams1',      //start frame of anim
+            this.bossFactor                   //boss level
+            );
+        this.enemyGroup.add(this.boss);*/
+
+        this.boss = new SkeletonKnightBoss(
+            this,               //scene
+            500,        //x
+            500,     //y
+            'entities',          //sprite
+            'sb_dominating_strike18',      //start frame of anim
             this.bossFactor                   //boss level
             );
         this.enemyGroup.add(this.boss);

@@ -21,7 +21,7 @@ class DreadEyes extends Enemy{
         this.on('animationcomplete', () => {this.setTexture('entities', frame,);}, this);
         this.on('dreadeyes_attackcomplete', () => {
             this.attackTimer.paused = false;
-            this.attacking = false;
+            this.scene.tweens.add(Enemy.getBossTween(this));
         }, this);
 
         this.scene.bossActive = true;
@@ -29,6 +29,9 @@ class DreadEyes extends Enemy{
 
     //how the enemy will specificly attack, if at all
     attackPattern(){
+        //face the player
+        this.scene.tweens.add(Enemy.getBossTween(this));
+        
         //five seconds between attacks, use attacks based on level
         this.attackTimer = Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 5000,            //5 seconds, plus 1 for the actual attack
@@ -118,7 +121,13 @@ class DreadEyes extends Enemy{
 
     cardinalRays(){
         //I want to tween this, but I can do that later
-        this.rotation = 0;
+        //this.rotation = 0;
+        this.scene.tweens.add({
+            targets: this,
+            rotation: {from: this.rotation, to: 0},
+            ease: 'linear',
+            duration: 250
+        });
         this.anims.play('dread_cardinalAnim');
         Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 1000,

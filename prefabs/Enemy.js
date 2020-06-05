@@ -82,4 +82,21 @@ class Enemy extends Phaser.GameObjects.Sprite{
         this.timers.forEach((item) => {item.remove()})
         this.destroy();
     }
+
+    //static functions
+    static getBossTween(boss){
+        let tweenConfig = {
+            targets: boss,
+            rotation: {
+                from: boss.rotation, //this atan2 calculation is how phaser gets its rotations
+                to: Math.atan2(boss.scene.player.y - boss.y, boss.scene.player.x - boss.x) - Math.PI/2
+            },
+            ease: 'linear',
+            duration: 250,
+            onComplete: () => {boss.attacking = false;},
+            onCompleteScope: boss
+            //Math.atan2(this.scene.player.y - this.y, this.scene.player.x - this.gameObject.x);
+        }
+        return tweenConfig
+    }
 }

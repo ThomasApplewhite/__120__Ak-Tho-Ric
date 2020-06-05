@@ -21,12 +21,18 @@ class SkeletonKnightBoss extends Enemy{
 
         this.scene.bossLaughSFX.play();
         this.on('animationcomplete', () => {this.setTexture('entities', frame,);}, this);
+        this.on('skeleton_attackComplete', () => {
+            this.scene.tweens.add(Enemy.getBossTween(this));
+        })
 
         this.scene.bossActive = true;
     }
 
     //how the enemy will specificly attack, if at all
     attackPattern(){
+        //face the player
+        this.scene.tweens.add(Enemy.getBossTween(this));
+        
         if(this.level == 1){
             this.once('skeleton_inRangeFor_dominating', this.phaseOneBehaviors, this);
             /*  when the player first gets in for dominating...
