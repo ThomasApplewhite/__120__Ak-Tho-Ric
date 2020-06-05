@@ -19,7 +19,6 @@ class SkeletonKnightBoss extends Enemy{
 
         //this.attackContainer = this.scene.add.container(this.x, this.y);
 
-        this.scene.bossLaughSFX.play();
         this.on('animationcomplete', () => {this.setTexture('entities', frame,);}, this);
         this.on('skeleton_attackComplete', () => {
             this.scene.tweens.add(Enemy.getBossTween(this));
@@ -30,6 +29,7 @@ class SkeletonKnightBoss extends Enemy{
 
     //how the enemy will specificly attack, if at all
     attackPattern(){
+        this.scene.bossLaughSFX.play();
         //face the player
         this.scene.tweens.add(Enemy.getBossTween(this, false));
 
