@@ -30,7 +30,7 @@ class Load extends Phaser.Scene{
         this.load.image('placeholder_map_tiles', './assets/placeholders/tiles_placeholder.png');
         this.load.tilemapTiledJSON('placeholder_map', './assets/placeholders/tilemap_placeholder.json'); 
         //this.load.image('breakable_wall', './assets/placeholders/breakableWall_placeholder.png');
-        this.load.image('dread_eyes', './assets/placeholders/dread_eyes_placeholder.png');
+        //this.load.image('dread_eyes', './assets/placeholders/dread_eyes_placeholder.png');
         this.load.image('blight_beam', './assets/placeholders/blight_beam_placeholder.png');
         this.load.image('shattering_stone', './assets/placeholders/shattering_stones_placeholder.png');
         this.load.image('cardinal_ray', './assets/placeholders/cardinal_ray_placeholder.png');
@@ -98,7 +98,7 @@ class Load extends Phaser.Scene{
         });
         this.load.image('lashing_strike', './assets/hook.png');
         this.load.image('magic_missile', './assets/missle.png');
-        this.load.image('dominating_strike', './assets/dominating_strike.png');
+        //this.load.image('dominating_strike', './assets/dominating_strike.png');
         this.load.image('sweeping_strike', './assets/sweeping_strike.png');
 
         //DEPRECIATED
@@ -270,6 +270,15 @@ class Load extends Phaser.Scene{
                 start: 1,
                 end: 18,
                 prefix: 'sb_slashing_strike'
+            })
+        });
+        this.anims.create({
+            key: 'skeleton_lashingAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 9,
+                prefix: 'sb_lashing_strike'
             })
         });
         this.anims.create({

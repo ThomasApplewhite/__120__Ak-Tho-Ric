@@ -10,11 +10,13 @@ class LashingStrike extends Attack{
         this.range = 64 * 7;         //range of the attack
         this.launchTime = -1;        //the time at which the hook was launched
         this.home = {x: x, y: y};       //where the attack was launched from
-        this.setAlpha(0.2);
+        this.x = x - (64 * 2);
+        this.alignHook();
+        this.setAlpha(0);
 
         //sets a timer to launch the hook in 3/4 of a second
         Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-            delay: 750,
+            delay: 500,
             callback: () => {
                 this.setAlpha(1);
                 this.active = true;
@@ -23,6 +25,8 @@ class LashingStrike extends Attack{
             },
             callbackScope: this
         }));
+
+        this.user.anims.play('skeleton_lashingAnim');
     }
 
     //what happens when the attack collides with a target
@@ -85,5 +89,17 @@ class LashingStrike extends Attack{
     removeSelf(){
         this.user.emit('skeleton_attackComplete');
         this.destroy();
+    }
+
+    alignHook(){
+        let finalPoint = Phaser.Math.RotateAroundDistance(
+            new Phaser.Geom.Point(this.x, this.y), 
+            this.user.x, 
+            this.user.y,
+            this.user.rotation - (Math.PI/2),
+            64 * 2      //how far the hitCircle should be from the boss
+        );
+        this.x = finalPoint.x;
+        this.y = finalPoint.y;
     }
 }

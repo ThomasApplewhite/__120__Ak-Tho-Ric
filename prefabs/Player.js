@@ -176,6 +176,7 @@ class Player extends Phaser.GameObjects.Sprite{
     defeat(){
         this.stunned = true;
         this.setVisible(false);
+        this.body.stop();
 
         this.stats.healthUpdate(0);
 
