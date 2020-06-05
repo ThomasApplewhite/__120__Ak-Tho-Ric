@@ -25,7 +25,7 @@ class TestMap extends Phaser.Scene{
             );
         this.enemyGroup.add(this.boss);*/
 
-        this.boss = new SkeletonKnightBoss(
+        /*this.boss = new SkeletonKnightBoss(
             this,               //scene
             500,        //x
             500,     //y
@@ -33,7 +33,16 @@ class TestMap extends Phaser.Scene{
             'sb_dominating_strike18',      //start frame of anim
             this.bossFactor                   //boss level
             );
-        this.enemyGroup.add(this.boss);
+        this.enemyGroup.add(this.boss);*/
+
+        this.enemyGroup.add(new Frog(
+            this,               //scene
+            500,        //x
+            500,     //y
+            'entities',          //sprite
+            'frog_walkAnim1',    //start frame of anim
+            )
+        );
 
         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }

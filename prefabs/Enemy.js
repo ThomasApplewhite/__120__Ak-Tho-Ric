@@ -70,6 +70,9 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
     //anything special that happens when the enemy dies
     onDeath(){
+        if(this.deathSound != null){
+            this.scene.sound.play(this.deathSound);
+        }
         ++this.scene.player.bodyCount;
         this.scene.player.score += this.points;
 

@@ -10,18 +10,10 @@ class Frog extends Enemy{
         this.attackCooldown = 750;  //how long before a frog can attack again
         //this.tooClose = false;
         this.scene = scene;
+        this.deathSound = 'frog_death';
 
         //restart walk anim when done with shooting
         this.on('animationcomplete', () => {this.anims.play('frog_walkAnim');}, this);
-    }
-
-    attackPattern(){
-        /*Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-            delay: 2000,     //time between attacks
-            callback: this.shoot,
-            callbackScope: this,
-            loop: true
-        }));*/
     }
 
     movementPattern(){
@@ -49,6 +41,11 @@ class Frog extends Enemy{
             this.rotation = this.scene.physics.moveToObject(this, this.scene.player, 0) + Math.PI/2;
         }
     }
+    
+    //attack related behavior that only runs once
+    attackPattern(){
+
+    }
 
     //fire the projectile
     shoot(){
@@ -63,7 +60,9 @@ class Frog extends Enemy{
             //attack timer
             Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
                 this.attackCharge,
-                () => {this.scene.hostileAttackGroup.add(new AcidSpit(this.scene, this.x, this.y, 'acid_spit', 0, this));},
+                () => {
+                    this.scene.sound.play('frog_spit');
+                    this.scene.hostileAttackGroup.add(new AcidSpit(this.scene, this.x, this.y, 'acid_spit', 0, this));},
                 null,
                 this
             ));
@@ -79,27 +78,3 @@ class Frog extends Enemy{
         
     }
 }
-
-//I'm goint to experiment with Frog's attack being a 'private' class within the frog itself.
-//Nope, didn't work
-/*class AcidSpit extends Attack{
-    constructor(scene, x, y, texture, frame, user){
-        super(scene, x, y, texture, frame, user);
-
-        this.damage = 3;
-        this.range = 5 * 64;
-        this.angle = user.angle - 90;
-        this.speed = 250;
-
-        scene.physics.velocityFromAngle(this.angle, -this.speed, this.body.velocity);
-    }
-
-    //what happens when the attack collides with a target
-    strike(target){
-        if(target == this.scene.player){
-            target.takeDamage(this.damage);
-        }
-
-        this.removeSelf();
-    }
-}*/
