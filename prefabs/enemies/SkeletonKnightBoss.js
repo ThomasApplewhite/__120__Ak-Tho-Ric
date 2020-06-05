@@ -31,8 +31,8 @@ class SkeletonKnightBoss extends Enemy{
     //how the enemy will specificly attack, if at all
     attackPattern(){
         //face the player
-        this.scene.tweens.add(Enemy.getBossTween(this));
-        
+        this.scene.tweens.add(Enemy.getBossTween(this, false));
+
         if(this.level == 1){
             this.once('skeleton_inRangeFor_dominating', this.phaseOneBehaviors, this);
             /*  when the player first gets in for dominating...
@@ -124,37 +124,6 @@ class SkeletonKnightBoss extends Enemy{
         }
     }
 
-    /*
-    DEPRECEATED by new boss behaviors
-    //randomly throws an attack, based on the boss' level
-    pickAttack(){
-        //console.log("SkeletonKnight Health:" + this.health);
-
-        let attackCall = Phaser.Math.Between(1, this.level);
-        
-        //if lashing strike is picked and the player is within 7 tiles, pick a different attack
-        if(attackCall == 3 && Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y) < 64 * 7){
-            attackCall = Phaser.Math.Between(1, 2);
-        }
-
-        console.log("Attack Calling: " + attackCall);
-        
-        this.attacking = true;
-        if(attackCall == 3){
-            this.lashingStrike();
-        }
-        else if(attackCall == 2){
-            this.sweepingStrike();
-        }
-        else{
-            this.dominatingStrike();
-            //this.attacking = true;
-            //this.emit('skeleton_attackComplete');
-        }
-
-        
-    }*/
-
     phaseOneBehaviors(){
         this.attacking = true;  
         this.dominatingStrike();        //start attacking
@@ -203,43 +172,7 @@ class SkeletonKnightBoss extends Enemy{
         //if the hook lands, make note of that
         this.once('skeleton_hooked!', () => {this.lashCatch = true}, this);
         //once the attack is over
-        this.once('skeleton_attackComplete', () => {
-            //if the lash caught something
-            if(this.lashCatch){
-                //wait half a second, ruin its day, then assume phaseTwo behaviors
-                Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
-                    500,
-                    this.phaseTwoBehaviors,
-                    1,      //this 1 argument makes phaseTwoBehaviors throw dominating strike
-                    this
-                ));
-            }
-            //if it didn't
-            else{
-                this.attacking = false;
-                //assume phaseTwo behaviors in one second
-                Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
-                    1000,
-                    () => {
-                        this.attacking = false;
-                        this.once('skeleton_inRangeFor_dominating', this.phaseTwoBehaviors, this);
-                    },
-                    null, 
-                    this
-                ));
-            }
-
-            //after seven seconds, start checking for lashing again.
-            Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
-                7000,
-                this.once,  //I think I can set this event call this way, because 'once' is a function...
-                ['skeleton_inRangeFor_lashing', this.phaseThreeBehaviors, this],
-                this
-            ));
-
-            //now that this hook has been fully resolved, reset lashCatch
-            this.lashCatch = false;
-        });
+        this.once('skeleton_attackComplete', this.lashHandling, this);
     }
 
     dominatingStrike(){
@@ -263,5 +196,43 @@ class SkeletonKnightBoss extends Enemy{
         this.scene.player.score += this.points;
 
         this.scene.collectableGroup.add(new Portal(this.scene, this.x, this.y, 'portal', 0, this.scene.nextScene));
+    }
+
+    lashHandling(){
+        //if the lash caught something
+        if(this.lashCatch){
+            //wait half a second, ruin its day, then assume phaseTwo behaviors
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
+                500,
+                this.phaseTwoBehaviors,
+                [1],      //this 1 argument makes phaseTwoBehaviors throw dominating strike
+                this
+            ));
+        }
+        //if it didn't
+        else{
+            this.attacking = false;
+            //assume phaseTwo behaviors in one second
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
+                1000,
+                () => {
+                    this.attacking = false;
+                    this.once('skeleton_inRangeFor_dominating', this.phaseTwoBehaviors, this);
+                },
+                null, 
+                this
+            ));
+        }
+
+        //after seven seconds, start checking for lashing again.
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
+            7000,
+            () => {this.once('skeleton_inRangeFor_lashing', this.phaseThreeBehaviors, this)},
+            null,
+            this
+        ));
+        
+        //with the hook resolved, reset lashCatch
+        this.lashCatch = false;
     }
 }

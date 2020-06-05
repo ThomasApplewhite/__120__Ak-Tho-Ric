@@ -47,7 +47,21 @@ class LashingStrike extends Attack{
             this.scene.physics.moveToObject(this.hookedTarget, this.user, this.speed);
             this.active = false;
 
-            this.scene.physics.add.collider(this, this.user, (hook) => {hook.removeSelf();});
+            this.scene.physics.add.collider(this, this.user, (hook) => {
+                hook.hookedTarget.body.stop();
+                hook.removeSelf();
+            });
+
+            //backup timer if the hook somehow misses the boss
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
+                this.scene.time.now - this.launchTime,
+                () => {
+                    this.hookedTarget.body.stop();
+                    this.removeSelf();
+                },
+                null,
+                this
+            ));
         }
     }
 
@@ -61,7 +75,7 @@ class LashingStrike extends Attack{
 
     //what happens when this attack is finished
     removeSelf(){
-        this.destroy();
         this.user.emit('skeleton_attackComplete');
+        this.destroy();
     }
 }

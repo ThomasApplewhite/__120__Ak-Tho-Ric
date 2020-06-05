@@ -84,7 +84,9 @@ class Enemy extends Phaser.GameObjects.Sprite{
     }
 
     //static functions
-    static getBossTween(boss){
+    static getBossTween(boss, attackRecovery){
+        if(attackRecovery = null){attackRecovery = true;}
+
         let tweenConfig = {
             targets: boss,
             rotation: {
@@ -93,7 +95,7 @@ class Enemy extends Phaser.GameObjects.Sprite{
             },
             ease: 'linear',
             duration: 250,
-            onComplete: () => {boss.attacking = false;},
+            onComplete: () => {if(attackRecovery){boss.attacking = false;}},
             onCompleteScope: boss
             //Math.atan2(this.scene.player.y - this.y, this.scene.player.x - this.gameObject.x);
         }
