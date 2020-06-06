@@ -119,7 +119,7 @@ class Menu extends Phaser.Scene{
         if(keyW.isDown){
             this.sound.removeByKey('pulsating_wrists');
             menuMusicPlaying = false;
-            this.scene.start("testMapScene");
+            this.scene.start("levelFiveScene");
             
         }
     }

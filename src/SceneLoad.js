@@ -94,8 +94,12 @@ class SceneLoad extends Phaser.Scene{
             let tileset = tilemapKey.concat("_tiles");
             let tilesetName = tilemap.substring(0, tilemap.length - 4);
 
+            console.log("trying to build " + tilemapKey + " with " + tilesetName + ": " + tileset);
+
             scene.tilemap = scene.add.tilemap(tilemapKey);
             scene.tilemap.addTilesetImage(tilesetName, tileset,);
+            console.log(scene.tilemap.getTilesetIndex(tilesetName));
+            console.log(scene.tilemap.getTileset(tilesetName));
 
             let tileCenterX = (game.config.width + scene.tilemap.widthInPixels) / 2;
             let tileCenterY = (game.config.height + scene.tilemap.heightInPixels) / 2;

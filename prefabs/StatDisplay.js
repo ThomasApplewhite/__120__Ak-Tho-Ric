@@ -45,7 +45,7 @@ class StatDisplay{
         this.dashIcon = scene.add.sprite(game.config.width - 208, 255,
             'UI', 'Dash_Icon').setScrollFactor(0);
         this.dashIcon.depth = 1;
-        console.log(this.dashIcon);
+        
         this.dashIcon.on('dashStarted', () => {this.dashIcon.visible = false;});
         this.dashIcon.on('dashReady', () => {this.dashIcon.visible = true;})
     }
