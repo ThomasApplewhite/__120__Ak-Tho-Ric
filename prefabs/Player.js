@@ -167,7 +167,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
             //make the screen red for a bit
             if(stunTime != 0){
-                new RedScreenEffect(this.scene, this.x, this.y, stunTime);
+                new RedScreenEffect(this.scene, game.config.width/2, game.config.height/2, stunTime);
             }
         }
     }
