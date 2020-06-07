@@ -20,13 +20,13 @@ class StatDisplay{
         }).setScrollFactor(0)
         this.scoreText.depth = 1;
 
-        //display the Magic Missile charge
+        //display the Magic Missile charge  [208, 278, 348]190
         this.magicMissileMeter = [
-            scene.add.sprite(game.config.width - 208, 190, 
+            scene.add.sprite(game.config.width - 208, 174, 
                 'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
-            scene.add.sprite(game.config.width - 278, 190, 
+            scene.add.sprite(game.config.width - 246, 174, 
                 'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
-            scene.add.sprite(game.config.width - 348, 190, 
+            scene.add.sprite(game.config.width - 284, 174, 
                 'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5)//.setScale(this.cameraZoom - 1, this.cameraZoom - 1)
         ];
         this.magicMissileMeter[0].depth = 1;
@@ -41,8 +41,8 @@ class StatDisplay{
         scene.add.sprite(game.config.width - 278, 140, 
             'UI', 'Health_Bar_Outline').setScrollFactor(0).depth = 1;
 
-        //display the dash icon
-        this.dashIcon = scene.add.sprite(game.config.width - 208, 255,
+        //display the dash icon                                 //255
+        this.dashIcon = scene.add.sprite(game.config.width - 208, 207,
             'UI', 'Dash_Icon').setScrollFactor(0).setScale(.5);
         this.dashIcon.depth = 1;
         
