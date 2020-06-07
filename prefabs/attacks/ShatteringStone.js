@@ -15,6 +15,7 @@ class ShatteringStone extends Attack{
                 this.setAlpha(1);
                 this.hostile = true;
                 this.durationTimer.paused = false;
+                this.scene.sound.play('dreadStone');
             },
             callbackScope: this
         });

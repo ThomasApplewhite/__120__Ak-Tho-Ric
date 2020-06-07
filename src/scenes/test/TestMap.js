@@ -5,7 +5,7 @@ class TestMap extends Phaser.Scene{
 
     preload(){
         this.nextScene = "levelOneScene";
-        this.bossFactor = 1
+        this.bossFactor = 3;
         this.distortionFactor = {count: 0, damage: 3};
     }
 
@@ -43,6 +43,15 @@ class TestMap extends Phaser.Scene{
             500,     //y
             'entities',          //sprite
             'fm_walk1',    //start frame of anim
+            )
+        );*/
+
+        /*this.enemyGroup.add(new Zombie(
+            this,               //scene
+            300,        //x
+            300,     //y
+            'entities',          //sprite
+            'zom_walk1',    //start frame of anim
             )
         );*/
 

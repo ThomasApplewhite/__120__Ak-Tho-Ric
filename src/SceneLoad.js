@@ -75,11 +75,6 @@ class SceneLoad extends Phaser.Scene{
         scene.mmShotSFX = scene.sound.add('magic_missile_firingSound');
         scene.mmBlastSFX = scene.sound.add('magic_missile_explosionSound');
         scene.bossLaughSFX = scene.sound.add('bossLaugh');
-        scene.dreadLaughSFX;
-        scene.dreadBlightSFX;
-        scene.dreadStoneSFX;
-        scene.dreadRaySFX;
-        scene.dreadDeathSFX;
 
         /*
             creating entities and their logic

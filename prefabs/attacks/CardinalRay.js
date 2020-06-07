@@ -9,7 +9,10 @@ class CardinalRay extends Attack{
 
         Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
             this.startup,
-            () => {this.hostile = true}
+            () => {
+                this.hostile = true;
+                this.scene.sound.play('dreadRay');
+            }
         ));
 
         this.setOrientation(orientation);

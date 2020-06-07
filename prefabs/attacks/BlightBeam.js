@@ -23,6 +23,7 @@ class BlightBeam extends Attack{
 
         this.anims.play('dreadAttack_blightAnim');
         this.anims.pause();
+        this.scene.sound.play('dreadBlightShot');
     }
 
     //what happens when the attack collides with a target
@@ -56,5 +57,6 @@ class BlightBeam extends Attack{
         this.body.setSize(64, 64);
         this.body.isCircle = true;
         this.anims.resume();
+        this.scene.sound.play('dreadBlightSplash');
     }
 }

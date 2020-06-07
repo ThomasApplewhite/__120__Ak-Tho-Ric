@@ -32,6 +32,7 @@ class DreadEyes extends Enemy{
     attackPattern(){
         //face the player
         this.scene.tweens.add(Enemy.getBossTween(this));
+        this.scene.sound.play('dreadLaugh');
         
         //five seconds between attacks, use attacks based on level
         this.attackTimer = Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({

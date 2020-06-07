@@ -137,8 +137,18 @@ class Load extends Phaser.Scene{
         //--enemy sounds--
         this.load.audio('frog_spit', './assets/sounds/frog_spit.mp3');
         this.load.audio('frog_death', './assets/sounds/frog_death.mp3');
+        this.load.audio('zombie_attack', './assets/sounds/zombie_attack.mp3');
+        this.load.audio('zombie_death', './assets/sounds/zombie_death.mp3');
         //--boss sounds--
+        //-Skeleton
         this.load.audio('bossLaugh', './assets/sounds/Boss Laugh.mp3');
+        //-DreadEyes
+        this.load.audio('dreadLaugh', './assets/sounds/dreadeyes_wakeup.mp3');
+        this.load.audio('dreadBlightShot', './assets/sounds/dreadeyes_blight_shot.mp3');
+        this.load.audio('dreadBlightSplash', './assets/sounds/dreadeyes_blight_splash.mp3');
+        this.load.audio('dreadStone', './assets/sounds/dreadeyes_rocks.mp3');
+        this.load.audio('dreadRay', './assets/sounds/dreadeyes_laser.mp3');
+        this.load.audio('dreadDeath', './assets/sounds/dreadeyes_death.mp3');
 
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;

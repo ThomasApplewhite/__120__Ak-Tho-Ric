@@ -8,6 +8,7 @@ class Zombie extends Enemy{
         this.body.setBounce(0, 0);  //bounciness
         this.lunging = 0;           //is it attacking? 
         //^0 = not attacking but can, 1 = about to attack, 2 = attacking, 3 = not attacking but can't
+        this.deathSound = 'zombie_death';
         this.body.setSize(24, 28);  //hurtbox size
         this.attackDuration = ((1.5 * 64) / this.lungeSpeed) * 1000 //how many miliseconds a zombie attack lasts. 
         //^Determined by how long it should take for a zombie to cross a certain number of tiles (currently 1.5)
@@ -43,6 +44,7 @@ class Zombie extends Enemy{
             //start lunging!
             this.lunging = 2;
             this.anims.play('zombie_attackAnim');
+            this.scene.sound.play('zombie_attack');
             //lunge managment timer
             this.scene.time.delayedCall(
                 this.attackDuration,
