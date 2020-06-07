@@ -300,7 +300,8 @@ class Load extends Phaser.Scene{
                 start: 1,
                 end: 15,
                 prefix: 'de_blight_beams'
-            })
+            }),
+            repeat: 0
         });
         this.anims.create({
             key: 'dread_cardinalAnim',
@@ -309,7 +310,8 @@ class Load extends Phaser.Scene{
                 start: 1,
                 end: 21,
                 prefix: 'de_cardinal_rays'
-            })
+            }),
+            repeat: 0
         });
         this.anims.create({
             key: 'dread_stonesAnim',
@@ -318,7 +320,51 @@ class Load extends Phaser.Scene{
                 start: 1,
                 end: 18,
                 prefix: 'de_shattering_stones'
-            })
+            }),
+            repeat: 0
+        });
+        //------
+        this.anims.create({
+            key: 'dreadAttack_blightAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('attacks', {
+                start: 1,
+                end: 5,
+                prefix: 'dread_eyes_projectile'
+            }),
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'dreadAttack_cardinalAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('attacks', {
+                start: 1,
+                end: 18,
+                prefix: 'dread_eyes_laser'
+            }),
+            repeat: 0,
+            delay: 0
+        });
+        this.anims.create({
+            key: 'dreadAttack_stonesAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('attacks', {
+                start: 1,
+                end: 15,
+                prefix: 'dread_eyes_stones'
+            }),
+            repeat: 0
+        });
+        //OTHER ANIMS--
+        this.anims.create({
+            key: 'fogAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('attacks', {
+                start: 1,
+                end: 6,
+                prefix: 'distortion_fog'
+            }),
+            repeat: -1
         });
 
 

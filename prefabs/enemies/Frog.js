@@ -62,7 +62,7 @@ class Frog extends Enemy{
                 this.attackCharge,
                 () => {
                     this.scene.sound.play('frog_spit');
-                    this.scene.hostileAttackGroup.add(new AcidSpit(this.scene, this.x, this.y, 'acid_spit', 0, this));},
+                    this.scene.hostileAttackGroup.add(new AcidSpit(this.scene, this.x, this.y, 'attacks', 'spit_projectile', this));},
                 null,
                 this
             ));

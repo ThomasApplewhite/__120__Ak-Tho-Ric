@@ -12,11 +12,17 @@ class Portal extends Phaser.GameObjects.Sprite{
         this.body.isCircle = true;
         this.body.setImmovable(true);
 
-    }
+        this.scene.tweens.add({
+            targets: this,
+            angle: {
+                from: 0,
+                to: 360
+            },
+            ease: 'linear',
+            duration: 2000,
+            repeat: -1
+        });
 
-    update(){
-        //this should make the portal sprite spin.
-        this.rotation += 1;
     }
 
     onPickup(){

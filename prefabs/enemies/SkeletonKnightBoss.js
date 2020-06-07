@@ -195,7 +195,7 @@ class SkeletonKnightBoss extends Enemy{
         ++this.scene.player.bodyCount;
         this.scene.player.score += this.points;
 
-        this.scene.collectableGroup.add(new Portal(this.scene, this.x, this.y, 'portal', 0, this.scene.nextScene));
+        this.scene.collectableGroup.add(new Portal(this.scene, this.x, this.y, 'attacks', 'portal', this.scene.nextScene));
     }
 
     lashHandling(){

@@ -42,13 +42,14 @@ class SceneLoad extends Phaser.Scene{
             runChildUpdate: true
         });
 
-        //creating the group to hold all the friendly attacks
+        //creating the group to hold all the hostile attacks
         scene.hostileAttackGroup = scene.add.group({
             classType: Phaser.GameObjects.Attack,
             active: true,
             maxSize: -1,
             runChildUpdate: true
         });
+        console.log("does hostile attack group self-update? " + scene.hostileAttackGroup.runChildUpdate);
 
         //creating the group to hold all the 'collectable' entities
         scene.collectableGroup = scene.add.group({
@@ -74,6 +75,11 @@ class SceneLoad extends Phaser.Scene{
         scene.mmShotSFX = scene.sound.add('magic_missile_firingSound');
         scene.mmBlastSFX = scene.sound.add('magic_missile_explosionSound');
         scene.bossLaughSFX = scene.sound.add('bossLaugh');
+        scene.dreadLaughSFX;
+        scene.dreadBlightSFX;
+        scene.dreadStoneSFX;
+        scene.dreadRaySFX;
+        scene.dreadDeathSFX;
 
         /*
             creating entities and their logic
@@ -278,7 +284,7 @@ class SceneLoad extends Phaser.Scene{
             }
             //only spawn the fog if it spawns within half a tile of the player
             if(Phaser.Math.Distance.Between(coords.x, coords.y, scene.player.x, scene.player.y) > 32){
-                scene.fogGroup.add(new Distortion(scene, coords.x, coords.y, 'distortion_effect'));
+                scene.fogGroup.add(new Distortion(scene, coords.x, coords.y, 'attacks', 'distortion_fog1'));
                 --count;
             }
         }

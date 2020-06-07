@@ -5,8 +5,8 @@ class TestMap extends Phaser.Scene{
 
     preload(){
         this.nextScene = "levelOneScene";
-        this.bossFactor = 3;
-        this.distortionFactor = {count: 40, damage: 3};
+        this.bossFactor = 1
+        this.distortionFactor = {count: 0, damage: 3};
     }
 
     create(){
@@ -15,7 +15,7 @@ class TestMap extends Phaser.Scene{
 
         //this.cameras.main.setTint('#FF0000')
 
-        /*this.boss = new DreadEyes(
+        this.boss = new DreadEyes(
             this,               //scene
             500,        //x
             500,     //y
@@ -23,7 +23,9 @@ class TestMap extends Phaser.Scene{
             'de_blight_beams1',      //start frame of anim
             this.bossFactor                   //boss level
             );
-        this.enemyGroup.add(this.boss);*/
+        this.enemyGroup.add(this.boss);
+
+        //new Portal(this, 300, 300, 'attacks', 'portal', 'menuScene');
 
         /*this.boss = new SkeletonKnightBoss(
             this,               //scene
@@ -35,14 +37,16 @@ class TestMap extends Phaser.Scene{
             );
         this.enemyGroup.add(this.boss);*/
 
-        this.enemyGroup.add(new Frog(
+        /*this.enemyGroup.add(new Frog(
             this,               //scene
             500,        //x
             500,     //y
             'entities',          //sprite
             'fm_walk1',    //start frame of anim
             )
-        );
+        );*/
+
+        //this.add.sprite(this.player.x, this.player.y, 'attacks', 'dread_eyes_stones1').anims.play('dreadAttack_cardinalAnim');
 
         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }

@@ -3,6 +3,7 @@ class Distortion extends Enemy{
         super(scene, x, y, texture, frame, -1, -1, -1);
 
         this.damage = scene.distortionFactor.damage/60;
+        this.anims.play('fogAnim');
     }
 
     onAttack(target){

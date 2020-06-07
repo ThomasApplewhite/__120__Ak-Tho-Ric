@@ -3,24 +3,27 @@ class CardinalRay extends Attack{
         super(scene, x, y, texture, frame, user);
 
         this.damage = 15;
-        this.duration = 500;
+        this.startup = 750;     //based on animation length, currently 750ms
         this.user = user;
-        
+        this.hostile = false;
+
+        Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
+            this.startup,
+            () => {this.hostile = true}
+        ));
+
         this.setOrientation(orientation);
 
-        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-            delay: this.duration,
-            callback: () => {
-                user.emit('dreadeyes_attackcomplete');
-                this.removeSelf();
-            },
-            callbackScope: this,
-            loop: 0,
-        }));
-    }
+        this.anims.play('dreadAttack_cardinalAnim');
 
+        this.on('animationcomplete', () => {
+            user.emit('dreadeyes_attackcomplete');
+            console.log("attack complete");
+            this.removeSelf();
+        });
+    }
     strike(target){
-        if(target != null){
+        if(this.hostile && target != null){
             target.takeDamage(this.damage);
         }
     }
@@ -28,7 +31,7 @@ class CardinalRay extends Attack{
     setOrientation(orientation){
         switch(orientation){
             case 4:
-                //right
+                //left
                 this.setAngle(90);
                 this.x -= (this.user.width / 2) + (this.height / 2);
                 this.body.setSize(this.height, this.width);
@@ -43,11 +46,13 @@ class CardinalRay extends Attack{
                 this.setAngle(90);
                 this.x += (this.user.width / 2) + (this.height / 2);
                 this.body.setSize(this.height, this.width);
+                this.flipY = true;
                 break;
             case 1:
+                //top
                 this.y -= (this.user.height / 2) + (this.height / 2);
                 this.angle = 0;
-                //top. do nothing
+                this.flipY = true;
                 break;
             default:
                 this.y -= (this.user.height / 2) + (this.height / 2);

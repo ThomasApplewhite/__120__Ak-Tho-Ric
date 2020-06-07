@@ -22,6 +22,7 @@ class DreadEyes extends Enemy{
         this.on('dreadeyes_attackcomplete', () => {
             this.attackTimer.paused = false;
             this.scene.tweens.add(Enemy.getBossTween(this));
+            this.attacking = false; //this is theoretically redundent
         }, this);
 
         this.scene.bossActive = true;
@@ -81,9 +82,9 @@ class DreadEyes extends Enemy{
             delay: 750,
             callback: () => {
                 this.scene.hostileAttackGroup.addMultiple([
-                    new BlightBeam(this.scene, this.x, this.y, 'blight_beam', 0, this, 35),
-                    new BlightBeam(this.scene, this.x, this.y, 'blight_beam', 0, this, 0),
-                    new BlightBeam(this.scene, this.x, this.y, 'blight_beam', 0, this, -35),
+                    new BlightBeam(this.scene, this.x, this.y, 'attacks', 'dread_eyes_projectile1', this, 35),
+                    new BlightBeam(this.scene, this.x, this.y, 'attacks', 'dread_eyes_projectile1', this, 0),
+                    new BlightBeam(this.scene, this.x, this.y, 'attacks', 'dread_eyes_projectile1', this, -35),
                 ]);
             },
             loop: 0
@@ -103,7 +104,7 @@ class DreadEyes extends Enemy{
                 xOff = Phaser.Math.Between(-256, 256);
                 yOff = Phaser.Math.Between(-256, 256);
                 this.scene.hostileAttackGroup.add(
-                    new ShatteringStone(this.scene, this.x + xOff, this.y + yOff, 'shattering_stone', 0, this, Phaser.Math.Between(1, 4))
+                    new ShatteringStone(this.scene, this.x + xOff, this.y + yOff, 'attacks', 'dread_eyes_stones1', this, Phaser.Math.Between(1, 4))
                 );
             },
             repeat: stoneCount,   //this timer will repeat once for each rock
@@ -130,13 +131,13 @@ class DreadEyes extends Enemy{
         });
         this.anims.play('dread_cardinalAnim');
         Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-            delay: 1000,
+            delay: 250,
             callback: () => {
                 this.scene.hostileAttackGroup.addMultiple([
-                    new CardinalRay(this.scene, this.x, this.y, 'cardinal_ray', 0, this, 1),
-                    new CardinalRay(this.scene, this.x, this.y, 'cardinal_ray', 0, this, 2),
-                    new CardinalRay(this.scene, this.x, this.y, 'cardinal_ray', 0, this, 3),
-                    new CardinalRay(this.scene, this.x, this.y, 'cardinal_ray', 0, this, 4),
+                    new CardinalRay(this.scene, this.x, this.y, 'attacks', 'dread_eyes_laser1', this, 1),
+                    new CardinalRay(this.scene, this.x, this.y, 'attacks', 'dread_eyes_laser1', this, 2),
+                    new CardinalRay(this.scene, this.x, this.y, 'attacks', 'dread_eyes_laser1', this, 3),
+                    new CardinalRay(this.scene, this.x, this.y, 'attacks', 'dread_eyes_laser1', this, 4),
                 ]);
             },
             loop: 0
@@ -148,7 +149,7 @@ class DreadEyes extends Enemy{
         ++this.scene.player.bodyCount;
         this.scene.player.score += this.points;
 
-        this.scene.collectableGroup.add(new Portal(this.scene, this.x, this.y, 'portal', 0, this.scene.nextScene));
+        this.scene.collectableGroup.add(new Portal(this.scene, this.x, this.y, 'attacks', 'portal', this.scene.nextScene));
     }
 
 }

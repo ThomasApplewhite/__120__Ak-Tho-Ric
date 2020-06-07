@@ -8,24 +8,21 @@ class BlightBeam extends Attack{
         this.damage = 5;
         this.user = user;
         this.exploded = false;
-        this.body.setCircle(5);
+        this.body.setSize(24, 24);
+        this.body.isCircle = true;
         this.angle = user.angle + rotation;
         this.xLaunch = x;
         this.yLaunch = y;
         scene.physics.velocityFromAngle(this.angle - 90, -speed, this.body.velocity);
 
-        //This will get replaced with an animation event, once the animations exist
-        this.blastDuration =  this.scene.time.addEvent({
-            delay: 250,
-            callback: () => {
-                this.user.emit('dreadeyes_attackcomplete')
-                this.removeSelf();
-            },
-            callbackScope: this,
-            loop: 0,
-            paused: true
+        this.on('animationcomplete', () => {
+            this.user.emit('dreadeyes_attackcomplete');
+            //console.log("animation done");
+            this.removeSelf();
         });
-        Phaser.Utils.Array.Add(this.timers, this.blastDuration);
+
+        this.anims.play('dreadAttack_blightAnim');
+        this.anims.pause();
     }
 
     //what happens when the attack collides with a target
@@ -54,9 +51,10 @@ class BlightBeam extends Attack{
 
     //time to explode
     explode(){
+        this.exploded = true;
         this.body.stop();
-        this.body.setCircle(64, -64, -64);
-        //play explosion animation
-        this.blastDuration.paused = false;
+        this.body.setSize(64, 64);
+        this.body.isCircle = true;
+        this.anims.resume();
     }
 }
