@@ -168,7 +168,7 @@ class SceneLoad extends Phaser.Scene{
         //background music
         if(scene.backgroundMusic != null){
             scene.bgm = scene.sound.add(scene.backgroundMusic);
-            scene.sound.play(scene.bgm.key);
+            scene.sound.play(scene.bgm.key, {loop: true});
         }
 
         //game-over flag

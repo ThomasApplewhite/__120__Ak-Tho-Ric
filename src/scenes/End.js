@@ -108,7 +108,7 @@ class End extends Phaser.Scene{
         }
 
         if(!this.music.isPlaying && !menuMusicPlaying){
-            this.sound.play(this.music.key);
+            this.sound.play(this.music.key, {loop: true});
             menuMusicPlaying = true;
         }
     }
