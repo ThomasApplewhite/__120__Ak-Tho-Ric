@@ -411,7 +411,7 @@ class Load extends Phaser.Scene{
             delay: 3000,
             callback: () => {
                         //setting background music
-                this.music = this.sound.add('bgm');
+                /*this.music = this.sound.add('bgm');
                 this.music.play({
                     mute: false,
                     volume: 0.75,
@@ -420,7 +420,7 @@ class Load extends Phaser.Scene{
                     seek: 0,
                     loop: true,
                     delay: 0
-                });
+                });*/
 
                 //CHANGE THIS TO CHANGE WHAT SCENE THE GAME STARTS IN
                 this.scene.start("menuScene");},

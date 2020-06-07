@@ -23,11 +23,11 @@ class StatDisplay{
         //display the Magic Missile charge
         this.magicMissileMeter = [
             scene.add.sprite(game.config.width - 208, 190, 
-                'UI', 'Magic_Missile_Icon').setScrollFactor(0),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
+                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
             scene.add.sprite(game.config.width - 278, 190, 
-                'UI', 'Magic_Missile_Icon').setScrollFactor(0),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
+                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
             scene.add.sprite(game.config.width - 348, 190, 
-                'UI', 'Magic_Missile_Icon').setScrollFactor(0)//.setScale(this.cameraZoom - 1, this.cameraZoom - 1)
+                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5)//.setScale(this.cameraZoom - 1, this.cameraZoom - 1)
         ];
         this.magicMissileMeter[0].depth = 1;
         this.magicMissileMeter[1].depth = 1;
@@ -43,7 +43,7 @@ class StatDisplay{
 
         //display the dash icon
         this.dashIcon = scene.add.sprite(game.config.width - 208, 255,
-            'UI', 'Dash_Icon').setScrollFactor(0);
+            'UI', 'Dash_Icon').setScrollFactor(0).setScale(.5);
         this.dashIcon.depth = 1;
         
         this.dashIcon.on('dashStarted', () => {this.dashIcon.visible = false;});
