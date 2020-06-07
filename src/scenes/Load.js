@@ -52,20 +52,23 @@ class Load extends Phaser.Scene{
 
         //map assets
         //--level 1--
-        this.load.image('level_one_map_tiles', './assets/tilemaps/cave_texture.png');
+        this.load.image('level_one_map_tiles', './assets/tilemaps/cave_texture_v2.png');
         this.load.tilemapTiledJSON('level_one_map', './assets/tilemaps/level_1_map.json');
         //--level 2--
-        this.load.image('level_two_map_tiles', './assets/tilemaps/cave_texture.png');
+        this.load.image('level_two_map_tiles', './assets/tilemaps/cave_texture_v2.png');
         this.load.tilemapTiledJSON('level_two_map', './assets/tilemaps/level_2_map.json');
         //--level 3--
-        this.load.image('level_three_map_tiles', './assets/tilemaps/cave_texture.png');
+        this.load.image('level_three_map_tiles', './assets/tilemaps/cave_texture_v2.png');
         this.load.tilemapTiledJSON('level_three_map', './assets/tilemaps/level_3_map.json');
         //--level 4--
-        this.load.image('level_four_map_tiles', './assets/tilemaps/cave_texture.png');
+        this.load.image('level_four_map_tiles', './assets/tilemaps/cave_texture_v2.png');
         this.load.tilemapTiledJSON('level_four_map', './assets/tilemaps/level_4_map.json');
         //--level 5--
-        this.load.image('level_five_map_tiles', './assets/tilemaps/cave_texture.png');
+        this.load.image('level_five_map_tiles', './assets/tilemaps/cave_texture_v2.png');
         this.load.tilemapTiledJSON('level_five_map', './assets/tilemaps/level_5_map.json');
+        //--level 6--
+        this.load.image('level_six_map_tiles', './assets/tilemaps/cave_texture_v2.png');
+        this.load.tilemapTiledJSON('level_six_map', './assets/tilemaps/level_6_map.json');
 
         //UI assets
         this.load.atlas({

@@ -15,7 +15,7 @@ let config = {
     width: 1024,
     height: 640,
     pixelArt: true,
-    scene: [ Load, Menu, End, Credits, TestMap, LevelOne, LevelTwo, LevelThree, LevelFour, LevelFive ],
+    scene: [ Load, Menu, End, Credits, TestMap, LevelOne, LevelTwo, LevelThree, LevelFour, LevelFive, LevelSix ],
     physics:{
         default: "arcade",
         arcade:{

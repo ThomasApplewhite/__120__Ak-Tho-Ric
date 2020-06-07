@@ -1,17 +1,17 @@
-class LevelFive extends Phaser.Scene{
+class LevelSix extends Phaser.Scene{
     constructor(){
-        super("levelFiveScene");
+        super("levelSixScene");
     }
 
     preload(){
-        this.nextScene = "levelSixScene";
+        this.nextScene = "menuScene";
         this.bossFactor = 3;
-        this.backgroundMusic = 'into_darkworld';
-        this.distortionFactor = {count: 50, damage: 3};
+        this.backgroundMusic = 'extreme_foe';
+        this.distortionFactor = {count: 60, damage: 3};
     }
 
     create(){
-        SceneLoad.genericCreate(this, 'level_five_map');
+        SceneLoad.genericCreate(this, 'level_six_map');
     }
 
     update(){
