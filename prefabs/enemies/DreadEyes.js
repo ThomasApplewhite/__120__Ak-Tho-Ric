@@ -14,6 +14,7 @@ class DreadEyes extends Enemy{
         this.body.setBounce(0, 0);
         this.speed = 50;
         this.attacking = false;
+        this.deathSound = 'dreadDeath';
 
         //this.scene.bossLaughSFX.play();
 

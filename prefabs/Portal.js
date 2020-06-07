@@ -33,6 +33,11 @@ class Portal extends Phaser.GameObjects.Sprite{
         this.player.controlLock = true;
         this.player.rotation = this.scene.physics.moveToObject(this.scene.player, this, this.player.speed, 1000);
 
+        //save the player's score
+        let scores = this.scene.player.exportScores();
+        game.registry.set("score", scores[0]);
+        game.registry.set("bodyCount", scores[1]);
+
         //fade the camera to black, then switch scenes
         this.scene.cameras.main.fade(
             1000,       //duration of fade

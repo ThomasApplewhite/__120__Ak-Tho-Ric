@@ -23,8 +23,8 @@ class Player extends Phaser.GameObjects.Sprite{
         this.stunned = false;
         this.immune = false;
         this.speed = 250;
-        this.bodyCount = 0;
-        this.score = 0;
+        this.bodyCount = game.registry.get("bodyCount");
+        this.score = game.registry.get("score");
         //action cooldowns
         this.canNormal = true;
         this.canDash = true;
