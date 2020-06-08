@@ -6,6 +6,7 @@ class Frog extends Enemy{
         this.body.setBounce(0, 0);  //bounciness
         this.body.setSize(24, 28);  //hurtbox size
         this.attacking = false;
+        this.moveLock = false;
         this.attackCharge = 500;    //how long it takes for an attack to charge
         this.attackCooldown = 750;  //how long before a frog can attack again
         //this.tooClose = false;
@@ -25,7 +26,7 @@ class Frog extends Enemy{
         this.shoot();
 
         //if aggro'd and the player's not too close
-        if(this.aggressive && dist > 64 * 6){
+        if(this.aggressive && dist > 64 * 6 && !this.moveLock){
             //walk towards the player if they're too far away
             this.rotation = this.scene.physics.moveToObject(this, this.scene.player, this.speed) + Math.PI/2;
         }
@@ -38,7 +39,7 @@ class Frog extends Enemy{
         else{
             //don't actually move, just face them and pause the walk anim
             if(this.anims.getCurrentKey() === "frog_walkAnim"){this.anims.pause();}
-            this.rotation = this.scene.physics.moveToObject(this, this.scene.player, 0) + Math.PI/2;
+            if(!this.moveLock){this.rotation = this.scene.physics.moveToObject(this, this.scene.player, 0) + Math.PI/2;}
         }
     }
     
@@ -56,6 +57,14 @@ class Frog extends Enemy{
             //attack in half a second
             this.anims.play('frog_spitAnim');
             this.attacking = true;
+
+            //move locking timer
+            Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
+                this.attackCharge/2,
+                () => {this.moveLock = true;},
+                null,
+                this
+            ));
             
             //attack timer
             Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
@@ -69,7 +78,10 @@ class Frog extends Enemy{
 
             Phaser.Utils.Array.Add(this.timers, this.scene.time.delayedCall(
                 this.attackCharge + this.attackCooldown,
-                () => {this.attacking = false;},
+                () => {
+                    this.attacking = false;
+                    this.moveLock = false;
+                },
                 null,
                 this
             ));
