@@ -31,15 +31,15 @@ class Load extends Phaser.Scene{
         this.load.tilemapTiledJSON('placeholder_map', './assets/placeholders/tilemap_placeholder.json'); 
         //this.load.image('breakable_wall', './assets/placeholders/breakableWall_placeholder.png');
         //this.load.image('dread_eyes', './assets/placeholders/dread_eyes_placeholder.png');
-        this.load.image('blight_beam', './assets/placeholders/blight_beam_placeholder.png');
-        this.load.image('shattering_stone', './assets/placeholders/shattering_stones_placeholder.png');
-        this.load.image('cardinal_ray', './assets/placeholders/cardinal_ray_placeholder.png');
-        this.load.image('health_orb', './assets/placeholders/health_orb_placeholder.png');
+        //this.load.image('blight_beam', './assets/placeholders/blight_beam_placeholder.png');
+        //this.load.image('shattering_stone', './assets/placeholders/shattering_stones_placeholder.png');
+        //this.load.image('cardinal_ray', './assets/placeholders/cardinal_ray_placeholder.png');
+        //this.load.image('health_orb', './assets/placeholders/health_orb_placeholder.png');
         //this.load.image('health_bar', './assets/placeholders/health_bar_placeholder.png');
         //this.load.image('frog', './assets/placeholders/frog_placeholder.png');
-        this.load.image('acid_spit', './assets/placeholders/acid_spit_placeholder.png');
-        this.load.image('distortion_effect', './assets/placeholders/distortion_placeholder.png');
-        this.load.image('portal', './assets/placeholders/portal_placeholder.png');
+        //this.load.image('acid_spit', './assets/placeholders/acid_spit_placeholder.png');
+        //this.load.image('distortion_effect', './assets/placeholders/distortion_placeholder.png');
+        //this.load.image('portal', './assets/placeholders/portal_placeholder.png');
         //this.load.image('particle', './assets/placeholders/particle_placeholder.png');
         //this.load.image('spark', './assets/placeholders/blue_placeholder.png');
         //this.load.image('volumeSlider_background', './assets/placeholders/volume_slider_background_placeholder.png');
@@ -143,6 +143,10 @@ class Load extends Phaser.Scene{
         //--boss sounds--
         //-Skeleton
         this.load.audio('bossLaugh', './assets/sounds/Boss Laugh.mp3');
+        this.load.audio('skeletonDom', './assets/sounds/skeleton_dominating_strike_v2.mp3');
+        this.load.audio('skeletonSweep', './assets/sounds/skeleton_sweeping_strike.mp3');
+        this.load.audio('skeletonLash', './assets/sounds/skeleton_lashing_strike.mp3');
+        this.load.audio('skeletonDeath', './assets/sounds/skeleton_death.mp3');
         //-DreadEyes
         this.load.audio('dreadLaugh', './assets/sounds/dreadeyes_wakeup.mp3');
         this.load.audio('dreadBlightShot', './assets/sounds/dreadeyes_blight_shot.mp3');
@@ -215,6 +219,25 @@ class Load extends Phaser.Scene{
                 start: 1,
                 end: 3,
                 prefix: 'om_dash' 
+            }),
+        });
+        this.anims.create({
+            key: 'orc_idleAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 15,
+                prefix: 'om_idle' 
+            }),
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'orc_deathAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 12,
+                prefix: 'om_death' 
             }),
         });
         //---ATTACK ANIMS---
@@ -376,6 +399,15 @@ class Load extends Phaser.Scene{
                 prefix: 'distortion_fog'
             }),
             repeat: -1
+        });
+        this.anims.create({
+            key: 'wall_breakAnim',
+            frameRate: 12,
+            frames: this.anims.generateFrameNames('entities', {
+                start: 1,
+                end: 4,
+                prefix: 'bw_break'
+            }),
         });
 
 

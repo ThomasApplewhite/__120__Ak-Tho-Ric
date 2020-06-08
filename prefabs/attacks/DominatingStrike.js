@@ -8,13 +8,16 @@ class DominatingStrike extends Attack{
         this.user = user;
         this.type = type;
         this.bossAnim;
+        this.bossSound;
 
         //choosing animation based on type
         if(this.type == 1){
             this.bossAnim = 'skeleton_sweepingAnim';
+            this.bossSound = 'skeletonSweep';
         }
         else{
             this.bossAnim = 'skeleton_dominatingAnim';
+            this.bossSound = 'skeletonDom';
         }
 
         //type determines the nature of the attack
@@ -30,6 +33,9 @@ class DominatingStrike extends Attack{
 
         //setting timers so the attack happens in-sync with the animation
         this.scene.boss.anims.play(this.bossAnim);
+        this.scene.sound.play(this.bossSound);
+        /*if(this.type == 1){this.scene.sound.play(this.bossSound);}
+        else{this.scene.sound.play(this.bossSound, {delay: 250});}*/
         Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
             delay: 750,
             callback: this.activateMove,

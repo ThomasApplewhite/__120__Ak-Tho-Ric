@@ -16,6 +16,7 @@ class SkeletonKnightBoss extends Enemy{
         this.speed = 50;
         this.attacking = false;
         this.lashCatch = false;     //whether or not the previous lashing strike hit something
+        this.deathSound = 'skeletonDeath';
 
         //this.attackContainer = this.scene.add.container(this.x, this.y);
 

@@ -22,6 +22,7 @@ class LashingStrike extends Attack{
                 this.active = true;
                 this.rotation = this.scene.physics.moveToObject(this, this.scene.player, this.speed);
                 this.launchTime = this.scene.time.now;
+                this.scene.sound.play('skeletonLash');
             },
             callbackScope: this
         }));
@@ -45,7 +46,8 @@ class LashingStrike extends Attack{
             this.hookedTarget = this.scene.player;
 
             this.rotation = this.scene.physics.moveToObject(this, this.user, this.speed);//this.scene.physics.moveTo(this, this.homeX, this.homeY, 125, 500);
-                       
+            this.scene.sound.play('skeletonLash');
+            
             //need to stun, then launch, as stunning stops the player
             //this.hookedTarget.startStun(this.scene.time.now - this.launchTime + 1000);
             this.hookedTarget.controlLock = true;

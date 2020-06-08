@@ -39,7 +39,7 @@ class Player extends Phaser.GameObjects.Sprite{
             dashCooldown: null,
         }
         //animation logic
-        this.walkAnim();
+        this.anims.play('orc_idleAnim');
         this.on('animationcomplete', () => {this.anims.play('orc_walkAnim');}, this);
         this.standingFrame = frame;
         //particle Logic
@@ -101,9 +101,10 @@ class Player extends Phaser.GameObjects.Sprite{
         }
 
         //if the player stopped moving, stop the animation
-        if(this.body.velocity.equals(Phaser.Math.Vector2.ZERO)){
-            this.anims.pause();
-            this.setFrame(this.standingFrame);
+        if(this.body.velocity.equals(Phaser.Math.Vector2.ZERO) && this.anims.getCurrentKey() == 'orc_walkAnim'){
+            //this.anims.pause();
+            //this.setFrame(this.standingFrame);
+            this.anims.play('orc_idleAnim', true);
         }
 
         this.updateRotation();
@@ -175,8 +176,11 @@ class Player extends Phaser.GameObjects.Sprite{
     //ends the game on player death
     defeat(){
         this.stunned = true;
-        this.setVisible(false);
+        //this.setVisible(false);
+        this.off('animationcomplete');
+        this.anims.play('orc_deathAnim');
         this.body.stop();
+        this.body.setImmovable(true);
 
         this.stats.healthUpdate(0);
 
@@ -280,8 +284,8 @@ class Player extends Phaser.GameObjects.Sprite{
 
     //resets animations when an action ends
     walkAnim(){
-        if(!this.anims.isPlaying && !this.stunned){
-            this.anims.play('orc_walkAnim');
+        if(this.anims.getCurrentKey() == 'orc_idleAnim' && !this.stunned){
+            this.anims.play('orc_walkAnim', true);
         }
     }
 

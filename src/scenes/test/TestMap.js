@@ -5,7 +5,7 @@ class TestMap extends Phaser.Scene{
 
     preload(){
         this.nextScene = "levelOneScene";
-        this.bossFactor = 3;
+        this.bossFactor = 1;
         this.distortionFactor = {count: 0, damage: 3};
     }
 
@@ -27,7 +27,7 @@ class TestMap extends Phaser.Scene{
 
         //new Portal(this, 300, 300, 'attacks', 'portal', 'menuScene');
 
-        /*this.boss = new SkeletonKnightBoss(
+        this.boss = new SkeletonKnightBoss(
             this,               //scene
             500,        //x
             500,     //y
@@ -35,16 +35,16 @@ class TestMap extends Phaser.Scene{
             'sb_dominating_strike18',      //start frame of anim
             this.bossFactor                   //boss level
             );
-        this.enemyGroup.add(this.boss);*/
+        this.enemyGroup.add(this.boss);
 
-        this.enemyGroup.add(new Frog(
+        /*this.enemyGroup.add(new Frog(
             this,               //scene
             64*3,        //x
             64*3,     //y
             'entities',          //sprite
             'fm_walk1',    //start frame of anim
             )
-        );
+        );*/
 
         /*this.enemyGroup.add(new Zombie(
             this,               //scene
@@ -55,7 +55,7 @@ class TestMap extends Phaser.Scene{
             )
         );*/
 
-        //this.add.sprite(this.player.x, this.player.y, 'attacks', 'dread_eyes_stones1').anims.play('dreadAttack_cardinalAnim');
+        this.add.sprite(this.player.x, this.player.y, 'entities', 'bw_break1').anims.play('wall_breakAnim');
 
         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
