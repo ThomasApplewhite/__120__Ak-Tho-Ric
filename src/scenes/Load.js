@@ -18,10 +18,6 @@ class Load extends Phaser.Scene{
 
         this.load.image('title', './assets/Title.png');
 
-        //placeholder assets   
-        this.load.image('placeholder_map_tiles', './assets/placeholders/tiles_placeholder.png');
-        this.load.tilemapTiledJSON('placeholder_map', './assets/placeholders/tilemap_placeholder.json'); 
-
         //misc. images
         this.load.image('background', './assets/cave_entrance_background.png');
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png'); 

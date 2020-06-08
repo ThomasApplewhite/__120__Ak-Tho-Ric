@@ -41,6 +41,8 @@ class Credits extends Phaser.Scene{
             ).setOrigin(0, 0).setScale(5.625);
  
         let centerX = game.config.width/2;
+        let leftCenterX = (game.config.width/2)-200;
+        let rightCenterX = (game.config.width/2)+200;
         let centerY = game.config.height/2;
         let textInterval = 30;
         let textSpacer = textInterval;
@@ -82,60 +84,64 @@ class Credits extends Phaser.Scene{
         //---DESIGN---
         textSpacer += textInterval;
         textConfig.color = colorBlue;
-        this.add.text(centerX, textSpacer, "DESIGN", textConfig).setOrigin(0.5);
+        this.add.text(leftCenterX, textSpacer, "DESIGN", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorRed;
-        this.add.text(centerX, textSpacer, "Akash D. Kapadia", textConfig).setOrigin(0.5);
+        this.add.text(leftCenterX, textSpacer, "Akash D. Kapadia", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorMagenta;
-        this.add.text(centerX, textSpacer, "Eric Long", textConfig).setOrigin(0.5);
+        this.add.text(leftCenterX, textSpacer, "Eric Long", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorOrange;
-        this.add.text(centerX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
+        this.add.text(leftCenterX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         //---PROGRAMING---
         textSpacer += textInterval;
         textConfig.color = colorBlue;
-        this.add.text(centerX, textSpacer, "PROGRAMMING", textConfig).setOrigin(0.5);
+        this.add.text(leftCenterX, textSpacer, "PROGRAMMING", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorOrange;
-        this.add.text(centerX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
+        this.add.text(leftCenterX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         //---ART---
         textSpacer += textInterval;
         textConfig.color = colorBlue;
-        this.add.text(centerX, textSpacer, "ART", textConfig).setOrigin(0.5);
+        this.add.text(leftCenterX, textSpacer, "ART", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorMagenta;
-        this.add.text(centerX, textSpacer, "Eric Long", textConfig).setOrigin(0.5);
+        this.add.text(leftCenterX, textSpacer, "Eric Long", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
+
+        textSpacer = 60;
         //---MUSIC---
         textSpacer += textInterval;
         textConfig.color = colorBlue;
-        this.add.text(centerX, textSpacer, "MUSIC", textConfig).setOrigin(0.5);
+        this.add.text(rightCenterX, textSpacer, "MUSIC", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorOrange;
-        this.add.text(centerX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
+        this.add.text(rightCenterX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         //---SOUND DESIGN---
         textSpacer += textInterval;
         textConfig.color = colorBlue;
-        this.add.text(centerX, textSpacer, "SOUND DESIGN", textConfig).setOrigin(0.5);
+        this.add.text(rightCenterX, textSpacer, "SOUND DESIGN", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorRed;
-        this.add.text(centerX, textSpacer, "Akash D. Kapadia", textConfig).setOrigin(0.5);
+        this.add.text(rightCenterX, textSpacer, "Akash D. Kapadia", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorOrange;
-        this.add.text(centerX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
+        this.add.text(rightCenterX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         //---PRODUCTION---
         textSpacer += textInterval;
         textConfig.color = colorBlue;
-        this.add.text(centerX, textSpacer, "PRODUCTION", textConfig).setOrigin(0.5);
+        this.add.text(rightCenterX, textSpacer, "PRODUCTION", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
         textConfig.color = colorMagenta;
-        this.add.text(centerX, textSpacer, "Eric Long", textConfig).setOrigin(0.5);
+        this.add.text(rightCenterX, textSpacer, "Eric Long", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
+
+        textSpacer = 510;
         //---FONT---
         textSpacer += textInterval;
         textConfig.color = colorBlue;
