@@ -5,7 +5,7 @@ class Player extends Phaser.GameObjects.Sprite{
         //add to scene
         scene.add.existing(this);           //add the sprite
         scene.physics.add.existing(this);   //add the physics
-        this.body.setSize(24, 36);
+        this.body.setSize(24, 24);
         this.body.setBounce(0, 0);
 
         //this.body.syncBounds = true;
