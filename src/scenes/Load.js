@@ -47,7 +47,7 @@ class Load extends Phaser.Scene{
         //this.load.image('volumeSlider_thumb', './assets/placeholders/volume_slider_thumb_placeholder.png');
 
         //misc. images
-        this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
+        this.load.image('background', './assets/cave_entrance_background.png');
         this.load.image('red_screen_effect', './assets/red_screen.png');
 
         //map assets

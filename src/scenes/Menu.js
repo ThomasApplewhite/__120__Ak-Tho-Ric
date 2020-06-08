@@ -25,13 +25,11 @@ class Menu extends Phaser.Scene{
         }
 
         //setting background tiles
-        this.background = this.add.tileSprite(
+        this.background = this.add.sprite(
             0, 
             0, 
-            config.width/2, 
-            config.height/2, 
-            'backgroundTile'
-        ).setOrigin(0, 0).setScale(4);
+            'background'
+        ).setOrigin(0, 0);
 
         //listening for up and down key
         keyUP    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -42,12 +40,12 @@ class Menu extends Phaser.Scene{
         let centerY = game.config.height/2;
         let textSpacer = 48;
 
-        this.add.text(centerX, centerY + 0 * textSpacer, '-Move with the Arrow Keys-', textConfig).setOrigin(0.5);
+        /*this.add.text(centerX, centerY + 0 * textSpacer, '-Move with the Arrow Keys-', textConfig).setOrigin(0.5);
         this.add.text(centerX, centerY + 1 * textSpacer, '-Press (Q) to Punch-', textConfig).setOrigin(0.5);
         this.add.text(centerX, centerY + 2 * textSpacer, '-Press (E) to cast Magic Missile-', textConfig).setOrigin(0.5);
         textConfig.color = '#C756E3';
         this.add.text(centerX, centerY + 3 * textSpacer, '>Avoid the Obstacles<', textConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + 4 * textSpacer, '>Slay your Foes<', textConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + 4 * textSpacer, '>Slay your Foes<', textConfig).setOrigin(0.5);*/
         textConfig.color = '#D62109';
         this.add.text(centerX, centerY + 5 * textSpacer, '==Press the Up Arrow to Start==', textConfig).setOrigin(0.5);
 
@@ -102,8 +100,6 @@ class Menu extends Phaser.Scene{
     }
 
     update(){
-        this.background.tilePositionY -= 1;
-
         if(keyUP.isDown){
             this.sound.removeByKey('pulsating_wrists');
             menuMusicPlaying = false;
