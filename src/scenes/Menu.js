@@ -88,7 +88,7 @@ class Menu extends Phaser.Scene{
             value: musicVolume,
             valuechangeCallback: function (value, oldValue, slider) {
                 //because for some reason, the top is 0 and the bottom is 1
-                musicVolume = 1 - value;
+                musicVolume = value;
                 slider.scene.sound.volume = musicVolume;
             },
             space: {
