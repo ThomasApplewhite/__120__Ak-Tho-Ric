@@ -14,7 +14,7 @@ class AcidSpit extends Attack{
 
     //what happens when the attack collides with a target
     strike(target){
-        if(target == this.scene.player){
+        if(this.scene != null && target == this.scene.player){
             target.takeDamage(this.damage);
         }
 

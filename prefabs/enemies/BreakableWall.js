@@ -17,7 +17,6 @@ class BreakableWall extends Enemy{
     //breakable walls specifically do nothing
     onDeath(){
         this.setTexture('entities', 'bw_break1');
-        console.log(this.anims.animationManager);
         this.anims.play('wall_breakAnim', true);
         this.body.checkCollision.none = true;
     }

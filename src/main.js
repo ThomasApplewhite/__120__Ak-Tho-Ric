@@ -4,11 +4,6 @@ CREATED BY AKASH D. KAPADIA, ERIC LONG, & THOMAS APPLEWHITE
 
 UI Slider plugin by Rex Rainbow, liscensed with MIT Liscence. This technically means
     I don't need to credit them but I'll write it here anyways.
-
-Hi. While walking around, you might notice a lot of old, commented code that's marked
-DEPRECEATED
-or is otherwise unused. This is because I am a code hoarder. I will clean it up eventually.
-    -Thomas.
 */
 let config = {
     type: Phaser.CANVAS,
