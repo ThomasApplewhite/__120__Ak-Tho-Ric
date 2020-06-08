@@ -4,7 +4,7 @@ class LevelThree extends Phaser.Scene{
     }
 
     preload(){
-        this.nextScene = "levelFourscene";
+        this.nextScene = "levelFourScene";
         this.bossFactor = 2;
         this.backgroundMusic = 'into_darkworld';
         this.distortionFactor = {count: 30, damage: 3};
