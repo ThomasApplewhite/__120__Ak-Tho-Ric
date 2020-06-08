@@ -21,6 +21,9 @@ class End extends Phaser.Scene{
 
         this.distance = game.registry.get("distance");
         this.bodyCount = game.registry.get("bodyCount");
+        if(isNaN(this.bodyCount)){
+            this.bodyCount = 0;
+        }
         this.score = game.registry.get("score");
          
         let textConfig = {

@@ -15,7 +15,7 @@ class TestMap extends Phaser.Scene{
 
         //this.cameras.main.setTint('#FF0000')
 
-        this.boss = new DreadEyes(
+        /*this.boss = new DreadEyes(
             this,               //scene
             500,        //x
             500,     //y
@@ -23,7 +23,7 @@ class TestMap extends Phaser.Scene{
             'de_blight_beams1',      //start frame of anim
             this.bossFactor                   //boss level
             );
-        this.enemyGroup.add(this.boss);
+        this.enemyGroup.add(this.boss);*/
 
         //new Portal(this, 300, 300, 'attacks', 'portal', 'menuScene');
 
@@ -37,14 +37,14 @@ class TestMap extends Phaser.Scene{
             );
         this.enemyGroup.add(this.boss);*/
 
-        /*this.enemyGroup.add(new Frog(
+        this.enemyGroup.add(new Frog(
             this,               //scene
-            500,        //x
-            500,     //y
+            64*3,        //x
+            64*3,     //y
             'entities',          //sprite
             'fm_walk1',    //start frame of anim
             )
-        );*/
+        );
 
         /*this.enemyGroup.add(new Zombie(
             this,               //scene

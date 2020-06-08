@@ -48,6 +48,7 @@ class Load extends Phaser.Scene{
 
         //misc. images
         this.load.image('background', './assets/cave_entrance_background.png');
+        this.load.image('backgroundTile', './assets/cave_tiles_standard.png'); 
         this.load.image('red_screen_effect', './assets/red_screen.png');
 
         //map assets
