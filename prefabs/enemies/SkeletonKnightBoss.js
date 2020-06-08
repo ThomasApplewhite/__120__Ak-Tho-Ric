@@ -80,24 +80,6 @@ class SkeletonKnightBoss extends Enemy{
             //some error handling if the levels miscount for any reason
             throw new Error("Skeleton Knight Boss in level is out of range");
         }
-
-
-        /*//five seconds between attacks, use attacks based on level
-        this.on('skeleton_attackComplete', () => {
-            this.attacking = false;
-            this.scene.time.delayedCall(
-                5000,
-                this.pickAttack,
-                null,
-                this
-            );
-        });
-        this.scene.time.delayedCall(
-            5000,
-            this.pickAttack,
-            null,
-            this
-        );*/
     }
 
     //I wish there was a better way to do this, but moveTo won't stop anything so...

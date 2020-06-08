@@ -30,11 +30,6 @@ class Frog extends Enemy{
             //walk towards the player if they're too far away
             this.rotation = this.scene.physics.moveToObject(this, this.scene.player, this.speed) + Math.PI/2;
         }
-        /*//if aggro'd and the player's too close
-        else if(this.aggressive && dist < 64 * 4){
-            //walk away from the player while still facing them
-            this.rotation = this.scene.physics.moveToObject(this, this.scene.player, -this.speed/2) - Math.PI*3/2;
-        }*/
         //if the frog is in the goldilocks zone
         else{
             //don't actually move, just face them and pause the walk anim
@@ -50,8 +45,6 @@ class Frog extends Enemy{
 
     //fire the projectile
     shoot(){
-        //this will have an animation tied to it at some point, for right now it will just shoot
-
         //if the frog is in range
         if(!this.attacking && Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y) < 64 * 5){
             //attack in half a second

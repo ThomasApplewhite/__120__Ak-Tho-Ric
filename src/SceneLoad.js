@@ -66,9 +66,6 @@ class SceneLoad extends Phaser.Scene{
             runChildUpdate: false   //I'll set this to true if I need to later
         })
 
-        //creating particle manager
-        //scene.particleManager = scene.add.particles('particle');
-
         //creating sounds
         scene.punchSFX = scene.sound.add('punchSound');
         scene.mmShotSFX = scene.sound.add('magic_missile_firingSound');

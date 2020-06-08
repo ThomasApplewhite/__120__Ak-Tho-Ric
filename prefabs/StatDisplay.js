@@ -23,11 +23,11 @@ class StatDisplay{
         //display the Magic Missile charge  [208, 278, 348]190
         this.magicMissileMeter = [
             scene.add.sprite(game.config.width - 208, 174, 
-                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
+                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5),
             scene.add.sprite(game.config.width - 246, 174, 
-                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5),//.setScale(this.cameraZoom - 1, this.cameraZoom - 1),
+                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5),
             scene.add.sprite(game.config.width - 284, 174, 
-                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5)//.setScale(this.cameraZoom - 1, this.cameraZoom - 1)
+                'UI', 'Magic_Missile_Icon').setScrollFactor(0).setScale(.5)
         ];
         this.magicMissileMeter[0].depth = 1;
         this.magicMissileMeter[1].depth = 1;

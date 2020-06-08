@@ -113,18 +113,9 @@ class DreadEyes extends Enemy{
             //paused: true
         });
         Phaser.Utils.Array.Add(this.timers, spawnTimer);
-
-        /*//timer that starts the rock fall
-        Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-            delay: 750,
-            callback: () => {spawnTimer.paused = true},
-            callbackScope: this
-        }))*/
     }
 
     cardinalRays(){
-        //I want to tween this, but I can do that later
-        //this.rotation = 0;
         this.scene.tweens.add({
             targets: this,
             rotation: {from: this.rotation, to: 0},

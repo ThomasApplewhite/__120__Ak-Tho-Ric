@@ -125,6 +125,9 @@ class Credits extends Phaser.Scene{
         textConfig.color = colorRed;
         this.add.text(centerX, textSpacer, "Akash D. Kapadia", textConfig).setOrigin(0.5);
         textSpacer += textInterval;
+        textConfig.color = colorOrange;
+        this.add.text(centerX, textSpacer, "Thomas Applewhite", textConfig).setOrigin(0.5);
+        textSpacer += textInterval;
         //---PRODUCTION---
         textSpacer += textInterval;
         textConfig.color = colorBlue;

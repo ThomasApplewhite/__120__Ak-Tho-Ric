@@ -110,35 +110,6 @@ class Zombie extends Enemy{
         //yes, I know stacking timers like this aren't great, but it'll have to do for now
         if(this.lunging == 0 && dist <= this.attackRange){
             this.emit("zombie_lungeStart");
-            /*//charge-up timer
-            Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-                delay: this.chargeTime,
-                callback: () => {
-                    //lunge at 'em
-                    this.lunging = 1;
-                    this.anims.play('zombie_attackAnim');
-                },
-                callbackScope: this
-            }));
-
-            //lunge managment timer
-            Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-                delay: this.attackDuration + this.chargeTime,
-                callback: () => {
-                    //after the lunge, enter cooldown
-                    this.lunging = 2;
-                    this.anims.play('zombie_walkAnim');
-                },
-                callbackScope: this
-            }));
-
-            //lunge cooldown timer
-            Phaser.Utils.Array.Add(this.timers, this.scene.time.addEvent({
-                delay: this.recoveryTime + this.attackDuration + this.chargeTime,
-                //after the cooldown, back to normal
-                callback: () => {this.lunging = 0;},
-                callbackScope: this
-            }));*/
         }
     }
 }

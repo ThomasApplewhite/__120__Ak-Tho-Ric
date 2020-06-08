@@ -42,24 +42,6 @@ class Player extends Phaser.GameObjects.Sprite{
         this.anims.play('orc_idleAnim');
         this.on('animationcomplete', () => {this.anims.play('orc_walkAnim');}, this);
         this.standingFrame = frame;
-        //particle Logic
-        /*console.log("particling");
-        if(this.scene.particleManager == null){
-            console.log("Something's wrong with the manager");
-        }
-        console.log(this.scene.particleManager.texture);
-        this.particleEmitter = this.scene.particleManager.createEmitter({
-            x: 400,
-            y: 300,
-            follow: this,
-            frame: 0,
-            lifespan: 1000,
-            scale: 10,
-            speed: 100,
-            quantity: 100,
-            blendMode: 'ADD'
-        });
-        console.log("particling done");*/
     }
 
     update(){
@@ -102,8 +84,6 @@ class Player extends Phaser.GameObjects.Sprite{
 
         //if the player stopped moving, stop the animation
         if(this.body.velocity.equals(Phaser.Math.Vector2.ZERO) && this.anims.getCurrentKey() == 'orc_walkAnim'){
-            //this.anims.pause();
-            //this.setFrame(this.standingFrame);
             this.anims.play('orc_idleAnim', true);
         }
 
@@ -156,9 +136,6 @@ class Player extends Phaser.GameObjects.Sprite{
         );
 
         if(!this.stunned && !this.immune){
-            //emit some particles
-            //this.particleEmitter.explode(damage, this.x, this.y)
-
             this.health -= damage;
             if(this.health > 0){
                 this.startStun(stunTime);
@@ -176,7 +153,6 @@ class Player extends Phaser.GameObjects.Sprite{
     //ends the game on player death
     defeat(){
         this.stunned = true;
-        //this.setVisible(false);
         this.off('animationcomplete');
         this.anims.play('orc_deathAnim');
         this.body.stop();
@@ -219,10 +195,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
     magicMissileAttack(){
         if(this.canSpecial >= 3){
-            //reset UI
-            //this.scene.meterUpdate(0);
             //create magic missile
-            //new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
             let attackOffset = this.spawningRotation(32) //change the numbers here to determine where the attack goes relative to the player
             this.scene.attackGroup.add(new MagicMissile(
                 this.scene, 

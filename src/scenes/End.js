@@ -4,12 +4,7 @@ class End extends Phaser.Scene{
     }
 
     preload(){
-        //this.load.image('title', './assets/Title_Large.png');
-        //this.load.image('start_button', './assets/start_button.png');
 
-        //background images
-        //this.load.image('backgroundTile', './assets/dirt.png');
-        //this.sound.volune = musicVolume;
     }
 
     create(){
@@ -60,9 +55,7 @@ class End extends Phaser.Scene{
         this.add.text(centerX, game.config.height/4, 'GAME OVER', textConfig).setOrigin(0.5);
         textConfig.color = colorBlue;
         textConfig.fontSize = '28px';
-        /*this.add.text(centerX, centerY + (-1/2 * textSpacer), 'You have delved', textConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + 1/2 * textSpacer, this.distance + ' meters into the darkness.', textConfig).setOrigin(0.5);
-        */textConfig.color = colorPurple;
+        textConfig.color = colorPurple;
         this.add.text(centerX, centerY + 3/2 * textSpacer, this.bodyCount + ' enemies were destroyed', textConfig).setOrigin(0.5);
         this.add.text(centerX, centerY + 5/2 * textSpacer, 'for ' + this.score + ' points', textConfig).setOrigin(0.5);
         textConfig.color = colorGreen;

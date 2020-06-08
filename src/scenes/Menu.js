@@ -111,13 +111,13 @@ class Menu extends Phaser.Scene{
             this.scene.start("creditsScene");
         }
 
-        //secret debug scene skipper!
+        /*//secret debug scene skipper!
         if(keyW.isDown){
             this.sound.removeByKey('pulsating_wrists');
             menuMusicPlaying = false;
             this.scene.start("testMapScene");
             
-        }
+        }*/
     }
 
     menuSoundSetter(){

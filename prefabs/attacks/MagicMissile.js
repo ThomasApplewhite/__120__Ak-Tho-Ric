@@ -21,11 +21,6 @@ class MagicMissile extends Attack{
         }
 
         //if the missile spawns in something
-        /*this.once('collide', () => {
-            if(this.body.touching){
-                this.strike(null)
-            }
-        });*/
         if(this.body.touching){
             //detonate it
             //this.strike(null);
